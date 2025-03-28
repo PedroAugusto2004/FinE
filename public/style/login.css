@@ -1,0 +1,229 @@
+/* Login Page Specific Styles */
+#login-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  margin-top: 8vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
+}
+
+.login-container {
+  max-width: 500px;
+  width: 100%;
+  background-color: rgba(15, 15, 15, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  margin: 2rem 0;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.form-nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.form-nav-item {
+  flex: 1;
+  text-align: center;
+  padding: 15px 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #d3d3d3;
+  font-weight: 500;
+}
+
+.form-nav-item:hover {
+  color: #FFD700;
+}
+
+.form-nav-item.active {
+  background-color: rgba(255, 215, 0, 0.1);
+  color: #FFD700;
+  font-weight: 600;
+  border-bottom: 2px solid #FFD700;
+}
+
+.form-container {
+  padding: 30px;
+  position: relative;
+}
+
+.auth-form {
+  display: none;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+
+.auth-form.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.auth-form h2 {
+  font-size: 1.8rem;
+  color: #FFD700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  color: #d3d3d3;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: rgba(255, 215, 0, 0.5);
+  box-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+}
+
+.remember-me input {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.remember-me label {
+  color: #d3d3d3;
+  cursor: pointer;
+}
+
+.terms {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.terms input {
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+.terms label {
+  color: #d3d3d3;
+  cursor: pointer;
+}
+
+.terms a {
+  color: #FFD700;
+  text-decoration: none;
+}
+
+.terms a:hover {
+  text-decoration: underline;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #FFD700;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.auth-btn:hover {
+  background-color: #FFC107;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+}
+
+.auth-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(255, 215, 0, 0.2);
+}
+
+.reset-instructions {
+  color: #d3d3d3;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-container {
+    max-width: 90%;
+  }
+  
+  .form-nav-item {
+    padding: 12px 0;
+    font-size: 0.9rem;
+  }
+  
+  .form-container {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .form-nav-item {
+    font-size: 0.8rem;
+    padding: 10px 0;
+  }
+  
+  .auth-form h2 {
+    font-size: 1.5rem;
+  }
+  
+  .form-group label {
+    font-size: 0.9rem;
+  }
+  
+  .form-group input {
+    padding: 10px;
+  }
+  
+  .remember-forgot, 
+  .terms {
+    font-size: 0.8rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .remember-forgot > div:first-child {
+    margin-bottom: 0.5rem;
+  }
+}
