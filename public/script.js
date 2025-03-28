@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
     option.addEventListener('click', (e) => {
       e.preventDefault();
       const lang = e.target.getAttribute('data-lang');
-      changeLanguage(lang);
+      changeLanguage(lang, true); // Pass true to indicate user-initiated change
       languageDropdown.classList.remove('show');
       
       // Update button text
@@ -102,8 +102,32 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+  // Custom Alert Function
+  const customAlertOverlay = document.getElementById('custom-alert-overlay');
+  const customAlertMessage = document.getElementById('custom-alert-message');
+  const customAlertButton = document.getElementById('custom-alert-button');
+  
+  function showCustomAlert(message) {
+    customAlertMessage.textContent = message;
+    customAlertOverlay.classList.add('show');
+    
+    // Close alert when OK button is clicked
+    customAlertButton.addEventListener('click', function closeAlert() {
+      customAlertOverlay.classList.remove('show');
+      customAlertButton.removeEventListener('click', closeAlert);
+    });
+    
+    // Close alert when clicking outside
+    customAlertOverlay.addEventListener('click', function closeOnOverlay(e) {
+      if (e.target === customAlertOverlay) {
+        customAlertOverlay.classList.remove('show');
+        customAlertOverlay.removeEventListener('click', closeOnOverlay);
+      }
+    });
+  }
+
   // Function to change the language
-  function changeLanguage(lang) {
+  function changeLanguage(lang, showAlert = false) {
     console.log(`Changing language to: ${lang}`);
     
     // This is where you would implement the actual language change
@@ -271,13 +295,16 @@ document.addEventListener('DOMContentLoaded', function() {
     // You could also store the selected language in localStorage for persistence
     localStorage.setItem('preferredLanguage', lang);
     
-    alert(`Language changed to ${lang.toUpperCase()}`);
+    // Only show alert when the change is user-initiated
+    if (showAlert) {
+      showCustomAlert(`Language changed to ${lang.toUpperCase()}`);
+    }
   }
   
   // Check if user has a previously selected language
   const savedLanguage = localStorage.getItem('preferredLanguage');
   if (savedLanguage) {
-    changeLanguage(savedLanguage);
+    changeLanguage(savedLanguage, false); // Pass false to prevent alert on page load
     languageBtn.innerHTML = savedLanguage.toUpperCase() + ' <span class="arrow-down">▼</span>';
   }
 });

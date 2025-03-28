@@ -415,3 +415,72 @@ footer {
 .toggle .line3 {
   transform: rotate(45deg) translate(-5px, -6px);
 }
+
+/* Custom Alert */
+.custom-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.custom-alert-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.custom-alert {
+  background-color: rgba(0, 0, 0, 0.9);
+  border: 2px solid #FFD700;
+  border-radius: 10px;
+  padding: 20px 30px;
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.custom-alert-overlay.show .custom-alert {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.custom-alert-content {
+  margin-bottom: 20px;
+  color: #fff;
+  font-size: 1.2rem;
+}
+
+.custom-alert-button {
+  background-color: #FFD700;
+  color: #000;
+  border: none;
+  padding: 10px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: all 0.3s ease;
+  font-weight: bold;
+}
+
+.custom-alert-button:hover {
+  background-color: #FFC107;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.2);
+}
+
+.custom-alert-button:active {
+  transform: translateY(-1px);
+}
