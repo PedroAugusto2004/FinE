@@ -1,4 +1,12 @@
 document.addEventListener('DOMContentLoaded', function() {
+  // Make logo clickable
+  const logoLink = document.getElementById('logoLink');
+  if (logoLink) {
+    logoLink.addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+  }
+
   // Get Started Button
   document.getElementById("getStarted").addEventListener("click", function() {
     document.getElementById('features').scrollIntoView({ behavior: 'smooth' });
