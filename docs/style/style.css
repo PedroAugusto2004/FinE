@@ -637,9 +637,10 @@ social-links a:hover {
   background-color: #FFD700;
   color: #000 !important;
   border-radius: 30px;
-  padding: 10px 25px !important;
+  padding: 8px 20px !important; /* Reduced from 10px 25px */
   transition: all 0.3s ease;
   font-weight: 600;
+  font-size: 0.95rem; /* Added smaller font size */
   box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
   border: 2px solid transparent;
   text-align: center;
