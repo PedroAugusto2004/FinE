@@ -12,6 +12,7 @@
           "scrollbar-width: thin"
         ]
       }
-    ]
+    ],
+    "css-prefix-order": "off"
   }
 }
