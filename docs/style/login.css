@@ -196,6 +196,29 @@
   .form-container {
     padding: 20px;
   }
+  
+  /* Add navigation optimizations specific to login page */
+  .nav-links {
+    padding: 2rem 0;
+    justify-content: flex-start;
+  }
+  
+  .nav-links li {
+    margin: 0.8rem 0;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .nav-links a {
+    padding: 0.6rem 1rem;
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+  }
+  
+  .nav-links li:last-child a {
+    border-bottom: none;
+  }
 }
 
 @media (max-width: 480px) {
