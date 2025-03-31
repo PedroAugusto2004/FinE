@@ -471,28 +471,7 @@ social-links a:hover {
   .language-selector {
     margin-right: 60px;
   }
-}
 
-/* Login Button Styling */
-.login-button {
-  background-color: #FFD700;
-  color: #000 !important;
-  border-radius: 20px;
-  padding: 8px 20px !important;
-  transition: all 0.3s ease;
-  font-weight: 600;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-}
-
-.login-button:hover {
-  background-color: #FFC107;
-  color: #000 !important;
-  transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
-}
-
-/* Responsive adjustment for login button */
-@media (max-width: 768px) {
   .login-button {
     margin: 15px auto;
     width: 80% !important;
@@ -505,16 +484,36 @@ social-links a:hover {
     border: 2px solid #000;
   }
   
-  /* Make the login button sticky at the bottom on mobile for easy access */
+  /* Position login button at the top of mobile nav */
   .nav-links li:last-child {
-    margin-top: auto; /* Push to the bottom of flex container */
-    padding-bottom: 20px;
+    order: -1; /* Move to the top of flex container */
+    margin-top: 20px !important; /* Override the auto margin */
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.3);
   }
   
   /* Adjust navigation spacing for better mobile layout */
   .nav-links {
-    padding-top: 50px; /* More space at the top */
+    padding-top: 20px; /* Reduced padding at the top */
     justify-content: flex-start;
+  }
+  
+  /* Add emphasis to the login button with glow effect */
+  .nav-links li:last-child .login-button {
+    animation: pulse 2s infinite;
+  }
+  
+  @keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.4);
+    }
+    70% {
+      box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+    }
   }
 }
 
@@ -631,4 +630,38 @@ social-links a:hover {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(45deg, #FFC107, #FFD700);
   box-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
+}
+
+/* Login Button Styling - Updated for consistency across all devices */
+.login-button {
+  background-color: #FFD700;
+  color: #000 !important;
+  border-radius: 30px;
+  padding: 10px 25px !important;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  border: 2px solid transparent;
+  text-align: center;
+  animation: subtle-pulse 3s infinite;
+}
+
+.login-button:hover {
+  background-color: #FFC107;
+  color: #000 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+  border: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+@keyframes subtle-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.3);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 215, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
+  }
 }
