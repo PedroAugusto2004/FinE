@@ -318,9 +318,11 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmPassword: "Confirm Password",
         passwordStrength: "Password strength: ",
         termsConditions: "I agree to the Terms and Conditions",
+        termsLink: "Terms and Conditions",
         sendResetLink: "Send Reset Link",
         backToLogin: "Back to login",
-        orSignInWith: "Or sign in with"
+        orSignInWith: "Or sign in with",
+        copyright: "All rights reserved."
       },
       es: {
         home: "Inicio",
@@ -346,9 +348,11 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmPassword: "Confirmar Contraseña",
         passwordStrength: "Fortaleza de la contraseña: ",
         termsConditions: "Acepto los Términos y Condiciones",
+        termsLink: "Términos y Condiciones",
         sendResetLink: "Enviar Enlace",
         backToLogin: "Volver a iniciar sesión",
-        orSignInWith: "O inicia sesión con"
+        orSignInWith: "O inicia sesión con",
+        copyright: "Todos los derechos reservados."
       },
       fr: {
         home: "Accueil",
@@ -374,9 +378,11 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmPassword: "Confirmer le Mot de Passe",
         passwordStrength: "Force du mot de passe: ",
         termsConditions: "J'accepte les Conditions Générales",
+        termsLink: "Conditions Générales",
         sendResetLink: "Envoyer le Lien",
         backToLogin: "Retour à la connexion",
-        orSignInWith: "Ou connectez-vous avec"
+        orSignInWith: "Ou connectez-vous avec",
+        copyright: "Tous droits réservés."
       },
       de: {
         home: "Startseite",
@@ -402,9 +408,11 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmPassword: "Passwort Bestätigen",
         passwordStrength: "Passwortstärke: ",
         termsConditions: "Ich stimme den Geschäftsbedingungen zu",
+        termsLink: "Geschäftsbedingungen",
         sendResetLink: "Link Senden",
         backToLogin: "Zurück zur Anmeldung",
-        orSignInWith: "Oder anmelden mit"
+        orSignInWith: "Oder anmelden mit",
+        copyright: "Alle Rechte vorbehalten."
       },
       pt: {
         home: "Início",
@@ -430,9 +438,11 @@ document.addEventListener('DOMContentLoaded', function() {
         confirmPassword: "Confirmar Senha",
         passwordStrength: "Força da senha: ",
         termsConditions: "Concordo com os Termos e Condições",
+        termsLink: "Termos e Condições",
         sendResetLink: "Enviar Link",
         backToLogin: "Voltar ao login",
-        orSignInWith: "Ou entre com"
+        orSignInWith: "Ou entre com",
+        copyright: "Todos os direitos reservados."
       }
     };
     
@@ -478,22 +488,46 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('label[for="signup-confirm"]').textContent = translations[lang].confirmPassword;
     document.querySelector('#signup-confirm').placeholder = translations[lang].passwordPlaceholder;
     
-    // Update terms - need to preserve the link element
+    // Update terms - fix for terms and conditions translation
     const termsLabel = document.querySelector('label[for="terms"]');
     const termsLink = termsLabel.querySelector('a');
-    termsLabel.childNodes[0].nodeValue = translations[lang].termsConditions.split('Terms')[0];
-    termsLink.textContent = 'Terms and Conditions';
+    // Clear the label content first
+    termsLabel.innerHTML = '';
+    // Create a text node with the first part of the terms text
+    const termsText = document.createTextNode(translations[lang].termsConditions.split('Terms')[0]);
+    termsLabel.appendChild(termsText);
+    // Update the link text and append it back
+    termsLink.textContent = translations[lang].termsLink;
+    termsLabel.appendChild(termsLink);
     
     // Update signup button
     document.querySelector('#signup-form .auth-btn span').textContent = translations[lang].createAccount;
     
-    // Update reset password form
+    // Update reset password form - complete fix for all elements
     document.querySelector('#reset-form h2').textContent = translations[lang].resetPassword;
     document.querySelector('#reset-form .form-intro').textContent = translations[lang].formIntroReset;
     document.querySelector('label[for="reset-email"]').textContent = translations[lang].email;
     document.querySelector('#reset-email').placeholder = translations[lang].emailPlaceholder;
     document.querySelector('#reset-form .auth-btn span').textContent = translations[lang].sendResetLink;
-    document.querySelector('.back-to-login a span').textContent = translations[lang].backToLogin;
+    const backToLoginText = document.querySelector('.back-to-login a span');
+    if (backToLoginText) {
+      backToLoginText.textContent = translations[lang].backToLogin;
+    }
+    
+    // Update footer links
+    const footerLinks = document.querySelectorAll('.footer-links a');
+    if (footerLinks.length >= 4) {
+      footerLinks[0].textContent = translations[lang].home;
+      footerLinks[1].textContent = translations[lang].features;
+      footerLinks[2].textContent = translations[lang].about;
+      footerLinks[3].textContent = translations[lang].contact;
+    }
+    
+    // Update copyright notice
+    const copyright = document.querySelector('.copyright');
+    if (copyright) {
+      copyright.textContent = `© 2025 ${translations[lang].copyright}`;
+    }
     
     // Set html lang attribute
     document.documentElement.lang = lang;
