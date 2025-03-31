@@ -244,6 +244,68 @@ button:active {
   box-shadow: 0 5px 10px rgba(0,0,0,0.2);
 }
 
+/* Get Started Button Custom Styling */
+.btn {
+  font-size: 17px;
+  background: transparent;
+  border: 2px solid #ffc506;
+  padding: 1em 1.5em;
+  color: #ffedd3;
+  text-transform: uppercase;
+  position: relative;
+  transition: 0.5s ease;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(255, 197, 6, 0.3);
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0;
+  background-color: #ffc506;
+  transition: 0.5s ease;
+}
+
+.btn:hover {
+  color: #1e1e2b;
+  transition-delay: 0.5s;
+  transform: none;
+  box-shadow: 0 0 20px rgba(255, 197, 6, 0.5);
+}
+
+.btn:hover::before {
+  width: 100%;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 0;
+  width: 100%;
+  background-color: #ffc506;
+  transition: 0.4s ease;
+  z-index: -1;
+}
+
+.btn:hover::after {
+  height: 100%;
+  transition-delay: 0.4s;
+  color: aliceblue;
+}
+
+.btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 10px rgba(255, 197, 6, 0.4);
+}
+
 /* Features Section */
 .features-container {
   display: flex;
@@ -406,6 +468,51 @@ social-links a:hover {
 
   .language-selector {
     margin-right: 60px;
+  }
+}
+
+/* Login Button Styling */
+.login-button {
+  background-color: #FFD700;
+  color: #000 !important;
+  border-radius: 20px;
+  padding: 8px 20px !important;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.login-button:hover {
+  background-color: #FFC107;
+  color: #000 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+}
+
+/* Responsive adjustment for login button */
+@media (max-width: 768px) {
+  .login-button {
+    margin: 15px auto;
+    width: 80% !important;
+    padding: 12px 20px !important;
+    font-size: 1.1rem;
+    text-align: center;
+    border-radius: 30px;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    /* Create a distinct visual separation */
+    border: 2px solid #000;
+  }
+  
+  /* Make the login button sticky at the bottom on mobile for easy access */
+  .nav-links li:last-child {
+    margin-top: auto; /* Push to the bottom of flex container */
+    padding-bottom: 20px;
+  }
+  
+  /* Adjust navigation spacing for better mobile layout */
+  .nav-links {
+    padding-top: 50px; /* More space at the top */
+    justify-content: flex-start;
   }
 }
 
