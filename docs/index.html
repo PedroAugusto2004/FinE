@@ -3,12 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FinE</title>
+  <meta name="description" content="FinE - Financial education platform with interactive simulations and games to make learning finance engaging and effective">
+  <title>FinE | Financial Education Reimagined</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style/style.css">
   <link rel="shortcut icon" href="assets/FinE.jpeg">
 </head>
 <body>
+  <!-- Navigation -->
   <nav>
     <div class="logo">Fin<span class="special-e">E</span></div>
     <ul class="nav-links">
@@ -35,59 +38,131 @@
     </div>
   </nav>
 
+  <!-- Hero Section -->
   <section id="home">
-    <header>
+    <div class="hero-content">
       <h1>Fin<span class="special-e">E</span></h1>
-      <p>Transforming financial education with gamification and real-world simulations.</p>
-      <button id="getStarted" class="btn">Get Started</button>
-    </header>
+      <p class="tagline">Master Your Money. Shape Your Future.</p>
+      <p class="subtitle">Learn financial skills through interactive simulations and games designed to make education both engaging and effective.</p>
+      <div class="cta-group">
+        <button id="getStarted" class="btn">Get Started</button>
+        <a href="#features" class="text-link">Explore Features <i class="fas fa-long-arrow-alt-right"></i></a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </section>
 
+  <!-- Features Section -->
   <section id="features" class="section-content">
-    <h2>Our Features</h2>
+    <div class="section-header">
+      <h2>Our Features</h2>
+      <p class="section-intro">Practical tools to build your financial knowledge</p>
+    </div>
     <div class="features-container">
       <div class="feature-card">
-        <div class="feature-icon">💰</div>
+        <div class="feature-icon"><i class="fas fa-wallet"></i></div>
         <h3>Budget Simulator</h3>
-        <p>Practice managing budgets in real-world scenarios.</p>
+        <p>Practice real-world budget management with scenarios that prepare you for financial success.</p>
+        <a href="#" class="feature-link">Learn more <i class="fas fa-chevron-right"></i></a>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">📊</div>
+        <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
         <h3>Investment Playground</h3>
-        <p>Learn investing strategies with virtual portfolios.</p>
+        <p>Test investment strategies with virtual portfolios using real market data, with zero financial risk.</p>
+        <a href="#" class="feature-link">Learn more <i class="fas fa-chevron-right"></i></a>
       </div>
       <div class="feature-card">
-        <div class="feature-icon">🎮</div>
+        <div class="feature-icon"><i class="fas fa-gamepad"></i></div>
         <h3>Financial Games</h3>
-        <p>Make learning about finance fun through interactive games.</p>
+        <p>Make learning about finance fun through interactive games that reinforce key financial concepts.</p>
+        <a href="#" class="feature-link">Learn more <i class="fas fa-chevron-right"></i></a>
       </div>
     </div>
   </section>
 
+  <!-- About Section -->
   <section id="about" class="section-content">
-    <h2>About FinE</h2>
-    <div class="about-content">
-      <p>FinE is dedicated to making financial education accessible, practical, and engaging. Our platform combines real-world simulations with gamification to help users develop crucial financial skills.</p>
-      <p>Whether you're a student, young professional, or simply looking to improve your financial literacy, FinE provides the tools you need to succeed in today's complex financial landscape.</p>
+    <div class="section-header">
+      <h2>About FinE</h2>
+      <p class="section-intro">Our mission to transform financial education</p>
+    </div>
+    <div class="about-container">
+      <div class="about-content">
+        <p>FinE was created with a simple belief: financial education should be accessible, practical, and engaging. Our platform combines real-world simulations with gamification to help users develop the financial skills needed in today's complex economy.</p>
+        <p>Whether you're a student beginning your financial journey, a young professional managing your first salary, or simply looking to improve your financial literacy, FinE provides the tools you need to succeed.</p>
+      </div>
+      <div class="stats-container">
+        <div class="stat-item">
+          <span class="stat-number">15k+</span>
+          <span class="stat-label">Active Users</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">30+</span>
+          <span class="stat-label">Financial Modules</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">95%</span>
+          <span class="stat-label">User Satisfaction</span>
+        </div>
+      </div>
     </div>
   </section>
 
+  <!-- Contact Section -->
   <section id="contact" class="section-content">
-    <h2>Contact Us</h2>
-    <form id="contact-form">
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+    <div class="section-header">
+      <h2>Contact Us</h2>
+      <p class="section-intro">Questions? We'd love to hear from you</p>
+    </div>
+    <div class="contact-container">
+      <div class="contact-info">
+        <div class="contact-method">
+          <i class="fas fa-envelope"></i>
+          <p>hello@fine-education.com</p>
+        </div>
+        <div class="contact-method">
+          <i class="fas fa-phone"></i>
+          <p>+1 (555) 123-4567</p>
+        </div>
+        <div class="contact-method">
+          <i class="fas fa-map-marker-alt"></i>
+          <p>123 Finance Street, New York, NY</p>
+        </div>
+      </div>
+      <form id="contact-form">
+        <div class="form-row">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+        </div>
+        <textarea placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
   </section>
 
+  <!-- Footer -->
   <footer>
-    <p>&copy; 2025 FinE. All rights reserved.</p>
-    <div class="social-links">
-      <a href="#">Twitter</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Instagram</a>
+    <div class="footer-content">
+      <div class="footer-logo">
+        Fin<span class="special-e">E</span>
+        <p class="copyright">&copy; 2025 All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a href="login.html">Login</a>
+      </div>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
     </div>
   </footer>
 

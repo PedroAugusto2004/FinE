@@ -41,6 +41,87 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
   
+  // Back to login link
+  const backToLoginLink = document.getElementById('back-to-login-link');
+  if (backToLoginLink) {
+    backToLoginLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      formNavItems.forEach(nav => nav.classList.remove('active'));
+      forms.forEach(form => form.classList.remove('active'));
+      
+      formNavItems[0].classList.add('active');
+      document.getElementById('login-form').classList.add('active');
+    });
+  }
+  
+  // Password strength indicator
+  const passwordInput = document.getElementById('signup-password');
+  const strengthBar = document.querySelector('.strength-bar');
+  const strengthValue = document.getElementById('strength-value');
+  
+  if (passwordInput) {
+    passwordInput.addEventListener('input', () => {
+      const password = passwordInput.value;
+      let strength = 0;
+      let status = '';
+      
+      // Calculate password strength
+      if (password.length >= 8) strength += 25;
+      if (password.match(/[A-Z]/)) strength += 25;
+      if (password.match(/[0-9]/)) strength += 25;
+      if (password.match(/[^A-Za-z0-9]/)) strength += 25;
+      
+      // Update strength bar width and color
+      strengthBar.style.width = strength + '%';
+      
+      if (strength <= 25) {
+        status = 'weak';
+        strengthBar.style.backgroundColor = '#f44336';
+      } else if (strength <= 50) {
+        status = 'medium';
+        strengthBar.style.backgroundColor = '#ffa726';
+      } else if (strength <= 75) {
+        status = 'good';
+        strengthBar.style.backgroundColor = '#ffeb3b';
+      } else {
+        status = 'strong';
+        strengthBar.style.backgroundColor = '#4caf50';
+      }
+      
+      // Update strength text
+      strengthValue.textContent = status;
+    });
+  }
+  
+  // Social login buttons
+  const socialButtons = document.querySelectorAll('.social-btn');
+  
+  socialButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      // For demo purposes, show a message
+      let platform = '';
+      if (button.classList.contains('google')) platform = 'Google';
+      if (button.classList.contains('facebook')) platform = 'Facebook';
+      if (button.classList.contains('apple')) platform = 'Apple';
+      
+      showCustomAlert(`${platform} login is not implemented in this demo.`);
+    });
+  });
+  
+  // Forgot password link
+  const forgotLink = document.querySelector('.forgot-link');
+  if (forgotLink) {
+    forgotLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      
+      formNavItems.forEach(nav => nav.classList.remove('active'));
+      forms.forEach(form => form.classList.remove('active'));
+      
+      formNavItems[2].classList.add('active');
+      document.getElementById('reset-form').classList.add('active');
+    });
+  }
+  
   // Form validation and submission
   const loginForm = document.getElementById('login-form');
   const signupForm = document.getElementById('signup-form');
@@ -222,18 +303,24 @@ document.addEventListener('DOMContentLoaded', function() {
         signUp: "Sign Up",
         resetPassword: "Reset Password",
         welcomeBack: "Welcome Back",
+        formIntroSignIn: "Sign in to access your financial education dashboard",
+        formIntroSignUp: "Join thousands learning to master their finances",
+        formIntroReset: "Enter your email address and we'll send you instructions to reset your password.",
         email: "Email",
         emailPlaceholder: "your@email.com",
         password: "Password",
         passwordPlaceholder: "********",
         rememberMe: "Remember me",
+        forgotPassword: "Forgot password?",
         createAccount: "Create Account",
         fullName: "Full Name",
         fullNamePlaceholder: "John Doe",
         confirmPassword: "Confirm Password",
+        passwordStrength: "Password strength: ",
         termsConditions: "I agree to the Terms and Conditions",
-        resetInstructions: "Enter your email address and we'll send you instructions to reset your password.",
-        sendResetLink: "Send Reset Link"
+        sendResetLink: "Send Reset Link",
+        backToLogin: "Back to login",
+        orSignInWith: "Or sign in with"
       },
       es: {
         home: "Inicio",
@@ -244,18 +331,24 @@ document.addEventListener('DOMContentLoaded', function() {
         signUp: "Registrarse",
         resetPassword: "Restablecer Contraseña",
         welcomeBack: "Bienvenido de Nuevo",
+        formIntroSignIn: "Inicia sesión para acceder a tu panel de educación financiera",
+        formIntroSignUp: "Únete a miles que aprenden a dominar sus finanzas",
+        formIntroReset: "Ingrese su dirección de correo electrónico y le enviaremos instrucciones para restablecer su contraseña.",
         email: "Correo Electrónico",
         emailPlaceholder: "tu@correo.com",
         password: "Contraseña",
         passwordPlaceholder: "********",
         rememberMe: "Recuérdame",
+        forgotPassword: "¿Olvidaste tu contraseña?",
         createAccount: "Crear Cuenta",
         fullName: "Nombre Completo",
         fullNamePlaceholder: "Juan Pérez",
         confirmPassword: "Confirmar Contraseña",
+        passwordStrength: "Fortaleza de la contraseña: ",
         termsConditions: "Acepto los Términos y Condiciones",
-        resetInstructions: "Ingrese su dirección de correo electrónico y le enviaremos instrucciones para restablecer su contraseña.",
-        sendResetLink: "Enviar Enlace"
+        sendResetLink: "Enviar Enlace",
+        backToLogin: "Volver a iniciar sesión",
+        orSignInWith: "O inicia sesión con"
       },
       fr: {
         home: "Accueil",
@@ -266,18 +359,24 @@ document.addEventListener('DOMContentLoaded', function() {
         signUp: "S'inscrire",
         resetPassword: "Réinitialiser le Mot de Passe",
         welcomeBack: "Bienvenue à Nouveau",
+        formIntroSignIn: "Connectez-vous pour accéder à votre tableau de bord d'éducation financière",
+        formIntroSignUp: "Rejoignez des milliers de personnes apprenant à maîtriser leurs finances",
+        formIntroReset: "Entrez votre adresse e-mail et nous vous enverrons des instructions pour réinitialiser votre mot de passe.",
         email: "E-mail",
         emailPlaceholder: "votre@email.com",
         password: "Mot de Passe",
         passwordPlaceholder: "********",
         rememberMe: "Se souvenir de moi",
+        forgotPassword: "Mot de passe oublié?",
         createAccount: "Créer un Compte",
         fullName: "Nom Complet",
         fullNamePlaceholder: "Jean Dupont",
         confirmPassword: "Confirmer le Mot de Passe",
+        passwordStrength: "Force du mot de passe: ",
         termsConditions: "J'accepte les Conditions Générales",
-        resetInstructions: "Entrez votre adresse e-mail et nous vous enverrons des instructions pour réinitialiser votre mot de passe.",
-        sendResetLink: "Envoyer le Lien"
+        sendResetLink: "Envoyer le Lien",
+        backToLogin: "Retour à la connexion",
+        orSignInWith: "Ou connectez-vous avec"
       },
       de: {
         home: "Startseite",
@@ -288,18 +387,24 @@ document.addEventListener('DOMContentLoaded', function() {
         signUp: "Registrieren",
         resetPassword: "Passwort Zurücksetzen",
         welcomeBack: "Willkommen Zurück",
+        formIntroSignIn: "Melden Sie sich an, um auf Ihr Finanzbildungs-Dashboard zuzugreifen",
+        formIntroSignUp: "Schließen Sie sich Tausenden an, die lernen, ihre Finanzen zu meistern",
+        formIntroReset: "Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen Anweisungen zum Zurücksetzen Ihres Passworts.",
         email: "E-Mail",
         emailPlaceholder: "ihre@email.com",
         password: "Passwort",
         passwordPlaceholder: "********",
         rememberMe: "Angemeldet bleiben",
+        forgotPassword: "Passwort vergessen?",
         createAccount: "Konto Erstellen",
         fullName: "Vollständiger Name",
         fullNamePlaceholder: "Max Mustermann",
         confirmPassword: "Passwort Bestätigen",
+        passwordStrength: "Passwortstärke: ",
         termsConditions: "Ich stimme den Geschäftsbedingungen zu",
-        resetInstructions: "Geben Sie Ihre E-Mail-Adresse ein und wir senden Ihnen Anweisungen zum Zurücksetzen Ihres Passworts.",
-        sendResetLink: "Link Senden"
+        sendResetLink: "Link Senden",
+        backToLogin: "Zurück zur Anmeldung",
+        orSignInWith: "Oder anmelden mit"
       },
       pt: {
         home: "Início",
@@ -310,18 +415,24 @@ document.addEventListener('DOMContentLoaded', function() {
         signUp: "Cadastrar",
         resetPassword: "Redefinir Senha",
         welcomeBack: "Bem-vindo de Volta",
+        formIntroSignIn: "Faça login para acessar seu painel de educação financeira",
+        formIntroSignUp: "Junte-se a milhares aprendendo a dominar suas finanças",
+        formIntroReset: "Digite seu endereço de email e enviaremos instruções para redefinir sua senha.",
         email: "Email",
         emailPlaceholder: "seu@email.com",
         password: "Senha",
         passwordPlaceholder: "********",
         rememberMe: "Lembrar-me",
+        forgotPassword: "Esqueceu a senha?",
         createAccount: "Criar Conta",
         fullName: "Nome Completo",
         fullNamePlaceholder: "João Silva",
         confirmPassword: "Confirmar Senha",
+        passwordStrength: "Força da senha: ",
         termsConditions: "Concordo com os Termos e Condições",
-        resetInstructions: "Digite seu endereço de email e enviaremos instruções para redefinir sua senha.",
-        sendResetLink: "Enviar Link"
+        sendResetLink: "Enviar Link",
+        backToLogin: "Voltar ao login",
+        orSignInWith: "Ou entre com"
       }
     };
     
@@ -344,21 +455,26 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update login form
     document.querySelector('#login-form h2').textContent = translations[lang].welcomeBack;
+    document.querySelector('#login-form .form-intro').textContent = translations[lang].formIntroSignIn;
     document.querySelector('label[for="login-email"]').textContent = translations[lang].email;
     document.querySelector('#login-email').placeholder = translations[lang].emailPlaceholder;
     document.querySelector('label[for="login-password"]').textContent = translations[lang].password;
     document.querySelector('#login-password').placeholder = translations[lang].passwordPlaceholder;
     document.querySelector('label[for="remember"]').textContent = translations[lang].rememberMe;
-    document.querySelector('#login-form .auth-btn').textContent = translations[lang].signIn;
+    document.querySelector('.forgot-link').textContent = translations[lang].forgotPassword;
+    document.querySelector('#login-form .auth-btn span').textContent = translations[lang].signIn;
+    document.querySelector('.social-login p').textContent = translations[lang].orSignInWith;
     
     // Update signup form
     document.querySelector('#signup-form h2').textContent = translations[lang].createAccount;
+    document.querySelector('#signup-form .form-intro').textContent = translations[lang].formIntroSignUp;
     document.querySelector('label[for="signup-name"]').textContent = translations[lang].fullName;
     document.querySelector('#signup-name').placeholder = translations[lang].fullNamePlaceholder;
     document.querySelector('label[for="signup-email"]').textContent = translations[lang].email;
     document.querySelector('#signup-email').placeholder = translations[lang].emailPlaceholder;
     document.querySelector('label[for="signup-password"]').textContent = translations[lang].password;
     document.querySelector('#signup-password').placeholder = translations[lang].passwordPlaceholder;
+    document.querySelector('.strength-text').textContent = translations[lang].passwordStrength + document.querySelector('#strength-value').textContent;
     document.querySelector('label[for="signup-confirm"]').textContent = translations[lang].confirmPassword;
     document.querySelector('#signup-confirm').placeholder = translations[lang].passwordPlaceholder;
     
@@ -369,14 +485,15 @@ document.addEventListener('DOMContentLoaded', function() {
     termsLink.textContent = 'Terms and Conditions';
     
     // Update signup button
-    document.querySelector('#signup-form .auth-btn').textContent = translations[lang].createAccount;
+    document.querySelector('#signup-form .auth-btn span').textContent = translations[lang].createAccount;
     
     // Update reset password form
     document.querySelector('#reset-form h2').textContent = translations[lang].resetPassword;
-    document.querySelector('.reset-instructions').textContent = translations[lang].resetInstructions;
+    document.querySelector('#reset-form .form-intro').textContent = translations[lang].formIntroReset;
     document.querySelector('label[for="reset-email"]').textContent = translations[lang].email;
     document.querySelector('#reset-email').placeholder = translations[lang].emailPlaceholder;
-    document.querySelector('#reset-form .auth-btn').textContent = translations[lang].sendResetLink;
+    document.querySelector('#reset-form .auth-btn span').textContent = translations[lang].sendResetLink;
+    document.querySelector('.back-to-login a span').textContent = translations[lang].backToLogin;
     
     // Set html lang attribute
     document.documentElement.lang = lang;

@@ -3,8 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FinE - Login</title>
+  <meta name="description" content="FinE - Sign in or create an account to access your financial education dashboard">
+  <title>FinE | Account Access</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
   <link rel="stylesheet" href="style/style.css">
   <link rel="stylesheet" href="style/login.css">
   <link rel="shortcut icon" href="assets/FinE.jpeg">
@@ -47,69 +49,151 @@
         <!-- Login Form -->
         <form id="login-form" class="auth-form active">
           <h2>Welcome Back</h2>
+          <p class="form-intro">Sign in to access your financial education dashboard</p>
+          
           <div class="form-group">
             <label for="login-email">Email</label>
-            <input type="email" id="login-email" placeholder="your@email.com" required>
+            <div class="input-with-icon">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="login-email" placeholder="your@email.com" required>
+            </div>
           </div>
+          
           <div class="form-group">
             <label for="login-password">Password</label>
-            <input type="password" id="login-password" placeholder="********" required>
+            <div class="input-with-icon">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="login-password" placeholder="********" required>
+            </div>
           </div>
+          
           <div class="remember-forgot">
             <div class="remember-me">
               <input type="checkbox" id="remember">
               <label for="remember">Remember me</label>
             </div>
+            <a href="#" class="forgot-link">Forgot password?</a>
           </div>
-          <button type="submit" class="auth-btn">Sign In</button>
+          
+          <button type="submit" class="auth-btn">
+            <span>Sign In</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+          
+          <div class="social-login">
+            <p>Or sign in with</p>
+            <div class="social-login-buttons">
+              <button type="button" class="social-btn google">
+                <i class="fab fa-google"></i>
+              </button>
+              <button type="button" class="social-btn facebook">
+                <i class="fab fa-facebook-f"></i>
+              </button>
+              <button type="button" class="social-btn apple">
+                <i class="fab fa-apple"></i>
+              </button>
+            </div>
+          </div>
         </form>
 
         <!-- Sign Up Form -->
         <form id="signup-form" class="auth-form">
           <h2>Create Account</h2>
+          <p class="form-intro">Join thousands learning to master their finances</p>
+          
           <div class="form-group">
             <label for="signup-name">Full Name</label>
-            <input type="text" id="signup-name" placeholder="John Doe" required>
+            <div class="input-with-icon">
+              <i class="fas fa-user"></i>
+              <input type="text" id="signup-name" placeholder="John Doe" required>
+            </div>
           </div>
+          
           <div class="form-group">
             <label for="signup-email">Email</label>
-            <input type="email" id="signup-email" placeholder="your@email.com" required>
+            <div class="input-with-icon">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="signup-email" placeholder="your@email.com" required>
+            </div>
           </div>
+          
           <div class="form-group">
             <label for="signup-password">Password</label>
-            <input type="password" id="signup-password" placeholder="********" required>
+            <div class="input-with-icon">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="signup-password" placeholder="********" required>
+            </div>
+            <div class="password-strength">
+              <div class="strength-bar"></div>
+              <span class="strength-text">Password strength: <span id="strength-value">weak</span></span>
+            </div>
           </div>
+          
           <div class="form-group">
             <label for="signup-confirm">Confirm Password</label>
-            <input type="password" id="signup-confirm" placeholder="********" required>
+            <div class="input-with-icon">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="signup-confirm" placeholder="********" required>
+            </div>
           </div>
+          
           <div class="terms">
             <input type="checkbox" id="terms" required>
             <label for="terms">I agree to the <a href="#">Terms and Conditions</a></label>
           </div>
-          <button type="submit" class="auth-btn">Create Account</button>
+          
+          <button type="submit" class="auth-btn">
+            <span>Create Account</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
         </form>
 
         <!-- Reset Password Form -->
         <form id="reset-form" class="auth-form">
           <h2>Reset Password</h2>
-          <p class="reset-instructions">Enter your email address and we'll send you instructions to reset your password.</p>
+          <p class="form-intro">Enter your email address and we'll send you instructions to reset your password.</p>
+          
           <div class="form-group">
             <label for="reset-email">Email</label>
-            <input type="email" id="reset-email" placeholder="your@email.com" required>
+            <div class="input-with-icon">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="reset-email" placeholder="your@email.com" required>
+            </div>
           </div>
-          <button type="submit" class="auth-btn">Send Reset Link</button>
+          
+          <button type="submit" class="auth-btn">
+            <span>Send Reset Link</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+          
+          <div class="back-to-login">
+            <a href="#" id="back-to-login-link">
+              <i class="fas fa-arrow-left"></i>
+              <span>Back to login</span>
+            </a>
+          </div>
         </form>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2025 FinE. All rights reserved.</p>
-    <div class="social-links">
-      <a href="#">Twitter</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">Instagram</a>
+    <div class="footer-content">
+      <div class="footer-logo">
+        Fin<span class="special-e">E</span>
+        <p class="copyright">&copy; 2025 All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html#home">Home</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+      </div>
     </div>
   </footer>
 
