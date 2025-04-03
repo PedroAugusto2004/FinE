@@ -477,4 +477,205 @@ document.addEventListener('DOMContentLoaded', function() {
     changeLanguage(savedLanguage, false); // Pass false to prevent alert on page load
     languageBtn.innerHTML = savedLanguage.toUpperCase() + ' <span class="arrow-down">▼</span>';
   }
+
+  // Feature Popup Functionality
+  const featurePopupOverlay = document.getElementById('feature-popup-overlay');
+  const featurePopupTitle = document.getElementById('feature-popup-title');
+  const featurePopupContent = document.getElementById('feature-popup-content');
+  const featurePopupClose = document.querySelector('.feature-popup-close');
+  
+  // Feature content with more detailed information
+  const featureDetails = {
+    'Budget Simulator': {
+      content: `
+        <p>Our Budget Simulator is designed to give you hands-on experience with real financial decision-making in a risk-free environment.</p>
+        
+        <h4>Key Features:</h4>
+        <ul>
+          <li class="highlight-item delay-1">Create and manage virtual monthly budgets based on various income levels and lifestyles</li>
+          <li class="highlight-item delay-2">Face unexpected financial challenges and learn how to adjust your budget accordingly</li>
+          <li class="highlight-item delay-3">Track your spending patterns and receive personalized insights</li>
+          <li class="highlight-item delay-4">Compare your budgeting decisions with financial experts' recommendations</li>
+          <li class="highlight-item delay-5">Earn achievements as you master different budgeting skills</li>
+        </ul>
+        
+        <h4>How It Helps:</h4>
+        <p>By practicing with our simulator, you'll develop practical skills that directly translate to managing your actual finances. You'll learn to anticipate expenses, build emergency funds, and make informed spending decisions—all essential skills for financial stability and growth.</p>
+        
+        <p>Start with beginner scenarios and work your way up to more complex financial situations as your confidence grows.</p>
+      `
+    },
+    'Investment Playground': {
+      content: `
+        <p>The Investment Playground provides a realistic, zero-risk environment to learn about investment strategies using real market data and simulated outcomes.</p>
+        
+        <h4>Key Features:</h4>
+        <ul>
+          <li class="highlight-item delay-1">Build diversified investment portfolios with stocks, bonds, ETFs, and other assets</li>
+          <li class="highlight-item delay-2">Access historical market data to observe how different investments performed over time</li>
+          <li class="highlight-item delay-3">Run simulations to see potential long-term outcomes of various investment strategies</li>
+          <li class="highlight-item delay-4">Learn about risk tolerance, asset allocation, and portfolio rebalancing</li>
+          <li class="highlight-item delay-5">Compete with friends or other users to see whose investment strategy performs best</li>
+        </ul>
+        
+        <h4>How It Helps:</h4>
+        <p>Investment can seem intimidating for beginners, but our playground demystifies the process. You'll gain confidence in making investment decisions by understanding concepts like compound interest, dividend reinvestment, and market volatility.</p>
+        
+        <p>The knowledge you gain here will prepare you to make informed decisions when you're ready to invest real money in your future.</p>
+      `
+    },
+    'Financial Games': {
+      content: `
+        <p>Our collection of Financial Games transforms complex financial concepts into engaging, interactive experiences that make learning enjoyable and effective.</p>
+        
+        <h4>Available Games:</h4>
+        <ul>
+          <li class="highlight-item delay-1"><strong>Debt Destroyer</strong> - Race against time to eliminate debt while managing income and expenses</li>
+          <li class="highlight-item delay-2"><strong>Market Mastery</strong> - Test your knowledge of market trends and investment principles</li>
+          <li class="highlight-item delay-3"><strong>Budget Hero</strong> - Build the perfect budget to achieve various life goals</li>
+          <li class="highlight-item delay-4"><strong>Credit Score Quest</strong> - Navigate financial decisions to boost your credit score</li>
+          <li class="highlight-item delay-5"><strong>Retirement Road</strong> - Plan your path to a comfortable retirement</li>
+        </ul>
+        
+        <h4>Benefits of Game-Based Learning:</h4>
+        <p>Research shows that gamification significantly improves retention of financial concepts. Our games create memorable experiences that reinforce key principles through active participation rather than passive consumption.</p>
+        
+        <p>Each game includes beginner to advanced levels, making them suitable for all knowledge levels. Compete with others on leaderboards or track your personal improvement over time.</p>
+      `
+    }
+  };
+  
+  // Get all feature links
+  const featureLinks = document.querySelectorAll('.feature-link');
+  
+  // Add click event to each feature link
+  featureLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Get feature title from the parent card's h3
+      const featureTitle = this.closest('.feature-card').querySelector('h3').textContent;
+      
+      // Set popup title
+      featurePopupTitle.textContent = featureTitle;
+      
+      // Set popup content
+      if (featureDetails[featureTitle]) {
+        featurePopupContent.innerHTML = featureDetails[featureTitle].content;
+      } else {
+        featurePopupContent.innerHTML = '<p>Details for this feature are coming soon!</p>';
+      }
+      
+      // Show popup
+      featurePopupOverlay.classList.add('show');
+      
+      // Prevent scrolling on the body
+      document.body.style.overflow = 'hidden';
+    });
+  });
+  
+  // Close popup when close button is clicked
+  featurePopupClose.addEventListener('click', () => {
+    featurePopupOverlay.classList.remove('show');
+    document.body.style.overflow = '';
+  });
+  
+  // Close popup when clicking outside the popup
+  featurePopupOverlay.addEventListener('click', (e) => {
+    if (e.target === featurePopupOverlay) {
+      featurePopupOverlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  });
+  
+  // Close popup when ESC key is pressed
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && featurePopupOverlay.classList.contains('show')) {
+      featurePopupOverlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  });
+  
+  // Translate feature popups
+  function updateFeaturePopupTranslations(lang) {
+    // This function would be called from the changeLanguage function
+    const translations = {
+      en: featureDetails,
+      es: {
+        'Simulador de Presupuesto': {
+          content: `
+            <p>Nuestro Simulador de Presupuesto está diseñado para darle experiencia práctica con la toma de decisiones financieras reales en un entorno libre de riesgos.</p>
+            
+            <h4>Características principales:</h4>
+            <ul>
+              <li class="highlight-item delay-1">Cree y administre presupuestos mensuales virtuales basados en varios niveles de ingresos y estilos de vida</li>
+              <li class="highlight-item delay-2">Enfrente desafíos financieros inesperados y aprenda a ajustar su presupuesto en consecuencia</li>
+              <li class="highlight-item delay-3">Realice un seguimiento de sus patrones de gasto y reciba información personalizada</li>
+              <li class="highlight-item delay-4">Compare sus decisiones de presupuesto con las recomendaciones de expertos financieros</li>
+              <li class="highlight-item delay-5">Gane logros a medida que domina diferentes habilidades de presupuesto</li>
+            </ul>
+            
+            <h4>Cómo ayuda:</h4>
+            <p>Al practicar con nuestro simulador, desarrollará habilidades prácticas que se traducen directamente en la gestión de sus finanzas reales. Aprenderá a anticipar gastos, crear fondos de emergencia y tomar decisiones de gasto informadas, todas habilidades esenciales para la estabilidad y el crecimiento financieros.</p>
+          `
+        },
+        'Zona de Inversiones': {
+          content: `
+            <p>La Zona de Inversiones proporciona un entorno realista y sin riesgos para aprender sobre estrategias de inversión utilizando datos de mercado reales y resultados simulados.</p>
+            
+            <h4>Características principales:</h4>
+            <ul>
+              <li class="highlight-item delay-1">Construya carteras de inversión diversificadas con acciones, bonos, ETF y otros activos</li>
+              <li class="highlight-item delay-2">Acceda a datos históricos del mercado para observar cómo se comportaron diferentes inversiones a lo largo del tiempo</li>
+              <li class="highlight-item delay-3">Ejecute simulaciones para ver los posibles resultados a largo plazo de varias estrategias de inversión</li>
+              <li class="highlight-item delay-4">Aprenda sobre tolerancia al riesgo, asignación de activos y reequilibrio de cartera</li>
+              <li class="highlight-item delay-5">Compita con amigos u otros usuarios para ver qué estrategia de inversión funciona mejor</li>
+            </ul>
+          `
+        },
+        'Juegos Financieros': {
+          content: `
+            <p>Nuestra colección de Juegos Financieros transforma conceptos financieros complejos en experiencias interactivas y atractivas que hacen que el aprendizaje sea agradable y efectivo.</p>
+            
+            <h4>Juegos disponibles:</h4>
+            <ul>
+              <li class="highlight-item delay-1"><strong>Destructor de Deudas</strong> - Corra contra el tiempo para eliminar la deuda mientras administra ingresos y gastos</li>
+              <li class="highlight-item delay-2"><strong>Maestría del Mercado</strong> - Ponga a prueba su conocimiento de las tendencias del mercado y los principios de inversión</li>
+              <li class="highlight-item delay-3"><strong>Héroe del Presupuesto</strong> - Construya el presupuesto perfecto para lograr varios objetivos de vida</li>
+              <li class="highlight-item delay-4"><strong>Búsqueda de Puntaje Crediticio</strong> - Navegue por decisiones financieras para aumentar su puntaje crediticio</li>
+            </ul>
+          `
+        }
+      }
+      // Add more languages as needed
+    };
+    
+    // Return the translations for the current language or default to English
+    return translations[lang] || translations['en'];
+  }
+  
+  // Update the changeLanguage function to handle feature popups
+  const originalChangeLanguage = changeLanguage;
+  changeLanguage = function(lang, showAlert = false) {
+    originalChangeLanguage(lang, showAlert);
+    
+    // Update feature titles based on new language
+    // This would need to be expanded for a full implementation
+    if (lang === 'es') {
+      document.querySelectorAll('.feature-card h3').forEach((heading, index) => {
+        if (index === 0) heading.textContent = 'Simulador de Presupuesto';
+        if (index === 1) heading.textContent = 'Zona de Inversiones';
+        if (index === 2) heading.textContent = 'Juegos Financieros';
+      });
+    } else if (lang === 'en') {
+      document.querySelectorAll('.feature-card h3').forEach((heading, index) => {
+        if (index === 0) heading.textContent = 'Budget Simulator';
+        if (index === 1) heading.textContent = 'Investment Playground';
+        if (index === 2) heading.textContent = 'Financial Games';
+      });
+    }
+    
+    // For a full implementation, you would also need to update the popup content
+    // based on the language when it opens
+  };
 });
