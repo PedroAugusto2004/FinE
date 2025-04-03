@@ -451,6 +451,9 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
+    // Update language selector text to show current language
+    languageBtn.innerHTML = lang.toUpperCase() + ' <span class="arrow-down">▼</span>';
+    
     // Update navigation links
     document.querySelector('.nav-links a[href="index.html#home"]').textContent = translations[lang].home;
     document.querySelector('.nav-links a[href="index.html#features"]').textContent = translations[lang].features;
@@ -470,7 +473,18 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#login-email').placeholder = translations[lang].emailPlaceholder;
     document.querySelector('label[for="login-password"]').textContent = translations[lang].password;
     document.querySelector('#login-password').placeholder = translations[lang].passwordPlaceholder;
-    document.querySelector('label[for="remember"]').textContent = translations[lang].rememberMe;
+    
+    // Fix for custom checkbox label in login form
+    const rememberLabel = document.querySelector('.remember-me .custom-checkbox');
+    if (rememberLabel) {
+      const input = rememberLabel.querySelector('input');
+      const checkmark = rememberLabel.querySelector('.checkmark');
+      rememberLabel.innerHTML = '';
+      rememberLabel.appendChild(input);
+      rememberLabel.appendChild(checkmark);
+      rememberLabel.appendChild(document.createTextNode(translations[lang].rememberMe));
+    }
+    
     document.querySelector('.forgot-link').textContent = translations[lang].forgotPassword;
     document.querySelector('#login-form .auth-btn span').textContent = translations[lang].signIn;
     document.querySelector('.social-login p').textContent = translations[lang].orSignInWith;
@@ -484,34 +498,115 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelector('#signup-email').placeholder = translations[lang].emailPlaceholder;
     document.querySelector('label[for="signup-password"]').textContent = translations[lang].password;
     document.querySelector('#signup-password').placeholder = translations[lang].passwordPlaceholder;
-    document.querySelector('.strength-text').textContent = translations[lang].passwordStrength + document.querySelector('#strength-value').textContent;
+    
+    // Update strength text properly
+    const strengthTextElement = document.querySelector('.strength-text');
+    if (strengthTextElement) {
+      const strengthValueElement = document.getElementById('strength-value');
+      const currentValue = strengthValueElement ? strengthValueElement.textContent : 'weak';
+      
+      // Recreate the element with proper structure
+      strengthTextElement.innerHTML = '';
+      strengthTextElement.textContent = translations[lang].passwordStrength;
+      
+      // Re-add the strength value span
+      const newStrengthValue = document.createElement('span');
+      newStrengthValue.id = 'strength-value';
+      newStrengthValue.textContent = currentValue;
+      strengthTextElement.appendChild(newStrengthValue);
+    }
+    
     document.querySelector('label[for="signup-confirm"]').textContent = translations[lang].confirmPassword;
     document.querySelector('#signup-confirm').placeholder = translations[lang].passwordPlaceholder;
     
-    // Update terms - fix for terms and conditions translation
-    const termsLabel = document.querySelector('label[for="terms"]');
-    const termsLink = termsLabel.querySelector('a');
-    // Clear the label content first
-    termsLabel.innerHTML = '';
-    // Create a text node with the first part of the terms text
-    const termsText = document.createTextNode(translations[lang].termsConditions.split('Terms')[0]);
-    termsLabel.appendChild(termsText);
-    // Update the link text and append it back
-    termsLink.textContent = translations[lang].termsLink;
-    termsLabel.appendChild(termsLink);
+    // Properly update terms checkbox label
+    const termsContainer = document.querySelector('.terms');
+    if (termsContainer) {
+      const customCheckbox = termsContainer.querySelector('.custom-checkbox');
+      if (customCheckbox) {
+        const input = customCheckbox.querySelector('input');
+        const checkmark = customCheckbox.querySelector('.checkmark');
+        const link = customCheckbox.querySelector('a');
+        
+        // Save reference to original elements
+        const originalInput = input.cloneNode(true);
+        const originalCheckmark = checkmark.cloneNode(true);
+        const originalLink = link.cloneNode(true);
+        
+        // Clear the label content
+        customCheckbox.innerHTML = '';
+        
+        // Add back the input and checkmark
+        customCheckbox.appendChild(originalInput);
+        customCheckbox.appendChild(originalCheckmark);
+        
+        // Split the terms text to insert the link in the middle
+        const fullTermsText = translations[lang].termsConditions;
+        let beforeLink = fullTermsText;
+        
+        // Check if the text contains the terms phrase
+        if (fullTermsText.includes("Terms") || 
+            fullTermsText.includes("Términos") || 
+            fullTermsText.includes("Conditions") || 
+            fullTermsText.includes("Condiciones") ||
+            fullTermsText.includes("Générales") ||
+            fullTermsText.includes("Geschäftsbedingungen") ||
+            fullTermsText.includes("Termos")) {
+          
+          // Try different splits based on language
+          const possibleSplits = [
+            "Terms and Conditions", 
+            "Términos y Condiciones", 
+            "Conditions Générales", 
+            "Geschäftsbedingungen",
+            "Termos e Condições"
+          ];
+          
+          for (const splitText of possibleSplits) {
+            if (fullTermsText.includes(splitText)) {
+              beforeLink = fullTermsText.split(splitText)[0];
+              break;
+            }
+          }
+        }
+        
+        // Add text before the link
+        customCheckbox.appendChild(document.createTextNode(beforeLink));
+        
+        // Update and add the link
+        originalLink.textContent = translations[lang].termsLink;
+        customCheckbox.appendChild(originalLink);
+      }
+    }
     
     // Update signup button
     document.querySelector('#signup-form .auth-btn span').textContent = translations[lang].createAccount;
     
-    // Update reset password form - complete fix for all elements
-    document.querySelector('#reset-form h2').textContent = translations[lang].resetPassword;
-    document.querySelector('#reset-form .form-intro').textContent = translations[lang].formIntroReset;
-    document.querySelector('label[for="reset-email"]').textContent = translations[lang].email;
-    document.querySelector('#reset-email').placeholder = translations[lang].emailPlaceholder;
-    document.querySelector('#reset-form .auth-btn span').textContent = translations[lang].sendResetLink;
-    const backToLoginText = document.querySelector('.back-to-login a span');
-    if (backToLoginText) {
-      backToLoginText.textContent = translations[lang].backToLogin;
+    // Update reset password form
+    const resetForm = document.getElementById('reset-form');
+    if (resetForm) {
+      // Update all text elements in reset form
+      resetForm.querySelector('h2').textContent = translations[lang].resetPassword;
+      resetForm.querySelector('.form-intro').textContent = translations[lang].formIntroReset;
+      resetForm.querySelector('label[for="reset-email"]').textContent = translations[lang].email;
+      resetForm.querySelector('#reset-email').placeholder = translations[lang].emailPlaceholder;
+      resetForm.querySelector('.auth-btn span').textContent = translations[lang].sendResetLink;
+      
+      // Update back to login link
+      const backToLoginLink = resetForm.querySelector('.back-to-login a');
+      if (backToLoginLink) {
+        // Preserve the icon
+        const icon = backToLoginLink.querySelector('i');
+        backToLoginLink.innerHTML = '';
+        if (icon) {
+          backToLoginLink.appendChild(icon);
+        }
+        
+        // Add translated text in a span
+        const span = document.createElement('span');
+        span.textContent = translations[lang].backToLogin;
+        backToLoginLink.appendChild(span);
+      }
     }
     
     // Update footer links
@@ -545,6 +640,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const savedLanguage = localStorage.getItem('preferredLanguage');
   if (savedLanguage) {
     changeLanguage(savedLanguage, false); // Pass false to prevent alert on page load
-    languageBtn.innerHTML = savedLanguage.toUpperCase() + ' <span class="arrow-down">▼</span>';
   }
+  // No need to update languageBtn here as it's now handled in the changeLanguage function
 });
