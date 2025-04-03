@@ -631,6 +631,9 @@ document.addEventListener('DOMContentLoaded', function() {
               <li class="highlight-item delay-4">Aprenda sobre tolerancia al riesgo, asignación de activos y reequilibrio de cartera</li>
               <li class="highlight-item delay-5">Compita con amigos u otros usuarios para ver qué estrategia de inversión funciona mejor</li>
             </ul>
+            
+            <h4>Cómo ayuda:</h4>
+            <p>La inversión puede parecer intimidante para los principiantes, pero nuestra zona desmitifica el proceso. Ganará confianza en la toma de decisiones de inversión al comprender conceptos como el interés compuesto, la reinversión de dividendos y la volatilidad del mercado.</p>
           `
         },
         'Juegos Financieros': {
@@ -643,29 +646,246 @@ document.addEventListener('DOMContentLoaded', function() {
               <li class="highlight-item delay-2"><strong>Maestría del Mercado</strong> - Ponga a prueba su conocimiento de las tendencias del mercado y los principios de inversión</li>
               <li class="highlight-item delay-3"><strong>Héroe del Presupuesto</strong> - Construya el presupuesto perfecto para lograr varios objetivos de vida</li>
               <li class="highlight-item delay-4"><strong>Búsqueda de Puntaje Crediticio</strong> - Navegue por decisiones financieras para aumentar su puntaje crediticio</li>
+              <li class="highlight-item delay-5"><strong>Camino a la Jubilación</strong> - Planifique su camino hacia una jubilación cómoda</li>
             </ul>
+            
+            <h4>Beneficios del aprendizaje basado en juegos:</h4>
+            <p>La investigación muestra que la gamificación mejora significativamente la retención de conceptos financieros. Nuestros juegos crean experiencias memorables que refuerzan principios clave mediante la participación activa en lugar del consumo pasivo.</p>
+          `
+        }
+      },
+      fr: {
+        'Simulateur de Budget': {
+          content: `
+            <p>Notre Simulateur de Budget est conçu pour vous donner une expérience pratique de la prise de décisions financières réelles dans un environnement sans risque.</p>
+            
+            <h4>Caractéristiques principales:</h4>
+            <ul>
+              <li class="highlight-item delay-1">Créez et gérez des budgets mensuels virtuels basés sur différents niveaux de revenus et styles de vie</li>
+              <li class="highlight-item delay-2">Faites face à des défis financiers inattendus et apprenez à ajuster votre budget en conséquence</li>
+              <li class="highlight-item delay-3">Suivez vos habitudes de dépenses et recevez des informations personnalisées</li>
+              <li class="highlight-item delay-4">Comparez vos décisions budgétaires avec les recommandations d'experts financiers</li>
+              <li class="highlight-item delay-5">Gagnez des réalisations au fur et à mesure que vous maîtrisez différentes compétences budgétaires</li>
+            </ul>
+            
+            <h4>Comment cela aide:</h4>
+            <p>En pratiquant avec notre simulateur, vous développerez des compétences pratiques qui se traduisent directement dans la gestion de vos finances réelles. Vous apprendrez à anticiper les dépenses, à constituer des fonds d'urgence et à prendre des décisions de dépenses éclairées - toutes des compétences essentielles pour la stabilité et la croissance financières.</p>
+          `
+        },
+        'Espace d\'Investissement': {
+          content: `
+            <p>L'Espace d'Investissement offre un environnement réaliste et sans risque pour apprendre les stratégies d'investissement en utilisant des données de marché réelles et des résultats simulés.</p>
+            
+            <h4>Caractéristiques principales:</h4>
+            <ul>
+              <li class="highlight-item delay-1">Construisez des portefeuilles d'investissement diversifiés avec des actions, des obligations, des ETF et d'autres actifs</li>
+              <li class="highlight-item delay-2">Accédez aux données historiques du marché pour observer comment différents investissements ont performé au fil du temps</li>
+              <li class="highlight-item delay-3">Exécutez des simulations pour voir les résultats potentiels à long terme de diverses stratégies d'investissement</li>
+              <li class="highlight-item delay-4">Apprenez sur la tolérance au risque, l'allocation d'actifs et le rééquilibrage de portefeuille</li>
+              <li class="highlight-item delay-5">Faites des compétitions avec des amis ou d'autres utilisateurs pour voir quelle stratégie d'investissement fonctionne le mieux</li>
+            </ul>
+            
+            <h4>Comment cela aide:</h4>
+            <p>L'investissement peut sembler intimidant pour les débutants, mais notre espace démystifie le processus. Vous gagnerez en confiance dans la prise de décisions d'investissement en comprenant des concepts comme l'intérêt composé, le réinvestissement des dividendes et la volatilité du marché.</p>
+          `
+        },
+        'Jeux Financiers': {
+          content: `
+            <p>Notre collection de Jeux Financiers transforme des concepts financiers complexes en expériences interactives et engageantes qui rendent l'apprentissage agréable et efficace.</p>
+            
+            <h4>Jeux disponibles:</h4>
+            <ul>
+              <li class="highlight-item delay-1"><strong>Destructeur de Dettes</strong> - Faites la course contre le temps pour éliminer les dettes tout en gérant revenus et dépenses</li>
+              <li class="highlight-item delay-2"><strong>Maîtrise du Marché</strong> - Testez votre connaissance des tendances du marché et des principes d'investissement</li>
+              <li class="highlight-item delay-3"><strong>Héros du Budget</strong> - Construisez le budget parfait pour atteindre divers objectifs de vie</li>
+              <li class="highlight-item delay-4"><strong>Quête du Score de Crédit</strong> - Naviguez à travers des décisions financières pour améliorer votre score de crédit</li>
+              <li class="highlight-item delay-5"><strong>Route de la Retraite</strong> - Planifiez votre chemin vers une retraite confortable</li>
+            </ul>
+            
+            <h4>Avantages de l'apprentissage par le jeu:</h4>
+            <p>La recherche montre que la gamification améliore considérablement la rétention des concepts financiers. Nos jeux créent des expériences mémorables qui renforcent les principes clés par une participation active plutôt que par une consommation passive.</p>
+          `
+        }
+      },
+      de: {
+        'Budget-Simulator': {
+          content: `
+            <p>Unser Budget-Simulator ist darauf ausgelegt, Ihnen praktische Erfahrungen mit realen finanziellen Entscheidungen in einer risikofreien Umgebung zu vermitteln.</p>
+            
+            <h4>Hauptfunktionen:</h4>
+            <ul>
+              <li class="highlight-item delay-1">Erstellen und verwalten Sie virtuelle Monatsbudgets basierend auf verschiedenen Einkommensniveaus und Lebensstilen</li>
+              <li class="highlight-item delay-2">Stellen Sie sich unerwarteten finanziellen Herausforderungen und lernen Sie, Ihr Budget entsprechend anzupassen</li>
+              <li class="highlight-item delay-3">Verfolgen Sie Ihre Ausgabenmuster und erhalten Sie personalisierte Einblicke</li>
+              <li class="highlight-item delay-4">Vergleichen Sie Ihre Budgetentscheidungen mit Empfehlungen von Finanzexperten</li>
+              <li class="highlight-item delay-5">Verdienen Sie Erfolge, während Sie verschiedene Budgetierungsfähigkeiten meistern</li>
+            </ul>
+            
+            <h4>Wie es hilft:</h4>
+            <p>Durch das Üben mit unserem Simulator entwickeln Sie praktische Fähigkeiten, die sich direkt auf die Verwaltung Ihrer tatsächlichen Finanzen übertragen lassen. Sie lernen, Ausgaben zu antizipieren, Notfallfonds aufzubauen und informierte Ausgabenentscheidungen zu treffen – alles wesentliche Fähigkeiten für finanzielle Stabilität und Wachstum.</p>
+          `
+        },
+        'Investment-Spielplatz': {
+          content: `
+            <p>Der Investment-Spielplatz bietet eine realistische, risikofreie Umgebung zum Erlernen von Anlagestrategien mit echten Marktdaten und simulierten Ergebnissen.</p>
+            
+            <h4>Hauptfunktionen:</h4>
+            <ul>
+              <li class="highlight-item delay-1">Bauen Sie diversifizierte Anlageportfolios mit Aktien, Anleihen, ETFs und anderen Vermögenswerten auf</li>
+              <li class="highlight-item delay-2">Greifen Sie auf historische Marktdaten zu, um zu beobachten, wie verschiedene Anlagen im Laufe der Zeit abgeschnitten haben</li>
+              <li class="highlight-item delay-3">Führen Sie Simulationen durch, um potenzielle langfristige Ergebnisse verschiedener Anlagestrategien zu sehen</li>
+              <li class="highlight-item delay-4">Lernen Sie über Risikotoleranz, Asset-Allokation und Portfolio-Rebalancing</li>
+              <li class="highlight-item delay-5">Wetteifern Sie mit Freunden oder anderen Benutzern, um zu sehen, welche Anlagestrategie am besten funktioniert</li>
+            </ul>
+            
+            <h4>Wie es hilft:</h4>
+            <p>Investitionen können für Anfänger einschüchternd wirken, aber unser Spielplatz entmystifiziert den Prozess. Sie gewinnen Vertrauen in Anlageentscheidungen, indem Sie Konzepte wie Zinseszins, Dividendenwiederanlage und Marktvolatilität verstehen.</p>
+          `
+        },
+        'Finanzspiele': {
+          content: `
+            <p>Unsere Sammlung von Finanzspielen verwandelt komplexe Finanzkonzepte in ansprechende, interaktive Erlebnisse, die das Lernen angenehm und effektiv gestalten.</p>
+            
+            <h4>Verfügbare Spiele:</h4>
+            <ul>
+              <li class="highlight-item delay-1"><strong>Schuldenvernichter</strong> - Wettlauf gegen die Zeit, um Schulden zu beseitigen, während Sie Einkommen und Ausgaben verwalten</li>
+              <li class="highlight-item delay-2"><strong>Marktbeherrschung</strong> - Testen Sie Ihr Wissen über Markttrends und Anlageprinzipien</li>
+              <li class="highlight-item delay-3"><strong>Budget-Held</strong> - Erstellen Sie das perfekte Budget, um verschiedene Lebensziele zu erreichen</li>
+              <li class="highlight-item delay-4"><strong>Kreditwürdigkeit-Quest</strong> - Navigieren Sie durch finanzielle Entscheidungen, um Ihren Kreditscore zu verbessern</li>
+              <li class="highlight-item delay-5"><strong>Rentenpfad</strong> - Planen Sie Ihren Weg zu einem komfortablen Ruhestand</li>
+            </ul>
+            
+            <h4>Vorteile des spielbasierten Lernens:</h4>
+            <p>Forschungen zeigen, dass Gamification die Beibehaltung von Finanzkonzepten erheblich verbessert. Unsere Spiele schaffen unvergessliche Erlebnisse, die Schlüsselprinzipien durch aktive Teilnahme statt passiven Konsum verstärken.</p>
+          `
+        }
+      },
+      pt: {
+        'Simulador de Orçamento': {
+          content: `
+            <p>Nosso Simulador de Orçamento foi projetado para dar a você experiência prática com tomada de decisões financeiras reais em um ambiente livre de riscos.</p>
+            
+            <h4>Principais características:</h4>
+            <ul>
+              <li class="highlight-item delay-1">Crie e gerencie orçamentos mensais virtuais baseados em vários níveis de renda e estilos de vida</li>
+              <li class="highlight-item delay-2">Enfrente desafios financeiros inesperados e aprenda a ajustar seu orçamento de acordo</li>
+              <li class="highlight-item delay-3">Acompanhe seus padrões de gastos e receba insights personalizados</li>
+              <li class="highlight-item delay-4">Compare suas decisões orçamentárias com recomendações de especialistas financeiros</li>
+              <li class="highlight-item delay-5">Ganhe conquistas à medida que domina diferentes habilidades de orçamento</li>
+            </ul>
+            
+            <h4>Como isso ajuda:</h4>
+            <p>Ao praticar com nosso simulador, você desenvolverá habilidades práticas que se traduzem diretamente no gerenciamento de suas finanças reais. Você aprenderá a antecipar despesas, construir fundos de emergência e tomar decisões informadas de gastos — todas habilidades essenciais para estabilidade e crescimento financeiro.</p>
+          `
+        },
+        'Ambiente de Investimento': {
+          content: `
+            <p>O Ambiente de Investimento oferece um ambiente realista e sem riscos para aprender sobre estratégias de investimento usando dados reais de mercado e resultados simulados.</p>
+            
+            <h4>Principais características:</h4>
+            <ul>
+              <li class="highlight-item delay-1">Construa carteiras de investimento diversificadas com ações, títulos, ETFs e outros ativos</li>
+              <li class="highlight-item delay-2">Acesse dados históricos do mercado para observar como diferentes investimentos se comportaram ao longo do tempo</li>
+              <li class="highlight-item delay-3">Execute simulações para ver potenciais resultados a longo prazo de várias estratégias de investimento</li>
+              <li class="highlight-item delay-4">Aprenda sobre tolerância ao risco, alocação de ativos e rebalanceamento de carteira</li>
+              <li class="highlight-item delay-5">Compita com amigos ou outros usuários para ver qual estratégia de investimento tem melhor desempenho</li>
+            </ul>
+            
+            <h4>Como isso ajuda:</h4>
+            <p>Investir pode parecer intimidador para iniciantes, mas nosso ambiente desmistifica o processo. Você ganhará confiança em tomar decisões de investimento ao entender conceitos como juros compostos, reinvestimento de dividendos e volatilidade do mercado.</p>
+          `
+        },
+        'Jogos Financeiros': {
+          content: `
+            <p>Nossa coleção de Jogos Financeiros transforma conceitos financeiros complexos em experiências interativas e envolventes que tornam o aprendizado agradável e eficaz.</p>
+            
+            <h4>Jogos disponíveis:</h4>
+            <ul>
+              <li class="highlight-item delay-1"><strong>Destruidor de Dívidas</strong> - Corra contra o tempo para eliminar dívidas enquanto gerencia receitas e despesas</li>
+              <li class="highlight-item delay-2"><strong>Maestria de Mercado</strong> - Teste seu conhecimento sobre tendências de mercado e princípios de investimento</li>
+              <li class="highlight-item delay-3"><strong>Herói do Orçamento</strong> - Construa o orçamento perfeito para atingir vários objetivos de vida</li>
+              <li class="highlight-item delay-4"><strong>Missão Score de Crédito</strong> - Navegue por decisões financeiras para melhorar seu score de crédito</li>
+              <li class="highlight-item delay-5"><strong>Caminho para a Aposentadoria</strong> - Planeje seu caminho para uma aposentadoria confortável</li>
+            </ul>
+            
+            <h4>Benefícios do aprendizado baseado em jogos:</h4>
+            <p>Pesquisas mostram que a gamificação melhora significativamente a retenção de conceitos financeiros. Nossos jogos criam experiências memoráveis que reforçam princípios-chave através da participação ativa em vez do consumo passivo.</p>
           `
         }
       }
-      // Add more languages as needed
     };
     
     // Return the translations for the current language or default to English
     return translations[lang] || translations['en'];
   }
   
+  // Expand the feature popup handling for all languages
+  function getLocalizedFeatureContent(featureTitle, lang) {
+    const translationsMap = updateFeaturePopupTranslations(lang);
+    
+    // Return content if available in selected language
+    if (translationsMap[featureTitle]) {
+      return translationsMap[featureTitle].content;
+    }
+    
+    // Default message if content not found
+    return '<p>Details for this feature are coming soon!</p>';
+  }
+  
+  // Add click event to each feature link with language support
+  featureLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Get feature title from the parent card's h3
+      const featureTitle = this.closest('.feature-card').querySelector('h3').textContent;
+      
+      // Set popup title
+      featurePopupTitle.textContent = featureTitle;
+      
+      // Get current language
+      const currentLang = document.documentElement.lang || 'en';
+      
+      // Set popup content based on current language
+      featurePopupContent.innerHTML = getLocalizedFeatureContent(featureTitle, currentLang);
+      
+      // Show popup
+      featurePopupOverlay.classList.add('show');
+      
+      // Prevent scrolling on the body
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
   // Update the changeLanguage function to handle feature popups
   const originalChangeLanguage = changeLanguage;
   changeLanguage = function(lang, showAlert = false) {
     originalChangeLanguage(lang, showAlert);
     
     // Update feature titles based on new language
-    // This would need to be expanded for a full implementation
     if (lang === 'es') {
       document.querySelectorAll('.feature-card h3').forEach((heading, index) => {
         if (index === 0) heading.textContent = 'Simulador de Presupuesto';
         if (index === 1) heading.textContent = 'Zona de Inversiones';
         if (index === 2) heading.textContent = 'Juegos Financieros';
+      });
+    } else if (lang === 'fr') {
+      document.querySelectorAll('.feature-card h3').forEach((heading, index) => {
+        if (index === 0) heading.textContent = 'Simulateur de Budget';
+        if (index === 1) heading.textContent = 'Espace d\'Investissement';
+        if (index === 2) heading.textContent = 'Jeux Financiers';
+      });
+    } else if (lang === 'de') {
+      document.querySelectorAll('.feature-card h3').forEach((heading, index) => {
+        if (index === 0) heading.textContent = 'Budget-Simulator';
+        if (index === 1) heading.textContent = 'Investment-Spielplatz';
+        if (index === 2) heading.textContent = 'Finanzspiele';
+      });
+    } else if (lang === 'pt') {
+      document.querySelectorAll('.feature-card h3').forEach((heading, index) => {
+        if (index === 0) heading.textContent = 'Simulador de Orçamento';
+        if (index === 1) heading.textContent = 'Ambiente de Investimento';
+        if (index === 2) heading.textContent = 'Jogos Financeiros';
       });
     } else if (lang === 'en') {
       document.querySelectorAll('.feature-card h3').forEach((heading, index) => {
@@ -675,7 +895,10 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     }
     
-    // For a full implementation, you would also need to update the popup content
-    // based on the language when it opens
+    // If a popup is currently open, update its content to the new language
+    if (featurePopupOverlay.classList.contains('show')) {
+      const currentTitle = featurePopupTitle.textContent;
+      featurePopupContent.innerHTML = getLocalizedFeatureContent(currentTitle, lang);
+    }
   };
 });
