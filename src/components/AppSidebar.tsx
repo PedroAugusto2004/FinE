@@ -1,5 +1,5 @@
 
-import { Home, BookOpen, Trophy, ShoppingBag, User, Settings as SettingsIcon } from "lucide-react";
+import { Home, BookOpen, Trophy, ShoppingBag, User, Settings as SettingsIcon, LogOut } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -16,8 +16,9 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
-import { getUserProgress } from "@/data/financialCourse";
-import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
+import { useUserStats } from "@/hooks/useUserProgress";
 
 const menuItems = [
   {
@@ -55,20 +56,21 @@ const menuItems = [
 export function AppSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [progress, setProgress] = useState(getUserProgress());
+  const { user, signOut } = useAuth();
+  const { data: userStats } = useUserStats();
 
-  useEffect(() => {
-    setProgress(getUserProgress());
-  }, [location]);
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
     <Sidebar className="border-r border-border">
       <SidebarHeader className="p-6">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center">
             <span className="text-primary-foreground font-bold text-lg">F</span>
           </div>
-          <h1 className="text-xl font-bold text-primary">FinanceAcademy</h1>
+          <h1 className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">FinE</h1>
         </div>
       </SidebarHeader>
 
@@ -103,22 +105,22 @@ export function AppSidebar() {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">Total XP</span>
-                <Badge variant="secondary">{progress.totalXP}</Badge>
+                <Badge variant="secondary">{userStats?.total_xp || 0}</Badge>
               </div>
-              <Progress value={(progress.totalXP % 100)} className="h-2" />
+              <Progress value={((userStats?.total_xp || 0) % 100)} className="h-2" />
             </div>
             
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">Streak</span>
-                <span className="text-sm font-medium">🔥 {progress.currentStreak}</span>
+                <span className="text-sm font-medium">🔥 {userStats?.current_streak || 0}</span>
               </div>
             </div>
 
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">Completed</span>
-                <span className="text-sm font-medium">{progress.completedLessons.length} lessons</span>
+                <span className="text-sm font-medium">{userStats?.lessons_completed || 0} lessons</span>
               </div>
             </div>
           </SidebarGroupContent>
@@ -141,17 +143,28 @@ export function AppSidebar() {
               </button>
             </SidebarMenuButton>
           </SidebarMenuItem>
+          
+          <SidebarMenuItem>
+            <Button
+              variant="ghost"
+              onClick={handleSignOut}
+              className="w-full justify-start py-3 px-4 hover:bg-red-50 hover:text-red-600 transition-colors"
+            >
+              <LogOut className="h-5 w-5 mr-3" />
+              <span className="font-medium">Sign Out</span>
+            </Button>
+          </SidebarMenuItem>
         </SidebarMenu>
 
         <div className="flex items-center gap-3 pt-4 border-t border-border">
           <Avatar className="h-8 w-8">
-            <AvatarFallback className="bg-primary text-primary-foreground">
-              U
+            <AvatarFallback className="bg-gradient-to-r from-green-600 to-emerald-600 text-white">
+              {user?.email?.charAt(0).toUpperCase() || 'U'}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium truncate">Finance Student</p>
-            <p className="text-xs text-muted-foreground truncate">Level {Math.floor(progress.totalXP / 100) + 1}</p>
+            <p className="text-sm font-medium truncate">{user?.email}</p>
+            <p className="text-xs text-muted-foreground truncate">Level {Math.floor((userStats?.total_xp || 0) / 100) + 1}</p>
           </div>
         </div>
       </SidebarFooter>

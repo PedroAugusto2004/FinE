@@ -9,7 +9,118 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          updated_at: string
+          username: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id: string
+          updated_at?: string
+          username?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          updated_at?: string
+          username?: string | null
+        }
+        Relationships: []
+      }
+      user_progress: {
+        Row: {
+          attempts: number | null
+          completed_at: string | null
+          created_at: string
+          id: string
+          lesson_id: string
+          score: number | null
+          user_id: string
+          xp_earned: number | null
+        }
+        Insert: {
+          attempts?: number | null
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          lesson_id: string
+          score?: number | null
+          user_id: string
+          xp_earned?: number | null
+        }
+        Update: {
+          attempts?: number | null
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          lesson_id?: string
+          score?: number | null
+          user_id?: string
+          xp_earned?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_progress_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_stats: {
+        Row: {
+          created_at: string
+          current_streak: number | null
+          id: string
+          last_study_date: string | null
+          lessons_completed: number | null
+          longest_streak: number | null
+          total_xp: number | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          current_streak?: number | null
+          id: string
+          last_study_date?: string | null
+          lessons_completed?: number | null
+          longest_streak?: number | null
+          total_xp?: number | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          current_streak?: number | null
+          id?: string
+          last_study_date?: string | null
+          lessons_completed?: number | null
+          longest_streak?: number | null
+          total_xp?: number | null
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_stats_id_fkey"
+            columns: ["id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
