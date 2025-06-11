@@ -7,7 +7,7 @@
 
 @layer base {
   :root {
-    /* Light theme - Clean white background */
+    /* Light theme - Updated for better contrast */
     --background: 255 255 255;
     --foreground: 17 24 39;
 
@@ -17,7 +17,7 @@
     --popover: 255 255 255;
     --popover-foreground: 17 24 39;
 
-    --primary: 34 197 94; /* Green-500 for primary actions */
+    --primary: 234 179 8; /* Yellow-500 */
     --primary-foreground: 255 255 255;
 
     --secondary: 249 250 251;
@@ -26,7 +26,7 @@
     --muted: 249 250 251;
     --muted-foreground: 107 114 128;
 
-    --accent: 243 244 246; /* Light gray for accents */
+    --accent: 254 249 195;
     --accent-foreground: 17 24 39;
 
     --destructive: 239 68 68;
@@ -34,7 +34,7 @@
 
     --border: 229 231 235;
     --input: 229 231 235;
-    --ring: 34 197 94;
+    --ring: 234 179 8;
 
     --success: 34 197 94;
     --success-foreground: 255 255 255;
@@ -45,65 +45,65 @@
     --info: 59 130 246;
     --info-foreground: 255 255 255;
 
-    --sidebar-background: 255 255 255;
+    --sidebar-background: 249 250 251;
     --sidebar-foreground: 55 65 81;
-    --sidebar-primary: 34 197 94;
+    --sidebar-primary: 234 179 8;
     --sidebar-primary-foreground: 255 255 255;
     --sidebar-accent: 243 244 246;
     --sidebar-accent-foreground: 55 65 81;
     --sidebar-border: 229 231 235;
-    --sidebar-ring: 34 197 94;
+    --sidebar-ring: 234 179 8;
 
     --radius: 0.75rem;
   }
 
   .dark {
-    /* Dark theme - Proper dark colors */
-    --background: 15 15 15;
-    --foreground: 245 245 245;
+    /* Dark theme */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
 
-    --card: 24 24 27;
-    --card-foreground: 245 245 245;
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 24 24 27;
-    --popover-foreground: 245 245 245;
+    --popover: 0 0% 12%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 34 197 94; /* Keep green as primary */
-    --primary-foreground: 15 15 15;
+    --primary: 45 100% 55%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 39 39 42;
-    --secondary-foreground: 245 245 245;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 98%;
 
-    --muted: 39 39 42;
-    --muted-foreground: 161 161 170;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 63%;
 
-    --accent: 39 39 42;
-    --accent-foreground: 245 245 245;
+    --accent: 0 0% 14%;
+    --accent-foreground: 0 0% 98%;
 
-    --destructive: 239 68 68;
-    --destructive-foreground: 245 245 245;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 39 39 42;
-    --input: 39 39 42;
-    --ring: 34 197 94;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 45 100% 55%;
 
-    --success: 34 197 94;
-    --success-foreground: 245 245 245;
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 98%;
 
-    --warning: 245 158 11;
-    --warning-foreground: 245 245 245;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 98%;
 
-    --info: 59 130 246;
-    --info-foreground: 245 245 245;
+    --info: 221 83% 53%;
+    --info-foreground: 0 0% 98%;
 
-    --sidebar-background: 24 24 27;
-    --sidebar-foreground: 245 245 245;
-    --sidebar-primary: 34 197 94;
-    --sidebar-primary-foreground: 15 15 15;
-    --sidebar-accent: 39 39 42;
-    --sidebar-accent-foreground: 245 245 245;
-    --sidebar-border: 39 39 42;
-    --sidebar-ring: 34 197 94;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -123,15 +123,15 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-100 dark:bg-gray-800;
+    @apply bg-gray-100;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-gray-300 dark:bg-gray-600 rounded-full;
+    @apply bg-gray-300 rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary;
+    @apply bg-yellow-500;
   }
 }
 
