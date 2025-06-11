@@ -26,8 +26,8 @@
     --muted: 248 250 252;
     --muted-foreground: 100 116 139;
 
-    --accent: 240 253 244;
-    --accent-foreground: 22 101 52;
+    --accent: 248 250 252;
+    --accent-foreground: 51 65 85;
 
     --destructive: 239 68 68;
     --destructive-foreground: 255 255 255;
@@ -58,7 +58,7 @@
   }
 
   .dark {
-    /* Dark theme */
+    /* Dark theme - keeping original dark theme */
     --background: 2 6 23;
     --foreground: 248 250 252;
 
@@ -224,5 +224,43 @@ input:focus-visible,
   [role="button"] {
     min-height: 44px;
     min-width: 44px;
+  }
+}
+
+/* Mobile optimizations for all pages */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Ensure proper spacing on mobile */
+  .space-y-6 > * + * {
+    margin-top: 1rem;
+  }
+  
+  .space-y-8 > * + * {
+    margin-top: 1.5rem;
+  }
+  
+  /* Mobile card adjustments */
+  .grid {
+    gap: 1rem;
+  }
+  
+  /* Mobile text sizes */
+  h1 {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  
+  /* Mobile button improvements */
+  .w-full {
+    width: 100%;
   }
 }
