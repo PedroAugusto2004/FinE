@@ -64,17 +64,17 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="border-r border-border">
-      <SidebarHeader className="p-6">
+    <Sidebar className="border-r border-border bg-card">
+      <SidebarHeader className="p-4 md:p-6">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-lg">F</span>
+          <div className="w-6 h-6 md:w-8 md:h-8 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center">
+            <span className="text-primary-foreground font-bold text-sm md:text-lg">F</span>
           </div>
-          <h1 className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">FinE</h1>
+          <h1 className="text-lg md:text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">FinE</h1>
         </div>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="px-2 md:px-0">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -83,14 +83,14 @@ export function AppSidebar() {
                   <SidebarMenuButton
                     asChild
                     isActive={location.pathname === item.url}
-                    className="w-full justify-start py-3 px-4 hover:bg-accent/50 transition-colors"
+                    className="w-full justify-start py-2 md:py-3 px-3 md:px-4 hover:bg-accent/50 transition-colors"
                   >
                     <button
                       onClick={() => navigate(item.url)}
-                      className="flex items-center gap-3"
+                      className="flex items-center gap-2 md:gap-3"
                     >
-                      <item.icon className={`h-5 w-5 ${item.color}`} />
-                      <span className="font-medium">{item.title}</span>
+                      <item.icon className={`h-4 w-4 md:h-5 md:w-5 ${item.color}`} />
+                      <span className="font-medium text-sm md:text-base">{item.title}</span>
                     </button>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -100,46 +100,46 @@ export function AppSidebar() {
         </SidebarGroup>
 
         <SidebarGroup>
-          <SidebarGroupLabel>Progress</SidebarGroupLabel>
-          <SidebarGroupContent className="px-4 space-y-4">
+          <SidebarGroupLabel className="text-xs md:text-sm">Progress</SidebarGroupLabel>
+          <SidebarGroupContent className="px-3 md:px-4 space-y-3 md:space-y-4">
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Total XP</span>
-                <Badge variant="secondary">{userStats?.total_xp || 0}</Badge>
+                <span className="text-xs md:text-sm text-muted-foreground">Total XP</span>
+                <Badge variant="secondary" className="text-xs">{userStats?.total_xp || 0}</Badge>
               </div>
-              <Progress value={((userStats?.total_xp || 0) % 100)} className="h-2" />
+              <Progress value={((userStats?.total_xp || 0) % 100)} className="h-1 md:h-2" />
             </div>
             
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Streak</span>
-                <span className="text-sm font-medium">🔥 {userStats?.current_streak || 0}</span>
+                <span className="text-xs md:text-sm text-muted-foreground">Streak</span>
+                <span className="text-xs md:text-sm font-medium">🔥 {userStats?.current_streak || 0}</span>
               </div>
             </div>
 
             <div className="space-y-2">
               <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Completed</span>
-                <span className="text-sm font-medium">{userStats?.lessons_completed || 0} lessons</span>
+                <span className="text-xs md:text-sm text-muted-foreground">Completed</span>
+                <span className="text-xs md:text-sm font-medium">{userStats?.lessons_completed || 0} lessons</span>
               </div>
             </div>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4">
+      <SidebarFooter className="p-3 md:p-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="w-full justify-start py-3 px-4 hover:bg-accent/50 transition-colors"
+              className="w-full justify-start py-2 md:py-3 px-3 md:px-4 hover:bg-accent/50 transition-colors"
             >
               <button
                 onClick={() => navigate('/settings')}
-                className="flex items-center gap-3"
+                className="flex items-center gap-2 md:gap-3"
               >
-                <SettingsIcon className="h-5 w-5 text-gray-500" />
-                <span className="font-medium">Settings</span>
+                <SettingsIcon className="h-4 w-4 md:h-5 md:w-5 text-gray-500" />
+                <span className="font-medium text-sm md:text-base">Settings</span>
               </button>
             </SidebarMenuButton>
           </SidebarMenuItem>
@@ -148,22 +148,22 @@ export function AppSidebar() {
             <Button
               variant="ghost"
               onClick={handleSignOut}
-              className="w-full justify-start py-3 px-4 hover:bg-red-50 hover:text-red-600 transition-colors"
+              className="w-full justify-start py-2 md:py-3 px-3 md:px-4 hover:bg-red-50 hover:text-red-600 transition-colors text-sm md:text-base"
             >
-              <LogOut className="h-5 w-5 mr-3" />
+              <LogOut className="h-4 w-4 md:h-5 md:w-5 mr-2 md:mr-3" />
               <span className="font-medium">Sign Out</span>
             </Button>
           </SidebarMenuItem>
         </SidebarMenu>
 
-        <div className="flex items-center gap-3 pt-4 border-t border-border">
-          <Avatar className="h-8 w-8">
-            <AvatarFallback className="bg-gradient-to-r from-green-600 to-emerald-600 text-white">
+        <div className="flex items-center gap-2 md:gap-3 pt-3 md:pt-4 border-t border-border">
+          <Avatar className="h-6 w-6 md:h-8 md:w-8">
+            <AvatarFallback className="bg-gradient-to-r from-green-600 to-emerald-600 text-white text-xs md:text-sm">
               {user?.email?.charAt(0).toUpperCase() || 'U'}
             </AvatarFallback>
           </Avatar>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium truncate">{user?.email}</p>
+            <p className="text-xs md:text-sm font-medium truncate">{user?.email}</p>
             <p className="text-xs text-muted-foreground truncate">Level {Math.floor((userStats?.total_xp || 0) / 100) + 1}</p>
           </div>
         </div>
