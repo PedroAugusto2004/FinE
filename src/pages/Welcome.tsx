@@ -146,71 +146,62 @@ const Welcome = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white text-gray-900">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white overflow-x-hidden">
+      {/* Floating Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-4 -right-4 w-72 h-72 bg-yellow-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 -left-4 w-96 h-96 bg-yellow-400/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-yellow-600/8 rounded-full blur-3xl animate-pulse delay-2000"></div>
+      </div>
+
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl flex items-center justify-center shadow-sm">
-                <DollarSign className="h-6 w-6 text-white font-bold" />
-              </div>
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
-                FinE
-              </h1>
-            </div>
-            <div className="hidden sm:flex items-center gap-4">
-              <Button variant="ghost" className="text-gray-600 hover:text-gray-900">
-                About
-              </Button>
-              <Button variant="ghost" className="text-gray-600 hover:text-gray-900">
-                Features
-              </Button>
-              <Button variant="outline" className="border-yellow-500 text-yellow-600 hover:bg-yellow-50">
-                Sign In
-              </Button>
-            </div>
+      <header className="relative z-10 p-6 animate-fade-in">
+        <div className="flex items-center gap-3">
+          <div className="w-12 h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center shadow-lg shadow-yellow-500/25">
+            <DollarSign className="h-7 w-7 text-gray-900 font-bold" />
           </div>
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+            FinE
+          </h1>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
         {/* Hero Section */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
+        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
           {/* Left Side - Hero Content */}
-          <div className="space-y-8 text-center lg:text-left">
+          <div className="space-y-8 animate-slide-in">
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-50 border border-yellow-200 rounded-full text-yellow-700 text-sm font-medium">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-yellow-400 text-sm font-medium">
                 <Star className="h-4 w-4" />
                 #1 Financial Education Platform
               </div>
               
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+              <h2 className="text-6xl md:text-7xl font-bold leading-tight">
                 Master Your{' '}
-                <span className="bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent">
                   Financial Future
                 </span>
               </h2>
               
-              <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-2xl">
+              <p className="text-xl text-gray-300 leading-relaxed">
                 Transform your relationship with money through our revolutionary gamified learning platform. 
-                Build wealth, secure your future, and achieve financial freedom.
+                Build wealth, secure your future, and achieve financial freedom with personalized lessons 
+                designed by financial experts.
               </p>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4">
               <Button 
-                size="lg"
-                className="h-12 px-8 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105"
+                className="h-14 px-8 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-gray-900 font-semibold text-lg shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105"
               >
                 <Play className="h-5 w-5 mr-2" />
                 Start Learning Free
               </Button>
               <Button 
                 variant="outline" 
-                size="lg"
-                className="h-12 px-8 border-gray-300 text-gray-700 hover:bg-gray-50 transition-all duration-300"
+                className="h-14 px-8 border-gray-600 text-white hover:bg-gray-800 text-lg transition-all duration-300"
               >
                 Watch Demo
                 <ArrowRight className="h-5 w-5 ml-2" />
@@ -218,36 +209,36 @@ const Welcome = () => {
             </div>
 
             {/* Quick Stats */}
-            <div className="flex items-center justify-center lg:justify-start gap-8 pt-8">
+            <div className="flex items-center gap-8 pt-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-500">50K+</div>
-                <div className="text-sm text-gray-500">Active Learners</div>
+                <div className="text-4xl font-bold text-yellow-400">50K+</div>
+                <div className="text-sm text-gray-400">Active Learners</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-500">200+</div>
-                <div className="text-sm text-gray-500">Expert Lessons</div>
+                <div className="text-4xl font-bold text-yellow-400">200+</div>
+                <div className="text-sm text-gray-400">Expert Lessons</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-yellow-500">4.9★</div>
-                <div className="text-sm text-gray-500">User Rating</div>
+                <div className="text-4xl font-bold text-yellow-400">4.9★</div>
+                <div className="text-sm text-gray-400">User Rating</div>
               </div>
             </div>
           </div>
 
           {/* Right Side - Auth Form */}
-          <div className="flex justify-center">
-            <Card className="w-full max-w-md bg-white shadow-xl border border-gray-200">
+          <div className="flex justify-center animate-slide-in delay-300">
+            <Card className="w-full max-w-md bg-gray-800/50 backdrop-blur-xl border-gray-700 shadow-2xl shadow-yellow-500/10">
               <CardHeader className="text-center space-y-2">
-                <CardTitle className="text-2xl text-gray-900">Join FinE Today</CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardTitle className="text-3xl text-white">Join FinE Today</CardTitle>
+                <CardDescription className="text-gray-300">
                   Start your journey to financial mastery
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Tabs defaultValue="signin" className="space-y-6">
-                  <TabsList className="grid w-full grid-cols-2 bg-gray-100">
-                    <TabsTrigger value="signin" className="data-[state=active]:bg-yellow-500 data-[state=active]:text-white">Sign In</TabsTrigger>
-                    <TabsTrigger value="signup" className="data-[state=active]:bg-yellow-500 data-[state=active]:text-white">Sign Up</TabsTrigger>
+                  <TabsList className="grid w-full grid-cols-2 bg-gray-700/50">
+                    <TabsTrigger value="signin" className="text-white data-[state=active]:bg-yellow-500 data-[state=active]:text-gray-900">Sign In</TabsTrigger>
+                    <TabsTrigger value="signup" className="text-white data-[state=active]:bg-yellow-500 data-[state=active]:text-gray-900">Sign Up</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="signin">
@@ -258,7 +249,7 @@ const Welcome = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="h-12 border-gray-300 focus:border-yellow-500 focus:ring-yellow-500"
+                        className="h-12 bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-yellow-500"
                       />
                       <Input
                         type="password"
@@ -266,11 +257,11 @@ const Welcome = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        className="h-12 border-gray-300 focus:border-yellow-500 focus:ring-yellow-500"
+                        className="h-12 bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-yellow-500"
                       />
                       <Button 
                         type="submit" 
-                        className="w-full h-12 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-semibold"
+                        className="w-full h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-gray-900 font-semibold transition-all duration-300"
                         disabled={loading}
                       >
                         {loading ? "Signing In..." : "Sign In"}
@@ -286,7 +277,7 @@ const Welcome = () => {
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         required
-                        className="h-12 border-gray-300 focus:border-yellow-500 focus:ring-yellow-500"
+                        className="h-12 bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-yellow-500"
                       />
                       <Input
                         type="email"
@@ -294,7 +285,7 @@ const Welcome = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="h-12 border-gray-300 focus:border-yellow-500 focus:ring-yellow-500"
+                        className="h-12 bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-yellow-500"
                       />
                       <Input
                         type="password"
@@ -302,11 +293,11 @@ const Welcome = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        className="h-12 border-gray-300 focus:border-yellow-500 focus:ring-yellow-500"
+                        className="h-12 bg-gray-700/50 border-gray-600 text-white placeholder:text-gray-400 focus:border-yellow-500"
                       />
                       <Button 
                         type="submit" 
-                        className="w-full h-12 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-semibold"
+                        className="w-full h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-gray-900 font-semibold transition-all duration-300"
                         disabled={loading}
                       >
                         {loading ? "Creating Account..." : "Create Account"}
@@ -322,25 +313,26 @@ const Welcome = () => {
         {/* Features Section */}
         <section className="mb-20">
           <div className="text-center mb-16">
-            <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Why Choose FinE?</h3>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+            <h3 className="text-4xl font-bold text-white mb-6">Why Choose FinE?</h3>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Experience the most comprehensive and engaging financial education platform designed for the modern learner.
             </p>
           </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
                 <div 
                   key={index}
-                  className="group p-6 sm:p-8 bg-white rounded-2xl border border-gray-200 hover:border-yellow-300 hover:shadow-lg transition-all duration-300"
+                  className="group p-8 bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-500 hover:transform hover:scale-105 animate-fade-in"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
-                  <div className="w-14 h-14 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="h-7 w-7 text-white" />
+                  <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="h-8 w-8 text-gray-900" />
                   </div>
-                  <h4 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h4>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                  <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
+                  <p className="text-gray-300 leading-relaxed">{feature.description}</p>
                 </div>
               );
             })}
@@ -350,28 +342,28 @@ const Welcome = () => {
         {/* Learning Path Preview */}
         <section className="mb-20">
           <div className="text-center mb-16">
-            <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Your Learning Journey</h3>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+            <h3 className="text-4xl font-bold text-white mb-6">Your Learning Journey</h3>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Follow our structured path from financial basics to advanced wealth-building strategies.
             </p>
           </div>
           
           <div className="relative">
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-8">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
               {[
                 { step: 1, title: "Financial Basics", desc: "Budgeting, saving, and spending habits" },
                 { step: 2, title: "Investment Fundamentals", desc: "Stocks, bonds, and portfolio building" },
                 { step: 3, title: "Advanced Strategies", desc: "Tax optimization and wealth building" },
                 { step: 4, title: "Financial Freedom", desc: "Passive income and retirement planning" }
               ].map((item, index) => (
-                <div key={index} className="flex flex-col items-center text-center max-w-xs">
-                  <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-full flex items-center justify-center text-xl font-bold text-white mb-4 shadow-lg">
+                <div key={index} className="flex flex-col items-center text-center animate-bounce-in" style={{ animationDelay: `${index * 200}ms` }}>
+                  <div className="w-20 h-20 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-2xl font-bold text-gray-900 mb-4 shadow-lg shadow-yellow-500/25">
                     {item.step}
                   </div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h4>
-                  <p className="text-gray-600 text-sm">{item.desc}</p>
+                  <h4 className="text-lg font-semibold text-white mb-2">{item.title}</h4>
+                  <p className="text-gray-400 text-sm max-w-32">{item.desc}</p>
                   {index < 3 && (
-                    <ChevronRight className="hidden sm:block h-6 w-6 text-yellow-400 mt-8 absolute" style={{ left: `${(index + 1) * 25 - 2}%` }} />
+                    <ChevronRight className="hidden md:block h-8 w-8 text-yellow-400 mt-8" />
                   )}
                 </div>
               ))}
@@ -382,27 +374,28 @@ const Welcome = () => {
         {/* Testimonials */}
         <section className="mb-20">
           <div className="text-center mb-16">
-            <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">Success Stories</h3>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
+            <h3 className="text-4xl font-bold text-white mb-6">Success Stories</h3>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Join thousands of learners who have transformed their financial lives with FinE.
             </p>
           </div>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
-                className="p-6 sm:p-8 bg-white rounded-2xl border border-gray-200 hover:border-yellow-300 hover:shadow-lg transition-all duration-300"
+                className="p-8 bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700 hover:border-yellow-500/50 transition-all duration-500 animate-slide-up"
+                style={{ animationDelay: `${index * 150}ms` }}
               >
                 <div className="flex mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
                     <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-6 italic">"{testimonial.content}"</p>
+                <p className="text-gray-300 mb-6 italic">"{testimonial.content}"</p>
                 <div>
-                  <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                  <div className="text-gray-500 text-sm">{testimonial.role}</div>
+                  <div className="font-semibold text-white">{testimonial.name}</div>
+                  <div className="text-gray-400 text-sm">{testimonial.role}</div>
                 </div>
               </div>
             ))}
@@ -410,18 +403,18 @@ const Welcome = () => {
         </section>
 
         {/* Final CTA */}
-        <section className="text-center py-16">
+        <section className="text-center py-20">
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8">
+            <h3 className="text-5xl font-bold text-white mb-8">
               Ready to Transform Your 
-              <span className="bg-gradient-to-r from-yellow-500 to-yellow-600 bg-clip-text text-transparent"> Financial Future?</span>
+              <span className="bg-gradient-to-r from-yellow-400 to-yellow-600 bg-clip-text text-transparent"> Financial Future?</span>
             </h3>
-            <p className="text-lg sm:text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
               Join FinE today and start your journey towards financial independence. Your future self will thank you.
             </p>
             <Button 
               size="lg"
-              className="h-14 px-12 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-white font-bold text-lg shadow-lg transition-all duration-300 hover:scale-105"
+              className="h-16 px-12 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-gray-900 font-bold text-xl shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105 animate-pulse-glow"
             >
               <CheckCircle className="h-6 w-6 mr-3" />
               Start Learning For Free
