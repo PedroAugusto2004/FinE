@@ -14,8 +14,13 @@ export type Database = {
           avatar_url: string | null
           created_at: string
           email: string
+          financial_goals: string | null
           full_name: string | null
           id: string
+          knowledge_level: string | null
+          onboarding_completed: boolean | null
+          priorities: string | null
+          referral_source: string | null
           updated_at: string
           username: string | null
         }
@@ -23,8 +28,13 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string
           email: string
+          financial_goals?: string | null
           full_name?: string | null
           id: string
+          knowledge_level?: string | null
+          onboarding_completed?: boolean | null
+          priorities?: string | null
+          referral_source?: string | null
           updated_at?: string
           username?: string | null
         }
@@ -32,8 +42,13 @@ export type Database = {
           avatar_url?: string | null
           created_at?: string
           email?: string
+          financial_goals?: string | null
           full_name?: string | null
           id?: string
+          knowledge_level?: string | null
+          onboarding_completed?: boolean | null
+          priorities?: string | null
+          referral_source?: string | null
           updated_at?: string
           username?: string | null
         }
