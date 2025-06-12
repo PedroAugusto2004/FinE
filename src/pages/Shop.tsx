@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -59,7 +58,7 @@ const Shop = () => {
   const categories = ["All", "Power-ups", "Themes"];
 
   return (
-    <div className="min-h-screen p-6 space-y-8">
+    <div className="min-h-screen bg-background text-foreground p-6 space-y-8">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold">Shop</h1>
         <p className="text-xl text-muted-foreground">

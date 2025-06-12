@@ -1,4 +1,3 @@
-
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -33,7 +32,7 @@ const Profile = () => {
   ];
 
   return (
-    <div className="min-h-screen p-6 space-y-8">
+    <div className="min-h-screen bg-background text-foreground p-6 space-y-8">
       {/* Header */}
       <div className="text-center space-y-4">
         <Avatar className="h-24 w-24 mx-auto">
