@@ -144,28 +144,22 @@ const Welcome = () => {
     }
   ];
 
-  const isDark = document.documentElement.classList.contains('dark');
-
   return (
-    <div className={`min-h-screen bg-background text-foreground overflow-x-hidden`}>
+    <div className="min-h-screen bg-neutral-900 text-white overflow-x-hidden">
       {/* Floating Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {isDark ? (
-          <>
-            <div className="absolute -top-4 -right-4 w-72 h-72 bg-yellow-500/10 rounded-full blur-3xl animate-pulse"></div>
-            <div className="absolute top-1/2 -left-4 w-96 h-96 bg-yellow-400/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-yellow-600/8 rounded-full blur-3xl animate-pulse delay-2000"></div>
-          </>
-        ) : null}
+        <div className="absolute -top-4 -right-4 w-72 h-72 bg-yellow-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute top-1/2 -left-4 w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute bottom-0 right-1/3 w-80 h-80 bg-yellow-600/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
       </div>
 
       {/* Header */}
       <header className="relative z-10 p-6 animate-fade-in">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center shadow-lg">
-            <DollarSign className="h-7 w-7 text-primary font-bold" />
+          <div className="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center shadow-lg">
+            <DollarSign className="h-7 w-7 text-yellow-400 font-bold" />
           </div>
-          <h1 className="text-3xl font-bold text-foreground">FinE</h1>
+          <h1 className="text-3xl font-bold text-white">FinE</h1>
         </div>
       </header>
 
@@ -175,17 +169,17 @@ const Welcome = () => {
           {/* Left Side - Hero Content */}
           <div className="space-y-8 animate-slide-in">
             <div className="space-y-6">
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 border border-gray-200 text-primary rounded-full text-sm font-medium">
-                <Star className="h-4 w-4 text-primary" />
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-800 border border-neutral-700 text-yellow-400 rounded-full text-sm font-medium">
+                <Star className="h-4 w-4 text-yellow-400" />
                 #1 Financial Education Platform
               </div>
               
               <h2 className="text-6xl md:text-7xl font-bold leading-tight">
                 Master Your{' '}
-                <span className="text-primary">Financial Future</span>
+                <span className="text-yellow-400">Financial Future</span>
               </h2>
               
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-xl text-neutral-300 leading-relaxed">
                 Transform your relationship with money through our revolutionary gamified learning platform. 
                 Build wealth, secure your future, and achieve financial freedom with personalized lessons 
                 designed by financial experts.
@@ -195,51 +189,51 @@ const Welcome = () => {
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Button 
-                className="h-14 px-8 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold text-lg shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105"
+                className="h-14 px-8 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold text-lg shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105"
               >
-                <Play className="h-5 w-5 mr-2 text-white" />
+                <Play className="h-5 w-5 mr-2 text-black" />
                 Start Learning Free
               </Button>
               <Button 
                 variant="outline" 
-                className="h-14 px-8 border-gray-300 text-gray-700 hover:bg-gray-100 text-lg transition-all duration-300"
+                className="h-14 px-8 border-neutral-700 text-neutral-200 hover:bg-neutral-800 text-lg transition-all duration-300"
               >
                 Watch Demo
-                <ArrowRight className="h-5 w-5 ml-2 text-primary" />
+                <ArrowRight className="h-5 w-5 ml-2 text-yellow-400" />
               </Button>
             </div>
 
             {/* Quick Stats */}
             <div className="flex items-center gap-8 pt-8">
               <div className="text-center">
-                <div className="text-4xl font-bold text-gray-900">50K+</div>
-                <div className="text-sm text-gray-500">Active Learners</div>
+                <div className="text-4xl font-bold text-white">50K+</div>
+                <div className="text-sm text-neutral-400">Active Learners</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-gray-900">200+</div>
-                <div className="text-sm text-gray-500">Expert Lessons</div>
+                <div className="text-4xl font-bold text-white">200+</div>
+                <div className="text-sm text-neutral-400">Expert Lessons</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-gray-900">4.9★</div>
-                <div className="text-sm text-gray-500">User Rating</div>
+                <div className="text-4xl font-bold text-white">4.9★</div>
+                <div className="text-sm text-neutral-400">User Rating</div>
               </div>
             </div>
           </div>
 
           {/* Right Side - Auth Form */}
           <div className="flex justify-center animate-slide-in delay-300">
-            <Card className="w-full max-w-md bg-white/90 border-gray-200 shadow-lg">
+            <Card className="w-full max-w-md bg-neutral-800/90 border-neutral-700 shadow-lg">
               <CardHeader className="text-center space-y-2">
-                <CardTitle className="text-gray-900 text-3xl">Join FinE Today</CardTitle>
-                <CardDescription className="text-gray-600">
+                <CardTitle className="text-white text-3xl">Join FinE Today</CardTitle>
+                <CardDescription className="text-neutral-300">
                   Start your journey to financial mastery
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <Tabs defaultValue="signin" className="space-y-6">
-                  <TabsList className="grid w-full grid-cols-2 bg-gray-100">
-                    <TabsTrigger value="signin" className="text-gray-700 data-[state=active]:bg-yellow-400 data-[state=active]:text-white">Sign In</TabsTrigger>
-                    <TabsTrigger value="signup" className="text-gray-700 data-[state=active]:bg-yellow-400 data-[state=active]:text-white">Sign Up</TabsTrigger>
+                  <TabsList className="grid w-full grid-cols-2 bg-neutral-900">
+                    <TabsTrigger value="signin" className="text-neutral-200 data-[state=active]:bg-yellow-400 data-[state=active]:text-black">Sign In</TabsTrigger>
+                    <TabsTrigger value="signup" className="text-neutral-200 data-[state=active]:bg-yellow-400 data-[state=active]:text-black">Sign Up</TabsTrigger>
                   </TabsList>
                   <TabsContent value="signin">
                     <form onSubmit={handleSignIn} className="space-y-4">
@@ -249,7 +243,7 @@ const Welcome = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="h-12 bg-gray-100 border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-yellow-500"
+                        className="h-12 bg-neutral-900 border-neutral-700 text-white placeholder:text-neutral-400 focus:border-yellow-500"
                       />
                       <Input
                         type="password"
@@ -257,11 +251,11 @@ const Welcome = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        className="h-12 bg-gray-100 border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-yellow-500"
+                        className="h-12 bg-neutral-900 border-neutral-700 text-white placeholder:text-neutral-400 focus:border-yellow-500"
                       />
                       <Button 
                         type="submit" 
-                        className="w-full h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold transition-all duration-300"
+                        className="w-full h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold transition-all duration-300"
                         disabled={loading}
                       >
                         {loading ? "Signing In..." : "Sign In"}
@@ -276,7 +270,7 @@ const Welcome = () => {
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         required
-                        className="h-12 bg-gray-100 border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-yellow-500"
+                        className="h-12 bg-neutral-900 border-neutral-700 text-white placeholder:text-neutral-400 focus:border-yellow-500"
                       />
                       <Input
                         type="email"
@@ -284,7 +278,7 @@ const Welcome = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="h-12 bg-gray-100 border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-yellow-500"
+                        className="h-12 bg-neutral-900 border-neutral-700 text-white placeholder:text-neutral-400 focus:border-yellow-500"
                       />
                       <Input
                         type="password"
@@ -292,11 +286,11 @@ const Welcome = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required
-                        className="h-12 bg-gray-100 border-gray-300 text-gray-900 placeholder:text-gray-400 focus:border-yellow-500"
+                        className="h-12 bg-neutral-900 border-neutral-700 text-white placeholder:text-neutral-400 focus:border-yellow-500"
                       />
                       <Button 
                         type="submit" 
-                        className="w-full h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold transition-all duration-300"
+                        className="w-full h-12 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold transition-all duration-300"
                         disabled={loading}
                       >
                         {loading ? "Creating Account..." : "Create Account"}
@@ -312,8 +306,8 @@ const Welcome = () => {
         {/* Features Section */}
         <section className="mb-20">
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold text-gray-900 mb-6">Why Choose FinE?</h3>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h3 className="text-4xl font-bold text-white mb-6">Why Choose FinE?</h3>
+            <p className="text-xl text-neutral-300 max-w-3xl mx-auto">
               Experience the most comprehensive and engaging financial education platform designed for the modern learner.
             </p>
           </div>
@@ -332,13 +326,13 @@ const Welcome = () => {
               return (
                 <div 
                   key={index}
-                  className={`group p-8 bg-gray-50 border-gray-200 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500 hover:transform hover:scale-105 animate-fade-in ${delayClass}`}
+                  className={`group p-8 bg-neutral-800 border-neutral-700 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500 hover:transform hover:scale-105 animate-fade-in ${delayClass}`}
                 >
-                  <div className="w-16 h-16 bg-gray-200 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <Icon className="h-8 w-8 text-primary" />
+                  <div className="w-16 h-16 bg-neutral-900 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                    <Icon className="h-8 w-8 text-yellow-400" />
                   </div>
-                  <h4 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h4>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+                  <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
+                  <p className="text-neutral-300 leading-relaxed">{feature.description}</p>
                 </div>
               );
             })}
@@ -348,8 +342,8 @@ const Welcome = () => {
         {/* Learning Path Preview */}
         <section className="mb-20">
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold text-gray-900 mb-6">Your Learning Journey</h3>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h3 className="text-4xl font-bold text-white mb-6">Your Learning Journey</h3>
+            <p className="text-xl text-neutral-300 max-w-3xl mx-auto">
               Follow our structured path from financial basics to advanced wealth-building strategies.
             </p>
           </div>
@@ -371,13 +365,13 @@ const Welcome = () => {
                 ][index % 4];
                 return (
                   <div key={index} className={`flex flex-col items-center text-center animate-bounce-in ${delayClass}`}>
-                    <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center text-2xl font-bold text-primary mb-4 shadow-lg">
+                    <div className="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center text-2xl font-bold text-yellow-400 mb-4 shadow-lg">
                       {item.step}
                     </div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h4>
-                    <p className="text-gray-600 text-sm max-w-32">{item.desc}</p>
+                    <h4 className="text-lg font-semibold text-white mb-2">{item.title}</h4>
+                    <p className="text-neutral-300 text-sm max-w-32">{item.desc}</p>
                     {index < 3 && (
-                      <ChevronRight className="hidden md:block h-8 w-8 text-primary mt-8" />
+                      <ChevronRight className="hidden md:block h-8 w-8 text-yellow-400 mt-8" />
                     )}
                   </div>
                 );
@@ -389,8 +383,8 @@ const Welcome = () => {
         {/* Testimonials */}
         <section className="mb-20">
           <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold text-gray-900 mb-6">Success Stories</h3>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h3 className="text-4xl font-bold text-white mb-6">Success Stories</h3>
+            <p className="text-xl text-neutral-300 max-w-3xl mx-auto">
               Join thousands of learners who have transformed their financial lives with FinE.
             </p>
           </div>
@@ -405,17 +399,17 @@ const Welcome = () => {
               return (
                 <div 
                   key={index}
-                  className={`p-8 bg-gray-50 border-gray-200 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500 animate-slide-up ${delayClass}`}
+                  className={`p-8 bg-neutral-800 border-neutral-700 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500 animate-slide-up ${delayClass}`}
                 >
                   <div className="flex mb-4">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-primary fill-current" />
+                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
                     ))}
                   </div>
-                  <p className="text-gray-600 mb-6 italic">"{testimonial.content}"</p>
+                  <p className="text-neutral-300 mb-6 italic">"{testimonial.content}"</p>
                   <div>
-                    <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                    <div className="text-gray-600 text-sm">{testimonial.role}</div>
+                    <div className="font-semibold text-white">{testimonial.name}</div>
+                    <div className="text-neutral-400 text-sm">{testimonial.role}</div>
                   </div>
                 </div>
               );
@@ -426,18 +420,18 @@ const Welcome = () => {
         {/* Final CTA */}
         <section className="text-center py-20">
           <div className="max-w-4xl mx-auto">
-            <h3 className="text-5xl font-bold text-gray-900 mb-8">
+            <h3 className="text-5xl font-bold text-white mb-8">
               Ready to Transform Your 
-              <span className="text-primary"> Financial Future?</span>
+              <span className="text-yellow-400"> Financial Future?</span>
             </h3>
-            <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            <p className="text-xl text-neutral-300 mb-12 max-w-2xl mx-auto">
               Join FinE today and start your journey towards financial independence. Your future self will thank you.
             </p>
             <Button 
               size="lg"
-              className="h-16 px-12 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-bold text-xl shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105 animate-pulse-glow"
+              className="h-16 px-12 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold text-xl shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105 animate-pulse-glow"
             >
-              <CheckCircle className="h-6 w-6 mr-3 text-white" />
+              <CheckCircle className="h-6 w-6 mr-3 text-black" />
               Start Learning For Free
             </Button>
           </div>

@@ -1,5 +1,4 @@
-
-import { Home, BookOpen, Trophy, ShoppingBag, User, Settings as SettingsIcon, LogOut } from "lucide-react";
+import { Home, BookOpen, Trophy, ShoppingBag, User, Settings as SettingsIcon, LogOut, DollarSign } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -67,10 +66,10 @@ export function AppSidebar() {
     <Sidebar className="border-r border-border">
       <SidebarHeader className="p-6">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 bg-gradient-to-r from-green-600 to-emerald-600 rounded-lg flex items-center justify-center">
-            <span className="text-primary-foreground font-bold text-lg">F</span>
+          <div className="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center shadow-lg">
+            <DollarSign className="h-7 w-7 text-yellow-400 font-bold" />
           </div>
-          <h1 className="text-xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">FinE</h1>
+          <h1 className="text-3xl font-bold text-black dark:text-white">FinE</h1>
         </div>
       </SidebarHeader>
 
