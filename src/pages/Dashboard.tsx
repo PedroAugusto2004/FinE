@@ -7,10 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { financialCourse, getUserProgress, Lesson } from "@/data/financialCourse";
 import { Clock, Target, TrendingUp, BookOpen, Award } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useState(getUserProgress());
+  const isMobile = useIsMobile();
 
   const getNextLesson = (): Lesson | null => {
     for (const unit of financialCourse) {
@@ -40,65 +42,65 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen p-6 space-y-8">
+    <div className="min-h-screen bg-background p-3 md:p-6 space-y-6 md:space-y-8">
       {/* Hero Section */}
       <div className="text-center space-y-4">
-        <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
           Master Your <span className="text-primary">Financial Future</span>
         </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
           Learn essential financial skills through interactive lessons and build lasting money management habits.
         </p>
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="relative overflow-hidden">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <Card className="relative overflow-hidden bg-card border-border">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total XP</CardTitle>
+            <CardTitle className="text-xs md:text-sm font-medium">Total XP</CardTitle>
             <Award className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-primary">{progress.totalXP}</div>
+            <div className="text-xl md:text-2xl font-bold text-primary">{progress.totalXP}</div>
             <p className="text-xs text-muted-foreground">
               Level {Math.floor(progress.totalXP / 100) + 1}
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-card border-border">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Current Streak</CardTitle>
+            <CardTitle className="text-xs md:text-sm font-medium">Current Streak</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-orange-500">{progress.currentStreak}</div>
+            <div className="text-xl md:text-2xl font-bold text-orange-500">{progress.currentStreak}</div>
             <p className="text-xs text-muted-foreground">
               🔥 Keep it going!
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-card border-border">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Lessons Completed</CardTitle>
+            <CardTitle className="text-xs md:text-sm font-medium">Lessons Completed</CardTitle>
             <BookOpen className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-green-500">{progress.completedLessons.length}</div>
+            <div className="text-xl md:text-2xl font-bold text-green-500">{progress.completedLessons.length}</div>
             <p className="text-xs text-muted-foreground">
               of {getTotalLessons()} total lessons
             </p>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="bg-card border-border">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Progress</CardTitle>
+            <CardTitle className="text-xs md:text-sm font-medium">Progress</CardTitle>
             <Target className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-blue-500">{getCompletionPercentage()}%</div>
+            <div className="text-xl md:text-2xl font-bold text-blue-500">{getCompletionPercentage()}%</div>
             <Progress value={getCompletionPercentage()} className="mt-2" />
           </CardContent>
         </Card>
@@ -106,11 +108,11 @@ const Dashboard = () => {
 
       {/* Continue Learning */}
       {nextLesson && (
-        <Card className="border-primary/20 bg-gradient-to-r from-primary/5 to-primary/10">
+        <Card className="border-primary/20 bg-card">
           <CardHeader>
             <div className="flex items-center justify-between">
               <div>
-                <CardTitle className="text-xl">Continue Learning</CardTitle>
+                <CardTitle className="text-lg md:text-xl">Continue Learning</CardTitle>
                 <CardDescription>Pick up where you left off</CardDescription>
               </div>
               <Badge variant="secondary" className="bg-primary/10 text-primary">
@@ -120,8 +122,8 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="space-y-2">
-              <h3 className="font-semibold text-lg">{nextLesson.title}</h3>
-              <p className="text-muted-foreground">{nextLesson.description}</p>
+              <h3 className="font-semibold text-base md:text-lg">{nextLesson.title}</h3>
+              <p className="text-muted-foreground text-sm md:text-base">{nextLesson.description}</p>
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
                   <Clock className="h-4 w-4" />
@@ -136,7 +138,7 @@ const Dashboard = () => {
             <Button 
               onClick={() => navigate(`/lesson/${nextLesson.id}`)}
               className="w-full md:w-auto bg-primary hover:bg-primary/90"
-              size="lg"
+              size={isMobile ? "default" : "lg"}
             >
               Start Lesson {nextLesson.icon}
             </Button>
@@ -146,8 +148,8 @@ const Dashboard = () => {
 
       {/* Course Units */}
       <div className="space-y-6">
-        <h2 className="text-2xl font-bold">Course Units</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <h2 className="text-xl md:text-2xl font-bold">Course Units</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {financialCourse.map((unit, index) => {
             const completedLessons = unit.lessons.filter(lesson => 
               progress.completedLessons.includes(lesson.id)
@@ -156,20 +158,20 @@ const Dashboard = () => {
             const unitProgress = (completedLessons / totalLessons) * 100;
 
             return (
-              <Card key={unit.id} className="group hover:shadow-lg transition-all duration-300 cursor-pointer">
+              <Card key={unit.id} className="group hover:shadow-lg transition-all duration-300 cursor-pointer bg-card border-border">
                 <CardHeader>
                   <div className="flex items-center justify-between">
-                    <div className={`w-12 h-12 rounded-lg ${unit.color} flex items-center justify-center text-white font-bold text-lg`}>
+                    <div className={`w-10 h-10 md:w-12 md:h-12 rounded-lg ${unit.color} flex items-center justify-center text-white font-bold text-base md:text-lg`}>
                       {index + 1}
                     </div>
                     <Badge variant="outline">
                       {completedLessons}/{totalLessons}
                     </Badge>
                   </div>
-                  <CardTitle className="group-hover:text-primary transition-colors">
+                  <CardTitle className="group-hover:text-primary transition-colors text-base md:text-lg">
                     {unit.title}
                   </CardTitle>
-                  <CardDescription>{unit.description}</CardDescription>
+                  <CardDescription className="text-sm">{unit.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="space-y-2">
@@ -194,38 +196,38 @@ const Dashboard = () => {
       </div>
 
       {/* Daily Goals */}
-      <Card>
+      <Card className="bg-card border-border">
         <CardHeader>
-          <CardTitle>Daily Goals</CardTitle>
+          <CardTitle className="text-lg md:text-xl">Daily Goals</CardTitle>
           <CardDescription>Complete these tasks to maintain your streak</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="flex items-center space-x-3 p-4 rounded-lg border">
+            <div className="flex items-center space-x-3 p-4 rounded-lg border border-border">
               <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
                 <BookOpen className="h-4 w-4 text-primary" />
               </div>
-              <div>
-                <p className="font-medium">Complete 1 lesson</p>
-                <p className="text-sm text-muted-foreground">0/1 completed</p>
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-sm md:text-base">Complete 1 lesson</p>
+                <p className="text-xs md:text-sm text-muted-foreground">0/1 completed</p>
               </div>
             </div>
-            <div className="flex items-center space-x-3 p-4 rounded-lg border">
-              <div className="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center">
+            <div className="flex items-center space-x-3 p-4 rounded-lg border border-border">
+              <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-950 flex items-center justify-center">
                 <Target className="h-4 w-4 text-green-600" />
               </div>
-              <div>
-                <p className="font-medium">Earn 50 XP</p>
-                <p className="text-sm text-muted-foreground">{Math.min(progress.totalXP % 100, 50)}/50 XP</p>
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-sm md:text-base">Earn 50 XP</p>
+                <p className="text-xs md:text-sm text-muted-foreground">{Math.min(progress.totalXP % 100, 50)}/50 XP</p>
               </div>
             </div>
-            <div className="flex items-center space-x-3 p-4 rounded-lg border">
-              <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center">
+            <div className="flex items-center space-x-3 p-4 rounded-lg border border-border">
+              <div className="w-8 h-8 rounded-full bg-orange-100 dark:bg-orange-950 flex items-center justify-center">
                 <TrendingUp className="h-4 w-4 text-orange-600" />
               </div>
-              <div>
-                <p className="font-medium">Study 15 minutes</p>
-                <p className="text-sm text-muted-foreground">0/15 minutes</p>
+              <div className="flex-1 min-w-0">
+                <p className="font-medium text-sm md:text-base">Study 15 minutes</p>
+                <p className="text-xs md:text-sm text-muted-foreground">0/15 minutes</p>
               </div>
             </div>
           </div>
