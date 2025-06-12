@@ -28,7 +28,7 @@ export const useOnboarding = () => {
       return data;
     },
     enabled: !!user,
-    refetchOnWindowFocus: true,
-    staleTime: 0, // Always refetch to get latest state
+    refetchOnWindowFocus: false,
+    staleTime: 1000, // Cache for 1 second to prevent excessive refetching
   });
 };

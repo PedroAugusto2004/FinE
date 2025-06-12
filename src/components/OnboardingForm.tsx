@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -6,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { useQueryClient } from '@tanstack/react-query';
 import { 
   TrendingUp, 
   PiggyBank, 
@@ -32,6 +32,7 @@ const OnboardingForm = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
+  const queryClient = useQueryClient();
 
   const questions = [
     {
@@ -124,16 +125,16 @@ const OnboardingForm = () => {
 
       console.log('Onboarding completed successfully');
 
+      // Invalidate and refetch the onboarding query to update the cache
+      await queryClient.invalidateQueries({ queryKey: ['onboarding', user.id] });
+      
       toast({
         title: "Welcome to FinE!",
         description: "Let's start your financial learning journey.",
       });
 
-      // Use setTimeout to ensure the database update has time to propagate
-      setTimeout(() => {
-        console.log('Redirecting to lesson 1');
-        navigate('/lesson/1', { replace: true });
-      }, 500);
+      console.log('Redirecting to lessons page');
+      navigate('/lessons', { replace: true });
 
     } catch (error: any) {
       console.error('Onboarding completion error:', error);
@@ -239,7 +240,7 @@ const OnboardingForm = () => {
         <div className="text-center mt-8">
           <Button
             variant="ghost"
-            onClick={() => navigate('/lesson/1')}
+            onClick={() => navigate('/lessons')}
             className="text-gray-400 hover:text-white hover:bg-white/5 backdrop-blur-sm border border-white/10"
           >
             Skip onboarding
