@@ -22,6 +22,7 @@ import {
 
 const OnboardingForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [answers, setAnswers] = useState({
     howDidYouHear: '',
     knowledgeLevel: '',
@@ -92,8 +93,16 @@ const OnboardingForm = () => {
   };
 
   const completeOnboarding = async () => {
+    if (!user) {
+      console.error('No user found');
+      return;
+    }
+
+    setLoading(true);
+    
     try {
-      if (!user) return;
+      console.log('Starting onboarding completion for user:', user.id);
+      console.log('Answers:', answers);
 
       // Update user profile with onboarding data
       const { error } = await supabase
@@ -108,21 +117,33 @@ const OnboardingForm = () => {
         })
         .eq('id', user.id);
 
-      if (error) throw error;
+      if (error) {
+        console.error('Database update error:', error);
+        throw error;
+      }
+
+      console.log('Onboarding completed successfully');
 
       toast({
         title: "Welcome to FinE!",
         description: "Let's start your financial learning journey.",
       });
 
-      // Redirect to first lesson
-      navigate('/lesson/1');
+      // Use setTimeout to ensure the database update has time to propagate
+      setTimeout(() => {
+        console.log('Redirecting to lesson 1');
+        navigate('/lesson/1', { replace: true });
+      }, 500);
+
     } catch (error: any) {
+      console.error('Onboarding completion error:', error);
       toast({
         title: "Error",
         description: "Failed to complete onboarding. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -134,6 +155,17 @@ const OnboardingForm = () => {
 
   const currentQuestion = questions[currentStep];
   const progress = ((currentStep + 1) / questions.length) * 100;
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-yellow-400 mx-auto"></div>
+          <p className="text-xl">Completing your setup...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex items-center justify-center p-4">

@@ -11,15 +11,24 @@ export const useOnboarding = () => {
     queryFn: async () => {
       if (!user) return null;
       
+      console.log('Fetching onboarding data for user:', user.id);
+      
       const { data, error } = await supabase
         .from('profiles')
         .select('onboarding_completed')
         .eq('id', user.id)
         .single();
       
-      if (error) throw error;
+      if (error) {
+        console.error('Error fetching onboarding data:', error);
+        throw error;
+      }
+      
+      console.log('Onboarding data fetched:', data);
       return data;
     },
     enabled: !!user,
+    refetchOnWindowFocus: true,
+    staleTime: 0, // Always refetch to get latest state
   });
 };

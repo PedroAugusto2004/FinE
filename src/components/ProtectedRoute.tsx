@@ -10,7 +10,11 @@ interface ProtectedRouteProps {
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
   const { user, loading } = useAuth();
-  const { data: onboardingData, isLoading: onboardingLoading } = useOnboarding();
+  const { data: onboardingData, isLoading: onboardingLoading, refetch } = useOnboarding();
+
+  console.log('ProtectedRoute - User:', user?.id);
+  console.log('ProtectedRoute - Onboarding data:', onboardingData);
+  console.log('ProtectedRoute - Loading states:', { loading, onboardingLoading });
 
   if (loading || onboardingLoading) {
     return (
@@ -26,9 +30,12 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children }) => {
 
   // Check if user needs onboarding
   if (onboardingData && !onboardingData.onboarding_completed) {
+    console.log('Showing onboarding form');
     return <OnboardingForm />;
   }
 
+  // If onboarding is completed, show the main app
+  console.log('Onboarding completed, showing main app');
   return <>{children}</>;
 };
 
