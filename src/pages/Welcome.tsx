@@ -217,7 +217,7 @@ const Welcome = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-900 text-white overflow-x-hidden">
+    <div className="min-h-screen bg-neutral-900 text-white overflow-x-hidden overflow-y-auto">
       {/* Floating Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-4 -right-4 w-72 h-72 bg-yellow-500/20 rounded-full blur-3xl animate-pulse"></div>
