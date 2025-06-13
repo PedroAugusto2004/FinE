@@ -26,20 +26,20 @@ import { learningJourney } from '@/data/learningJourney';
 // Animation variants
 const sectionVariants = {
   hidden: { opacity: 0, y: 60 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.42, 0, 0.58, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, type: 'tween' } },
 };
 const staggerContainer = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.18,
-      delayChildren: 0.1,
+      staggerChildren: 0.15,
+      delayChildren: 0.05,
     },
   },
 };
 const fadeInUp = {
   hidden: { opacity: 0, y: 40 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0, 0, 0.58, 1] } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.7, type: 'tween' } },
 };
 
 const Welcome = () => {
@@ -227,42 +227,41 @@ const Welcome = () => {
 
       {/* Header */}
       <motion.header 
-        className="relative z-10 p-6"
+        className="relative z-10 p-4 sm:p-6"
         initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.15 }}
         transition={{ duration: 1 }}
       >
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center shadow-lg">
-            <DollarSign className="h-7 w-7 text-yellow-400 font-bold" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-neutral-800 rounded-xl flex items-center justify-center shadow-lg">
+            <DollarSign className="h-6 w-6 sm:h-7 sm:w-7 text-yellow-400 font-bold" />
           </div>
-          <h1 className="text-3xl font-bold text-white">FinE</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">FinE</h1>
         </div>
       </motion.header>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 space-y-32">
+      <div className="relative z-10 max-w-7xl mx-auto px-2 sm:px-6 py-8 sm:py-12 space-y-24 sm:space-y-32">
         {/* Hero Section */}
         <motion.section
-          className="grid lg:grid-cols-2 gap-16 items-center min-h-[80vh]"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-16 items-center min-h-[70vh]"
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: false, amount: 0.15 }}
         >
           {/* Left Side - Hero Content */}
           <motion.div className="space-y-8" variants={staggerContainer}>
             <motion.div className="space-y-6" variants={fadeInUp}>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-800 border border-neutral-700 text-yellow-400 rounded-full text-sm font-medium">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-800 border border-neutral-700 text-yellow-400 rounded-full text-xs sm:text-sm font-medium">
                 <Star className="h-4 w-4 text-yellow-400" />
                 #1 Financial Education Platform
               </div>
-              
-              <h2 className="text-6xl md:text-7xl font-bold leading-tight">
+              <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold leading-tight">
                 Master Your{' '}
                 <span className="text-yellow-400">Financial Future</span>
               </h2>
-              
-              <p className="text-xl text-neutral-300 leading-relaxed">
+              <p className="text-base sm:text-xl text-neutral-300 leading-relaxed">
                 Transform your relationship with money through our revolutionary gamified learning platform. 
                 Build wealth, secure your future, and achieve financial freedom with personalized lessons 
                 designed by financial experts.
@@ -271,14 +270,14 @@ const Welcome = () => {
             {/* CTA Buttons */}
             <motion.div className="flex flex-col sm:flex-row gap-4" variants={fadeInUp}>
               <Button 
-                className="h-14 px-8 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold text-lg shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105"
+                className="h-12 sm:h-14 px-6 sm:px-8 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold text-base sm:text-lg shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105"
               >
                 <Play className="h-5 w-5 mr-2 text-black" />
                 Start Learning Free
               </Button>
               <Button 
                 variant="outline" 
-                className="h-14 px-8 border-neutral-700 bg-neutral-900 text-neutral-200 hover:bg-neutral-800 text-lg transition-all duration-300"
+                className="h-12 sm:h-14 px-6 sm:px-8 border-neutral-700 bg-neutral-900 text-neutral-200 hover:bg-neutral-800 text-base sm:text-lg transition-all duration-300"
                 style={{ backgroundColor: '#171717', color: '#e5e5e5', borderColor: '#262626' }}
               >
                 Watch Demo
@@ -286,18 +285,18 @@ const Welcome = () => {
               </Button>
             </motion.div>
             {/* Quick Stats */}
-            <motion.div className="flex items-center gap-8 pt-8" variants={fadeInUp}>
+            <motion.div className="flex items-center gap-6 sm:gap-8 pt-6 sm:pt-8" variants={fadeInUp}>
               <div className="text-center">
-                <div className="text-4xl font-bold text-white">50K+</div>
-                <div className="text-sm text-neutral-400">Active Learners</div>
+                <div className="text-2xl sm:text-4xl font-bold text-white">50K+</div>
+                <div className="text-xs sm:text-sm text-neutral-400">Active Learners</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-white">200+</div>
-                <div className="text-sm text-neutral-400">Expert Lessons</div>
+                <div className="text-2xl sm:text-4xl font-bold text-white">200+</div>
+                <div className="text-xs sm:text-sm text-neutral-400">Expert Lessons</div>
               </div>
               <div className="text-center">
-                <div className="text-4xl font-bold text-white">4.9★</div>
-                <div className="text-sm text-neutral-400">User Rating</div>
+                <div className="text-2xl sm:text-4xl font-bold text-white">4.9★</div>
+                <div className="text-xs sm:text-sm text-neutral-400">User Rating</div>
               </div>
             </motion.div>
           </motion.div>
@@ -308,8 +307,8 @@ const Welcome = () => {
           >
             <Card className="w-full max-w-md bg-neutral-800/90 border-neutral-700 shadow-lg">
               <CardHeader className="text-center space-y-2">
-                <CardTitle className="text-white text-3xl">Join FinE Today</CardTitle>
-                <CardDescription className="text-neutral-300">
+                <CardTitle className="text-white text-2xl sm:text-3xl">Join FinE Today</CardTitle>
+                <CardDescription className="text-neutral-300 text-base sm:text-lg">
                   Start your journey to financial mastery
                 </CardDescription>
               </CardHeader>
@@ -393,7 +392,7 @@ const Welcome = () => {
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.15 }}
         >
           <motion.div className="text-center mb-16" variants={fadeInUp}>
             <h3 className="text-4xl font-bold text-white mb-6">Why Choose FinE?</h3>
@@ -467,7 +466,7 @@ const Welcome = () => {
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.15 }}
         >
           <motion.div className="text-center mb-16 px-2" variants={fadeInUp}>
             <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Your Learning Journey</h3>
@@ -507,7 +506,7 @@ const Welcome = () => {
                     className="w-full h-2 rounded-full bg-neutral-800 mt-4 overflow-hidden"
                     initial={{ width: 0 }}
                     whileInView={{ width: '100%' }}
-                    transition={{ delay: 0.2 * index, duration: 1.2, ease: [0.42, 0, 0.58, 1] }}
+                    transition={{ delay: 0.2 * index, duration: 1.2, ease: "easeInOut" }}
                   >
                     <div className="h-full bg-gradient-to-r from-yellow-400/80 to-yellow-600/60" />
                   </motion.div>
@@ -534,7 +533,7 @@ const Welcome = () => {
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.15 }}
         >
           <motion.div className="text-center mb-16" variants={fadeInUp}>
             <h3 className="text-4xl font-bold text-white mb-6">Success Stories</h3>
@@ -569,7 +568,7 @@ const Welcome = () => {
           className="text-center py-20"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.15 }}
           transition={{ duration: 1 }}
         >
           <div className="max-w-2xl mx-auto bg-white/10 backdrop-blur-xl border border-yellow-400/20 rounded-3xl shadow-2xl p-8 md:p-14 flex flex-col items-center">
