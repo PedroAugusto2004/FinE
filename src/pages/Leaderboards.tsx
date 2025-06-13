@@ -14,7 +14,7 @@ const Leaderboards = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-6 space-y-8">
+    <div className="min-h-screen bg-background text-foreground p-3 sm:p-6 space-y-8 max-w-3xl mx-auto w-full">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold">Leaderboards</h1>
         <p className="text-xl text-muted-foreground">
@@ -23,7 +23,7 @@ const Leaderboards = () => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Your Rank</CardTitle>

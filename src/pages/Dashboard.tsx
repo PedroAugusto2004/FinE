@@ -41,19 +41,19 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-3 md:p-6 space-y-6 md:space-y-8">
+    <div className="min-h-screen bg-background text-foreground p-3 sm:p-4 md:p-6 space-y-6 md:space-y-8">
       {/* Hero Section */}
-      <div className="text-center space-y-4">
+      <div className="text-center space-y-4 px-2 sm:px-4">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
           Master Your <span className="text-primary">Financial Future</span>
         </h1>
-        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
+        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-2 sm:px-4">
           Learn essential financial skills through interactive lessons and build lasting money management habits.
         </p>
       </div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
         <Card className="relative overflow-hidden bg-card border-border">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-xs md:text-sm font-medium">Total XP</CardTitle>
@@ -147,8 +147,8 @@ const Dashboard = () => {
 
       {/* Course Units */}
       <div className="space-y-6">
-        <h2 className="text-xl md:text-2xl font-bold">Course Units</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+        <h2 className="text-xl md:text-2xl font-bold px-2 sm:px-0">Course Units</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
           {financialCourse.map((unit, index) => {
             const completedLessons = unit.lessons.filter(lesson => 
               progress.completedLessons.includes(lesson.id)

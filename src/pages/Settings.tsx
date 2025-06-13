@@ -37,8 +37,8 @@ const Settings = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-6">
-      <div className="max-w-4xl mx-auto space-y-6">
+    <div className="min-h-screen bg-background text-foreground p-3 sm:p-6">
+      <div className="max-w-3xl mx-auto space-y-6 w-full">
         {/* Header */}
         <div className="flex items-center gap-4">
           <Button variant="ghost" onClick={() => navigate('/')}>

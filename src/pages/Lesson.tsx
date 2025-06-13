@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -37,8 +36,8 @@ const Lesson = () => {
 
   if (!lesson) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
+      <div className="min-h-screen flex items-center justify-center p-3 sm:p-6">
+        <div className="text-center w-full max-w-md mx-auto">
           <h1 className="text-2xl font-bold mb-4">Lesson not found</h1>
           <Button onClick={() => navigate('/lessons')}>Back to Lessons</Button>
         </div>
@@ -290,7 +289,7 @@ const Lesson = () => {
   }
 
   return (
-    <div className="min-h-screen p-6">
+    <div className="min-h-screen bg-background text-foreground p-3 sm:p-6 max-w-3xl mx-auto w-full">
       <div className="max-w-2xl mx-auto space-y-6">
         {/* Quiz Header */}
         <div className="flex items-center justify-between">

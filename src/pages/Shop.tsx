@@ -58,7 +58,7 @@ const Shop = () => {
   const categories = ["All", "Power-ups", "Themes"];
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-6 space-y-8">
+    <div className="min-h-screen bg-background text-foreground p-3 sm:p-6 space-y-8 max-w-3xl mx-auto w-full">
       <div className="text-center space-y-4">
         <h1 className="text-4xl font-bold">Shop</h1>
         <p className="text-xl text-muted-foreground">
@@ -100,7 +100,7 @@ const Shop = () => {
       </div>
 
       {/* Shop Items */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {shopItems.map((item) => (
           <Card key={item.id} className="group hover:shadow-lg transition-all duration-300">
             <CardHeader>
