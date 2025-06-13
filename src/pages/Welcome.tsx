@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
@@ -20,6 +21,26 @@ import {
   CheckCircle,
   ArrowRight
 } from 'lucide-react';
+import { learningJourney } from '@/data/learningJourney';
+
+// Animation variants
+const sectionVariants = {
+  hidden: { opacity: 0, y: 60 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.42, 0, 0.58, 1] } },
+};
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.18,
+      delayChildren: 0.1,
+    },
+  },
+};
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0, 0, 0.58, 1] } },
+};
 
 const Welcome = () => {
   const [email, setEmail] = useState('');
@@ -94,32 +115,83 @@ const Welcome = () => {
     {
       icon: TrendingUp,
       title: "Smart Progress Tracking",
-      description: "Monitor your financial learning journey with detailed analytics and personalized insights."
+      description: "Monitor your financial learning journey with detailed analytics and personalized insights.",
+      details: [
+        "Visualize your progress with beautiful charts.",
+        "Personalized learning recommendations.",
+        "Track completed lessons and XP earned."
+      ]
     },
     {
       icon: Target,
       title: "Goal-Oriented Learning",
-      description: "Set and achieve financial milestones with our structured curriculum and achievement system."
+      description: "Set and achieve financial milestones with our structured curriculum and achievement system.",
+      details: [
+        "Custom goal setting and reminders.",
+        "Unlock badges for every milestone.",
+        "Progressive difficulty for continuous growth."
+      ]
     },
     {
       icon: BookOpen,
       title: "Interactive Lessons",
-      description: "Learn through engaging, bite-sized lessons designed for maximum retention and practical application."
+      description: "Learn through engaging, bite-sized lessons designed for maximum retention and practical application.",
+      details: [
+        "Quizzes and real-world scenarios.",
+        "Instant feedback and explanations.",
+        "Save favorite lessons for review."
+      ]
     },
     {
       icon: Award,
       title: "Gamified Experience",
-      description: "Earn XP, unlock achievements, and compete on leaderboards while mastering financial concepts."
+      description: "Earn XP, unlock achievements, and compete on leaderboards while mastering financial concepts.",
+      details: [
+        "Daily streaks and bonus rewards.",
+        "Compete with friends and the community.",
+        "Seasonal events and challenges."
+      ]
     },
     {
       icon: Shield,
       title: "Secure & Private",
-      description: "Your financial education data is protected with enterprise-grade security and privacy measures."
+      description: "Your financial education data is protected with enterprise-grade security and privacy measures.",
+      details: [
+        "End-to-end encrypted data.",
+        "No ads, no data selling.",
+        "Full control over your privacy settings."
+      ]
     },
     {
       icon: Users,
       title: "Community Support",
-      description: "Connect with fellow learners, share experiences, and get support from our financial education community."
+      description: "Connect with fellow learners, share experiences, and get support from our financial education community.",
+      details: [
+        "Active forums and Q&A.",
+        "Mentorship from experts.",
+        "Live webinars and events."
+      ]
+    },
+    // Extra features for more content
+    {
+      icon: PiggyBank,
+      title: "Savings Simulations",
+      description: "Practice saving and investing in a risk-free environment.",
+      details: [
+        "Simulate real-world financial decisions.",
+        "See the impact of your choices instantly.",
+        "Learn from mistakes without consequences."
+      ]
+    },
+    {
+      icon: DollarSign,
+      title: "Expert Insights",
+      description: "Access exclusive tips and strategies from financial professionals.",
+      details: [
+        "Weekly expert articles and videos.",
+        "Ask questions and get answers.",
+        "Stay updated with the latest trends."
+      ]
     }
   ];
 
@@ -154,21 +226,32 @@ const Welcome = () => {
       </div>
 
       {/* Header */}
-      <header className="relative z-10 p-6 animate-fade-in">
+      <motion.header 
+        className="relative z-10 p-6"
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+      >
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center shadow-lg">
             <DollarSign className="h-7 w-7 text-yellow-400 font-bold" />
           </div>
           <h1 className="text-3xl font-bold text-white">FinE</h1>
         </div>
-      </header>
+      </motion.header>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 py-12 space-y-32">
         {/* Hero Section */}
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+        <motion.section
+          className="grid lg:grid-cols-2 gap-16 items-center min-h-[80vh]"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+        >
           {/* Left Side - Hero Content */}
-          <div className="space-y-8 animate-slide-in">
-            <div className="space-y-6">
+          <motion.div className="space-y-8" variants={staggerContainer}>
+            <motion.div className="space-y-6" variants={fadeInUp}>
               <div className="inline-flex items-center gap-2 px-4 py-2 bg-neutral-800 border border-neutral-700 text-yellow-400 rounded-full text-sm font-medium">
                 <Star className="h-4 w-4 text-yellow-400" />
                 #1 Financial Education Platform
@@ -184,10 +267,9 @@ const Welcome = () => {
                 Build wealth, secure your future, and achieve financial freedom with personalized lessons 
                 designed by financial experts.
               </p>
-            </div>
-
+            </motion.div>
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            <motion.div className="flex flex-col sm:flex-row gap-4" variants={fadeInUp}>
               <Button 
                 className="h-14 px-8 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold text-lg shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105"
               >
@@ -196,15 +278,15 @@ const Welcome = () => {
               </Button>
               <Button 
                 variant="outline" 
-                className="h-14 px-8 border-neutral-700 text-neutral-200 hover:bg-neutral-800 text-lg transition-all duration-300"
+                className="h-14 px-8 border-neutral-700 bg-neutral-900 text-neutral-200 hover:bg-neutral-800 text-lg transition-all duration-300"
+                style={{ backgroundColor: '#171717', color: '#e5e5e5', borderColor: '#262626' }}
               >
                 Watch Demo
                 <ArrowRight className="h-5 w-5 ml-2 text-yellow-400" />
               </Button>
-            </div>
-
+            </motion.div>
             {/* Quick Stats */}
-            <div className="flex items-center gap-8 pt-8">
+            <motion.div className="flex items-center gap-8 pt-8" variants={fadeInUp}>
               <div className="text-center">
                 <div className="text-4xl font-bold text-white">50K+</div>
                 <div className="text-sm text-neutral-400">Active Learners</div>
@@ -217,11 +299,13 @@ const Welcome = () => {
                 <div className="text-4xl font-bold text-white">4.9★</div>
                 <div className="text-sm text-neutral-400">User Rating</div>
               </div>
-            </div>
-          </div>
-
+            </motion.div>
+          </motion.div>
           {/* Right Side - Auth Form */}
-          <div className="flex justify-center animate-slide-in delay-300">
+          <motion.div
+            className="flex justify-center"
+            variants={fadeInUp}
+          >
             <Card className="w-full max-w-md bg-neutral-800/90 border-neutral-700 shadow-lg">
               <CardHeader className="text-center space-y-2">
                 <CardTitle className="text-white text-3xl">Join FinE Today</CardTitle>
@@ -300,142 +384,221 @@ const Welcome = () => {
                 </Tabs>
               </CardContent>
             </Card>
-          </div>
-        </div>
+          </motion.div>
+        </motion.section>
 
         {/* Features Section */}
-        <section className="mb-20">
-          <div className="text-center mb-16">
+        <motion.section
+          className="mb-20"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <motion.div className="text-center mb-16" variants={fadeInUp}>
             <h3 className="text-4xl font-bold text-white mb-6">Why Choose FinE?</h3>
             <p className="text-xl text-neutral-300 max-w-3xl mx-auto">
               Experience the most comprehensive and engaging financial education platform designed for the modern learner.
             </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          </motion.div>
+          <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" variants={staggerContainer}>
             {features.map((feature, index) => {
               const Icon = feature.icon;
-              const delayClass = [
-                'animate-delay-0',
-                'animate-delay-100',
-                'animate-delay-200',
-                'animate-delay-300',
-                'animate-delay-400',
-                'animate-delay-500',
-              ][index % 6];
+              // Mouse movement state for 3D hover effect
+              const [hovered, setHovered] = useState(false);
+              const [coords, setCoords] = useState({ x: 0, y: 0 });
+              // Handler for mouse movement
+              const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                setCoords({ x, y });
+              };
+              // Handler for mouse leave
+              const handleMouseLeave = () => {
+                setCoords({ x: 0, y: 0 });
+                setHovered(false);
+              };
               return (
-                <div 
+                <motion.div
                   key={index}
-                  className={`group p-8 bg-neutral-800 border-neutral-700 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500 hover:transform hover:scale-105 animate-fade-in ${delayClass}`}
+                  className="group p-8 bg-neutral-800 border-neutral-700 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500 cursor-pointer relative overflow-hidden"
+                  variants={fadeInUp}
+                  whileHover={{ scale: 1.06, boxShadow: '0 8px 32px 0 rgba(255, 214, 10, 0.15)' }}
+                  onMouseMove={handleMouseMove}
+                  onMouseEnter={() => setHovered(true)}
+                  onMouseLeave={handleMouseLeave}
+                  style={{
+                    transform: hovered
+                      ? `perspective(800px) rotateY(${coords.x / 20}deg) rotateX(${-coords.y / 20}deg) scale(1.06)`
+                      : undefined,
+                    transition: 'transform 0.3s cubic-bezier(0.42,0,0.58,1)',
+                  }}
                 >
                   <div className="w-16 h-16 bg-neutral-900 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                     <Icon className="h-8 w-8 text-yellow-400" />
                   </div>
                   <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
-                  <p className="text-neutral-300 leading-relaxed">{feature.description}</p>
-                </div>
+                  <p className="text-neutral-300 leading-relaxed mb-4">{feature.description}</p>
+                  <ul className="text-neutral-400 text-sm space-y-1 text-left mx-auto max-w-xs">
+                    {feature.details && feature.details.map((detail: string, i: number) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-yellow-400">•</span> {detail}
+                      </li>
+                    ))}
+                  </ul>
+                  {/* Animated background highlight on hover */}
+                  <motion.div
+                    className="absolute inset-0 pointer-events-none rounded-2xl"
+                    initial={{ opacity: 0 }}
+                    animate={hovered ? { opacity: 0.12 } : { opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{ background: 'radial-gradient(circle at 60% 40%, #fde047 0%, transparent 80%)' }}
+                  />
+                </motion.div>
               );
             })}
-          </div>
-        </section>
+          </motion.div>
+        </motion.section>
 
         {/* Learning Path Preview */}
-        <section className="mb-20">
-          <div className="text-center mb-16">
-            <h3 className="text-4xl font-bold text-white mb-6">Your Learning Journey</h3>
+        <motion.section
+          className="mb-20"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <motion.div className="text-center mb-16 px-2" variants={fadeInUp}>
+            <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">Your Learning Journey</h3>
             <p className="text-xl text-neutral-300 max-w-3xl mx-auto">
-              Follow our structured path from financial basics to advanced wealth-building strategies.
+              A step-by-step path from financial basics to advanced wealth-building, with interactive milestones and beautiful progress animations.
             </p>
-          </div>
-          
-          <div className="relative">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-              {[1, 2, 3, 4].map((step, index) => {
-                const item = [
-                  { step: 1, title: "Financial Basics", desc: "Budgeting, saving, and spending habits" },
-                  { step: 2, title: "Investment Fundamentals", desc: "Stocks, bonds, and portfolio building" },
-                  { step: 3, title: "Advanced Strategies", desc: "Tax optimization and wealth building" },
-                  { step: 4, title: "Financial Freedom", desc: "Passive income and retirement planning" }
-                ][index];
-                const delayClass = [
-                  'animate-delay-0',
-                  'animate-delay-200',
-                  'animate-delay-400',
-                  'animate-delay-600',
-                ][index % 4];
-                return (
-                  <div key={index} className={`flex flex-col items-center text-center animate-bounce-in ${delayClass}`}>
-                    <div className="w-20 h-20 bg-neutral-900 rounded-full flex items-center justify-center text-2xl font-bold text-yellow-400 mb-4 shadow-lg">
-                      {item.step}
-                    </div>
-                    <h4 className="text-lg font-semibold text-white mb-2">{item.title}</h4>
-                    <p className="text-neutral-300 text-sm max-w-32">{item.desc}</p>
-                    {index < 3 && (
-                      <ChevronRight className="hidden md:block h-8 w-8 text-yellow-400 mt-8" />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+          </motion.div>
+          <motion.div className="relative flex flex-col md:flex-row items-stretch md:items-center justify-between gap-8 md:gap-6 px-0 md:px-0 w-full" variants={staggerContainer}>
+            {learningJourney.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.step}
+                  className="relative flex-1 flex flex-col items-center text-center group min-w-0 md:min-w-[180px] max-w-full md:max-w-xs mb-8 md:mb-0"
+                  variants={fadeInUp}
+                >
+                  {/* Animated step circle with icon */}
+                  <motion.div
+                    className="w-16 h-16 md:w-20 md:h-20 bg-neutral-900/80 border border-yellow-400/10 rounded-2xl flex items-center justify-center text-3xl font-bold mb-4 shadow-xl"
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 0.1 * index, type: 'spring', stiffness: 180 }}
+                  >
+                    <Icon className="h-8 w-8 md:h-10 md:w-10 text-yellow-400" />
+                  </motion.div>
+                  <h4 className="text-lg md:text-xl font-semibold text-white mb-2 tracking-tight">{item.title}</h4>
+                  <p className="text-neutral-300 text-sm md:text-base mb-3 min-h-[40px] md:min-h-[48px]">{item.desc}</p>
+                  <ul className="text-neutral-400 text-xs md:text-sm space-y-1 text-left mx-auto max-w-xs mb-2 px-2 md:px-0">
+                    {item.details.map((detail, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <span className="text-yellow-400">•</span> {detail}
+                      </li>
+                    ))}
+                  </ul>
+                  {/* Animated progress bar for each step */}
+                  <motion.div
+                    className="w-full h-2 rounded-full bg-neutral-800 mt-4 overflow-hidden"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: '100%' }}
+                    transition={{ delay: 0.2 * index, duration: 1.2, ease: [0.42, 0, 0.58, 1] }}
+                  >
+                    <div className="h-full bg-gradient-to-r from-yellow-400/80 to-yellow-600/60" />
+                  </motion.div>
+                  {/* Connector arrow */}
+                  {index < learningJourney.length - 1 && (
+                    <motion.div
+                      className="hidden md:block absolute right-[-40px] top-1/2 -translate-y-1/2"
+                      initial={{ opacity: 0, x: 20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.2 * index, duration: 0.6 }}
+                    >
+                      <ChevronRight className="h-10 w-10 text-yellow-400" />
+                    </motion.div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </motion.section>
 
         {/* Testimonials */}
-        <section className="mb-20">
-          <div className="text-center mb-16">
+        <motion.section
+          className="mb-20"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <motion.div className="text-center mb-16" variants={fadeInUp}>
             <h3 className="text-4xl font-bold text-white mb-6">Success Stories</h3>
             <p className="text-xl text-neutral-300 max-w-3xl mx-auto">
               Join thousands of learners who have transformed their financial lives with FinE.
             </p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => {
-              const delayClass = [
-                'animate-delay-0',
-                'animate-delay-150',
-                'animate-delay-300',
-              ][index % 3];
-              return (
-                <div 
-                  key={index}
-                  className={`p-8 bg-neutral-800 border-neutral-700 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500 animate-slide-up ${delayClass}`}
-                >
-                  <div className="flex mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-neutral-300 mb-6 italic">"{testimonial.content}"</p>
-                  <div>
-                    <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-neutral-400 text-sm">{testimonial.role}</div>
-                  </div>
+          </motion.div>
+          <motion.div className="grid md:grid-cols-3 gap-8" variants={staggerContainer}>
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                className="p-8 bg-neutral-800 border-neutral-700 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500"
+                variants={fadeInUp}
+              >
+                <div className="flex mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                  ))}
                 </div>
-              );
-            })}
-          </div>
-        </section>
+                <p className="text-neutral-300 mb-6 italic">"{testimonial.content}"</p>
+                <div>
+                  <div className="font-semibold text-white">{testimonial.name}</div>
+                  <div className="text-neutral-400 text-sm">{testimonial.role}</div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </motion.section>
 
-        {/* Final CTA */}
-        <section className="text-center py-20">
-          <div className="max-w-4xl mx-auto">
-            <h3 className="text-5xl font-bold text-white mb-8">
-              Ready to Transform Your 
-              <span className="text-yellow-400"> Financial Future?</span>
-            </h3>
-            <p className="text-xl text-neutral-300 mb-12 max-w-2xl mx-auto">
-              Join FinE today and start your journey towards financial independence. Your future self will thank you.
-            </p>
-            <Button 
-              size="lg"
-              className="h-16 px-12 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-bold text-xl shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105 animate-pulse-glow"
-            >
-              <CheckCircle className="h-6 w-6 mr-3 text-black" />
-              Start Learning For Free
-            </Button>
+        {/* Get in Touch Section */}
+        <motion.section
+          className="text-center py-20"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1 }}
+        >
+          <div className="max-w-2xl mx-auto bg-white/10 backdrop-blur-xl border border-yellow-400/20 rounded-3xl shadow-2xl p-8 md:p-14 flex flex-col items-center">
+            <h3 className="text-4xl md:text-5xl font-bold text-white mb-2">Get in Touch</h3>
+            <p className="text-base md:text-lg text-neutral-200 mb-8 max-w-xl font-normal">We'd love to hear from you.</p>
+            <form className="w-full space-y-5 text-left">
+              <div className="flex flex-col md:flex-row gap-4">
+                <Input type="text" placeholder="Name" required className="flex-1 h-12 bg-white/10 border border-yellow-400/20 rounded-xl text-white placeholder:text-neutral-400 focus:border-yellow-400/60 focus:bg-white/20 transition-all duration-200" />
+                <Input type="email" placeholder="Email" required className="flex-1 h-12 bg-white/10 border border-yellow-400/20 rounded-xl text-white placeholder:text-neutral-400 focus:border-yellow-400/60 focus:bg-white/20 transition-all duration-200" />
+              </div>
+              <textarea
+                rows={4}
+                placeholder="Your message"
+                required
+                className="w-full h-28 bg-white/10 border border-yellow-400/20 rounded-xl text-white placeholder:text-neutral-400 p-4 focus:border-yellow-400/60 focus:bg-white/20 transition-all duration-200 resize-none"
+              />
+              <div className="flex justify-center pt-2">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="h-12 px-8 bg-yellow-400/80 hover:bg-yellow-400 text-black font-semibold rounded-xl shadow-md transition-all duration-200"
+                >
+                  <CheckCircle className="h-5 w-5 mr-2 text-black" />
+                  Send
+                </Button>
+              </div>
+            </form>
           </div>
-        </section>
+        </motion.section>
       </div>
     </div>
   );
