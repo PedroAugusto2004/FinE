@@ -40,8 +40,8 @@ const Settings = () => {
     <div className="min-h-screen bg-background text-foreground p-3 sm:p-6">
       <div className="max-w-3xl mx-auto space-y-6 w-full">
         {/* Header */}
-        <div className="flex items-center gap-4">
-          <Button variant="ghost" onClick={() => navigate('/')}>
+        <div className="flex items-center gap-4 mt-12 md:mt-0">
+          <Button variant="ghost" onClick={() => navigate('/')} className="md:mt-0 mt-2">
             <ArrowLeft className="h-4 w-4 mr-2" />
             Back to Dashboard
           </Button>

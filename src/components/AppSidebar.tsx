@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
 import { useUserStats } from "@/hooks/useUserProgress";
+import { useSidebar } from "@/components/ui/sidebar";
 
 const menuItems = [
   {
@@ -57,9 +58,17 @@ export function AppSidebar() {
   const location = useLocation();
   const { user, signOut } = useAuth();
   const { data: userStats } = useUserStats();
+  const { isMobile, setOpenMobile } = useSidebar();
+
+  // Helper to close sidebar on mobile after navigation
+  const handleNavigate = (url: string) => {
+    navigate(url);
+    if (isMobile) setOpenMobile(false);
+  };
 
   const handleSignOut = async () => {
     await signOut();
+    if (isMobile) setOpenMobile(false);
   };
 
   return (
@@ -85,7 +94,7 @@ export function AppSidebar() {
                     className="w-full justify-start py-3 px-4 hover:bg-accent/50 transition-colors"
                   >
                     <button
-                      onClick={() => navigate(item.url)}
+                      onClick={() => handleNavigate(item.url)}
                       className="flex items-center gap-3"
                     >
                       <item.icon className={`h-5 w-5 ${item.color}`} />
@@ -134,7 +143,7 @@ export function AppSidebar() {
               className="w-full justify-start py-3 px-4 hover:bg-accent/50 transition-colors"
             >
               <button
-                onClick={() => navigate('/settings')}
+                onClick={() => handleNavigate('/settings')}
                 className="flex items-center gap-3"
               >
                 <SettingsIcon className="h-5 w-5 text-gray-500" />
