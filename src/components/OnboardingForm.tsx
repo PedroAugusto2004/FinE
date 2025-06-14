@@ -17,8 +17,10 @@ import {
   Search,
   ArrowLeft,
   ArrowRight,
-  CheckCircle
+  CheckCircle,
+  Bell
 } from 'lucide-react';
+import { FaTiktok, FaGoogle, FaFacebook, FaInstagram } from 'react-icons/fa';
 
 const OnboardingForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
@@ -39,12 +41,47 @@ const OnboardingForm = () => {
       id: 'howDidYouHear',
       title: 'How did you hear about FinE?',
       options: [
-        { value: 'tiktok', label: 'TikTok', icon: '🎵' },
-        { value: 'google', label: 'Google Search', icon: <Search className="w-5 h-5" /> },
+        { value: 'tiktok', label: 'TikTok', icon: <FaTiktok className="w-5 h-5" /> },
+        { value: 'google', label: 'Google Search', icon: <FaGoogle className="w-5 h-5" /> },
         { value: 'friends', label: 'Friends or family', icon: <Users className="w-5 h-5" /> },
         { value: 'news', label: 'News, article or blog', icon: <Newspaper className="w-5 h-5" /> },
-        { value: 'social', label: 'Facebook or Instagram', icon: '📱' },
+        { value: 'social', label: 'Facebook or Instagram', icon: (
+          <div className="flex gap-1">
+            <FaFacebook className="w-4 h-4" />
+            <FaInstagram className="w-4 h-4" />
+          </div>
+        ) },
         { value: 'youtube', label: 'YouTube', icon: <Youtube className="w-5 h-5" /> }
+      ]
+    },
+    {
+      id: 'learningGoal',
+      title: 'What’s your daily learning goal?',
+      options: [
+        { value: '5min', label: '5 minutes', icon: <TrendingUp className="w-5 h-5" /> },
+        { value: '10min', label: '10 minutes', icon: <Target className="w-5 h-5" /> },
+        { value: '15min', label: '15 minutes', icon: <Shield className="w-5 h-5" /> },
+        { value: '20min', label: '20+ minutes', icon: <PiggyBank className="w-5 h-5" /> }
+      ]
+    },
+    {
+      id: 'motivation',
+      title: 'What motivates you to improve your finances?',
+      options: [
+        { value: 'family', label: 'Family', icon: <Users className="w-5 h-5" /> },
+        { value: 'freedom', label: 'Financial freedom', icon: <TrendingUp className="w-5 h-5" /> },
+        { value: 'security', label: 'Security', icon: <Shield className="w-5 h-5" /> },
+        { value: 'growth', label: 'Personal growth', icon: <Target className="w-5 h-5" /> }
+      ]
+    },
+    {
+      id: 'preferredFormat',
+      title: 'How do you prefer to learn?',
+      options: [
+        { value: 'reading', label: 'Reading', icon: <Newspaper className="w-5 h-5" /> },
+        { value: 'videos', label: 'Videos', icon: <Youtube className="w-5 h-5" /> },
+        { value: 'interactive', label: 'Interactive lessons', icon: <Target className="w-5 h-5" /> },
+        { value: 'audio', label: 'Audio', icon: <PiggyBank className="w-5 h-5" /> }
       ]
     },
     {
@@ -75,6 +112,15 @@ const OnboardingForm = () => {
         { value: 'income', label: 'Increasing my income', icon: <TrendingUp className="w-5 h-5" /> },
         { value: 'expenses', label: 'Reducing my expenses', icon: <PiggyBank className="w-5 h-5" /> },
         { value: 'future', label: 'Planning for the future', icon: <Target className="w-5 h-5" /> }
+      ]
+    },
+    {
+      id: 'reminders',
+      title: 'Would you like to receive reminders so it becomes a habit?',
+      options: [
+        { value: 'yes', label: 'Yes, send me reminders', icon: <CheckCircle className="w-5 h-5 text-green-500" /> },
+        { value: 'no', label: 'No, thanks', icon: <Shield className="w-5 h-5 text-gray-400" /> },
+        { value: 'notifications', label: 'Show notifications on screen', icon: <Bell className="w-5 h-5 text-yellow-400" /> }
       ]
     }
   ];
@@ -168,36 +214,63 @@ const OnboardingForm = () => {
     );
   }
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex items-center justify-center p-4">
-      {/* Background decorative elements */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-4 -right-4 w-72 h-72 bg-yellow-500/5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-yellow-400/3 rounded-full blur-3xl"></div>
+  // At the end, after the last question is answered and onboarding is complete, show a showcase
+  if (currentStep >= questions.length) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white flex items-center justify-center p-4">
+        <div className="relative z-10 w-full max-w-2xl text-center space-y-8">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-yellow-200 bg-clip-text text-transparent animate-fade-in">
+            Welcome to FinE!
+          </h1>
+          <p className="text-lg md:text-xl text-gray-200 animate-fade-in delay-100">
+            By using FinE, you can:
+          </p>
+          <ul className="text-left mx-auto max-w-md space-y-4 animate-fade-in delay-200">
+            <li className="flex items-center gap-3"><TrendingUp className="w-6 h-6 text-yellow-400" /> Master budgeting, saving, and investing</li>
+            <li className="flex items-center gap-3"><PiggyBank className="w-6 h-6 text-yellow-400" /> Build healthy financial habits</li>
+            <li className="flex items-center gap-3"><Shield className="w-6 h-6 text-yellow-400" /> Achieve financial security and freedom</li>
+            <li className="flex items-center gap-3"><Target className="w-6 h-6 text-yellow-400" /> Set and reach your personal goals</li>
+            <li className="flex items-center gap-3"><Users className="w-6 h-6 text-yellow-400" /> Join a supportive learning community</li>
+          </ul>
+          <Button
+            onClick={() => navigate('/lessons', { replace: true })}
+            className="mt-8 px-8 py-3 text-lg font-semibold bg-gradient-to-r from-yellow-400 to-yellow-500 text-black rounded-xl shadow-lg hover:scale-105 transition-transform"
+          >
+            Start Learning Now
+          </Button>
+        </div>
       </div>
+    );
+  }
 
+  return (
+    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
+      {/* Animated background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute w-[120vw] h-[120vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-radial from-gray-900 via-gray-800 to-black animate-bgPulse" />
+        <div className="absolute w-96 h-96 left-[-10%] top-[-10%] bg-yellow-500/10 rounded-full blur-3xl animate-float1" />
+        <div className="absolute w-80 h-80 right-[-8%] bottom-[-8%] bg-yellow-400/10 rounded-full blur-2xl animate-float2" />
+      </div>
       <div className="relative z-10 w-full max-w-2xl">
         {/* Progress bar */}
         <div className="mb-8">
-          <div className="w-full h-2 bg-gray-800/50 rounded-full backdrop-blur-sm border border-gray-700/30 overflow-hidden">
-            <div 
-              className="h-full bg-gradient-to-r from-yellow-400 to-yellow-500 transition-all duration-500 ease-out"
+          <div className="w-full h-1.5 bg-gray-800/60 rounded-full overflow-hidden relative">
+            <div
+              className="h-full bg-yellow-400 rounded-full transition-all duration-700 ease-in-out"
               style={{ width: `${progress}%` }}
             />
           </div>
-          <div className="flex justify-between items-center mt-4">
+          {/* Back button for previous question */}
+          <div className="flex justify-start mt-4">
             <Button
               variant="ghost"
               onClick={goBack}
               disabled={currentStep === 0}
-              className="text-gray-400 hover:text-white hover:bg-white/5 backdrop-blur-sm border border-white/10 disabled:opacity-30"
+              className="text-gray-400 hover:text-white hover:bg-white/5 backdrop-blur-sm border border-white/10 disabled:opacity-30 px-3 py-1 text-sm"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </Button>
-            <span className="text-sm text-gray-400">
-              {currentStep + 1} of {questions.length}
-            </span>
           </div>
         </div>
 
@@ -209,27 +282,27 @@ const OnboardingForm = () => {
         </div>
 
         {/* Options */}
-        <div className="grid gap-4 md:gap-6">
+        <div className="grid grid-cols-2 gap-3 md:gap-4">
           {currentQuestion.options.map((option, index) => (
             <Card
               key={option.value}
-              className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/10 animate-fade-in bg-gray-800/30 backdrop-blur-xl border border-gray-700/50 hover:border-yellow-400/50"
+              className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/10 animate-fade-in bg-gray-800/30 backdrop-blur-xl border border-gray-700/50 hover:border-yellow-400/50 px-2 py-2 md:px-4 md:py-3"
               style={{ animationDelay: `${index * 100}ms` }}
               onClick={() => handleAnswer(option.value)}
             >
-              <div className="p-6 md:p-8 flex items-center gap-4">
-                <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-r from-yellow-400/20 to-yellow-500/20 rounded-xl flex items-center justify-center group-hover:from-yellow-400/30 group-hover:to-yellow-500/30 transition-all duration-300 backdrop-blur-sm border border-yellow-400/20">
+              <div className="flex items-center gap-2 md:gap-4 p-0">
+                <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-yellow-400/20 to-yellow-500/20 rounded-lg flex items-center justify-center group-hover:from-yellow-400/30 group-hover:to-yellow-500/30 transition-all duration-300 backdrop-blur-sm border border-yellow-400/20">
                   {typeof option.icon === 'string' ? (
-                    <span className="text-2xl">{option.icon}</span>
+                    <span className="text-xl md:text-2xl">{option.icon}</span>
                   ) : (
                     <div className="text-yellow-400">{option.icon}</div>
                   )}
                 </div>
-                <span className="text-lg md:text-xl font-medium text-white group-hover:text-yellow-100 transition-colors duration-300">
+                <span className="text-sm md:text-base font-medium text-white group-hover:text-yellow-100 transition-colors duration-300">
                   {option.label}
                 </span>
                 <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowRight className="w-5 h-5 text-yellow-400" />
+                  <ArrowRight className="w-4 h-4 text-yellow-400" />
                 </div>
               </div>
             </Card>
@@ -237,15 +310,7 @@ const OnboardingForm = () => {
         </div>
 
         {/* Skip option */}
-        <div className="text-center mt-8">
-          <Button
-            variant="ghost"
-            onClick={() => navigate('/lessons')}
-            className="text-gray-400 hover:text-white hover:bg-white/5 backdrop-blur-sm border border-white/10"
-          >
-            Skip onboarding
-          </Button>
-        </div>
+        {/* Removed the Skip onboarding button as users must complete the form */}
       </div>
     </div>
   );
