@@ -1,16 +1,16 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Trophy, Medal, Award, TrendingUp } from "lucide-react";
+import { Trophy, Medal, Award, TrendingUp, Flame } from "lucide-react";
 
 const Leaderboards = () => {
   const leaderboardData = [
-    { rank: 1, name: "Alex Chen", xp: 2450, streak: 15, avatar: "AC", badge: "🥇" },
-    { rank: 2, name: "Sarah Johnson", xp: 2380, streak: 12, avatar: "SJ", badge: "🥈" },
-    { rank: 3, name: "Mike Rodriguez", xp: 2290, streak: 18, avatar: "MR", badge: "🥉" },
-    { rank: 4, name: "Emma Thompson", xp: 2150, streak: 8, avatar: "ET", badge: "" },
-    { rank: 5, name: "David Kim", xp: 2100, streak: 22, avatar: "DK", badge: "" },
-    { rank: 6, name: "You", xp: 150, streak: 1, avatar: "YU", badge: "", isCurrentUser: true },
+    { rank: 1, name: "Alex Chen", xp: 2450, streak: 15, avatar: "AC", badge: Trophy },
+    { rank: 2, name: "Sarah Johnson", xp: 2380, streak: 12, avatar: "SJ", badge: Award },
+    { rank: 3, name: "Mike Rodriguez", xp: 2290, streak: 18, avatar: "MR", badge: Medal },
+    { rank: 4, name: "Emma Thompson", xp: 2150, streak: 8, avatar: "ET", badge: null },
+    { rank: 5, name: "David Kim", xp: 2100, streak: 22, avatar: "DK", badge: null },
+    { rank: 6, name: "You", xp: 150, streak: 1, avatar: "YU", badge: null, isCurrentUser: true },
   ];
 
   return (
@@ -58,7 +58,7 @@ const Leaderboards = () => {
           <CardContent>
             <div className="text-2xl font-bold">1 day</div>
             <p className="text-xs text-muted-foreground">
-              Keep it up! 🔥
+              Keep it up! <Flame className="inline-block h-4 w-4" />
             </p>
           </CardContent>
         </Card>
@@ -89,7 +89,11 @@ const Leaderboards = () => {
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-3">
                     <span className="text-2xl font-bold text-muted-foreground w-8">
-                      {user.rank <= 3 ? user.badge : `#${user.rank}`}
+                      {user.rank <= 3 ? (
+                        user.badge && <user.badge className="h-6 w-6" />
+                      ) : (
+                        `#${user.rank}`
+                      )}
                     </span>
                     <Avatar className="h-10 w-10">
                       <AvatarFallback className={user.isCurrentUser ? 'bg-primary text-primary-foreground' : ''}>

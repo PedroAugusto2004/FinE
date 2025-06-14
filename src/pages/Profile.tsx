@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Calendar, Award, TrendingUp, BookOpen, Target, Clock } from "lucide-react";
+import { Calendar, Award, TrendingUp, BookOpen, Target, Clock, Zap, Flame, Brain, BookOpenCheck, Diamond } from "lucide-react";
 import { getUserProgress } from "@/data/financialCourse";
 
 const Profile = () => {
@@ -13,12 +13,12 @@ const Profile = () => {
   const levelProgress = ((progress.totalXP % 100) / 100) * 100;
 
   const achievements = [
-    { name: "First Steps", description: "Completed first lesson", earned: true, icon: "🎯" },
-    { name: "Quick Learner", description: "Completed 3 lessons in one day", earned: false, icon: "⚡" },
-    { name: "Consistent", description: "Maintained 7-day streak", earned: false, icon: "🔥" },
-    { name: "Quiz Master", description: "Got 100% on 5 quizzes", earned: false, icon: "🧠" },
-    { name: "Knowledge Seeker", description: "Completed 10 lessons", earned: false, icon: "📚" },
-    { name: "Dedicated", description: "Maintained 30-day streak", earned: false, icon: "💎" },
+    { name: "First Steps", description: "Completed first lesson", earned: true, icon: Target },
+    { name: "Quick Learner", description: "Completed 3 lessons in one day", earned: false, icon: Zap },
+    { name: "Consistent", description: "Maintained 7-day streak", earned: false, icon: Flame },
+    { name: "Quiz Master", description: "Got 100% on 5 quizzes", earned: false, icon: Brain },
+    { name: "Knowledge Seeker", description: "Completed 10 lessons", earned: false, icon: BookOpenCheck },
+    { name: "Dedicated", description: "Maintained 30-day streak", earned: false, icon: Diamond },
   ];
 
   const weeklyActivity = [
@@ -79,7 +79,7 @@ const Profile = () => {
           <CardContent>
             <div className="text-2xl font-bold">{progress.currentStreak}</div>
             <p className="text-xs text-muted-foreground">
-              🔥 Keep it going!
+              <Flame className="inline-block h-4 w-4 mr-1" /> Keep it going!
             </p>
           </CardContent>
         </Card>
@@ -172,7 +172,9 @@ const Profile = () => {
                 }`}
               >
                 <div className="flex items-center gap-3 mb-2">
-                  <span className="text-2xl">{achievement.icon}</span>
+                  <span className="text-2xl">
+                    <achievement.icon className="h-6 w-6" />
+                  </span>
                   <div className="flex-1">
                     <p className={`font-semibold ${achievement.earned ? 'text-primary' : 'text-muted-foreground'}`}>
                       {achievement.name}

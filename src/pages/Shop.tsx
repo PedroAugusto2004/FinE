@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ShoppingBag, Gem, Zap } from "lucide-react";
+import { ShoppingBag, Gem, Zap, Snowflake, Lightbulb, Crown, Moon, TreePine } from "lucide-react";
 
 const Shop = () => {
   const shopItems = [
@@ -10,7 +10,7 @@ const Shop = () => {
       name: "Streak Freeze",
       description: "Protect your streak for one day",
       price: 50,
-      icon: "❄️",
+      icon: Snowflake,
       category: "Power-ups"
     },
     {
@@ -18,7 +18,7 @@ const Shop = () => {
       name: "Double XP",
       description: "Earn 2x XP for 24 hours",
       price: 100,
-      icon: "⚡",
+      icon: Zap,
       category: "Power-ups"
     },
     {
@@ -26,7 +26,7 @@ const Shop = () => {
       name: "Hint Boost",
       description: "Get hints on quiz questions",
       price: 25,
-      icon: "💡",
+      icon: Lightbulb,
       category: "Power-ups"
     },
     {
@@ -34,7 +34,7 @@ const Shop = () => {
       name: "Golden Theme",
       description: "Unlock premium golden theme",
       price: 500,
-      icon: "👑",
+      icon: Crown,
       category: "Themes"
     },
     {
@@ -42,7 +42,7 @@ const Shop = () => {
       name: "Night Owl Theme",
       description: "Beautiful dark purple theme",
       price: 300,
-      icon: "🦉",
+      icon: Moon,
       category: "Themes"
     },
     {
@@ -50,7 +50,7 @@ const Shop = () => {
       name: "Forest Theme",
       description: "Calming green nature theme",
       price: 300,
-      icon: "🌲",
+      icon: TreePine,
       category: "Themes"
     }
   ];
@@ -106,7 +106,7 @@ const Shop = () => {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center text-2xl">
-                  {item.icon}
+                  <item.icon className="h-6 w-6" />
                 </div>
                 <Badge variant="secondary">{item.category}</Badge>
               </div>
