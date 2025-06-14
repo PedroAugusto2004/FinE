@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { flags } from '@/assets/flags';
 import { useToast } from '@/hooks/use-toast';
 import { useQueryClient } from '@tanstack/react-query';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   TrendingUp, 
   PiggyBank, 
@@ -324,11 +325,11 @@ const OnboardingForm = () => {
 
       <div className="relative z-10 w-full max-w-lg sm:max-w-2xl mx-auto">
         {/* Progress bar */}
-        <div className="mb-8">
-          <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden relative">
-            <div
+        <div className="mb-8">          <div className="w-full h-1.5 bg-gray-800 rounded-full overflow-hidden relative">
+            <motion.div
               className="h-full bg-yellow-400 rounded-full"
-              style={{ width: `${progress}%` }}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             />
           </div>
           {/* Back button for previous question */}
@@ -343,42 +344,73 @@ const OnboardingForm = () => {
               {t('onboarding.back')}
             </Button>
           </div>
-        </div>
-
-        {/* Question */}
-        <div className="text-center mb-8 px-2 sm:px-0 flex items-end min-h-[3.5rem]">
-          <h1 className="text-2xl md:text-4xl font-light mb-4 text-white break-words whitespace-pre-line leading-tight pb-1">
-            {currentQuestion.title}
-          </h1>
-        </div>
+        </div>        {/* Question */}
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={currentStep}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+            className="text-center mb-8 px-2 sm:px-0 flex items-end min-h-[3.5rem]"
+          >
+            <h1 className="text-2xl md:text-4xl font-light mb-4 text-white break-words whitespace-pre-line leading-tight pb-1">
+              {currentQuestion.title}
+            </h1>
+          </motion.div>
+        </AnimatePresence>
 
         {/* Options */}
-        <div className="grid grid-cols-2 gap-3 md:gap-4">
-          {currentQuestion.options.map((option) => (
-            <Card
-              key={option.value}
-              className="bg-gray-800 group cursor-pointer hover:bg-gray-700 border-gray-700 px-2 py-2 md:px-4 md:py-3"
-              onClick={() => handleAnswer(option.value)}
-            >
-              <div className="flex items-center gap-2 md:gap-4 p-0">
-                <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 bg-gray-700 rounded-lg flex items-center justify-center group-hover:bg-gray-600 border border-gray-600">
-                  {typeof option.icon === 'string' ? (
-                    <span className="text-xl md:text-2xl">{option.icon}</span>
-                  ) : (
-                    <div className="text-yellow-400">{option.icon}</div>
-                  )}
-                </div>
-                <span className="text-sm md:text-base font-medium text-white group-hover:text-yellow-100">
-                  {option.label}
-                </span>
-                <div className="ml-auto">
-                  <ArrowRight className="w-5 h-5 text-yellow-400" />
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </div>
+        <AnimatePresence mode="wait">
+          <motion.div 
+            key={currentStep}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+              exit: { opacity: 0, transition: { staggerChildren: 0.05, staggerDirection: -1 } }
+            }}
+            className="grid grid-cols-2 gap-3 md:gap-4"
+          >
+            {currentQuestion.options.map((option, index) => (
+              <motion.div
+                key={option.value}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0, transition: { duration: 0.3, ease: "easeOut" } },
+                  exit: { opacity: 0, y: -20, transition: { duration: 0.2, ease: "easeIn" } }
+                }}
+              >
+                <Card
+                  className="bg-gray-800 group cursor-pointer hover:bg-gray-700 border-gray-700 px-2 py-2 md:px-4 md:py-3 hover:scale-[1.02] transition-transform duration-200"
+                  onClick={() => handleAnswer(option.value)}
+                >
+                  <div className="flex items-center gap-2 md:gap-4 p-0">
+                    <div className="flex-shrink-0 w-8 h-8 md:w-10 md:h-10 bg-gray-700 rounded-lg flex items-center justify-center group-hover:bg-gray-600 border border-gray-600">
+                      {typeof option.icon === 'string' ? (
+                        <span className="text-xl md:text-2xl">{option.icon}</span>
+                      ) : (
+                        <div className="text-yellow-400">{option.icon}</div>
+                      )}
+                    </div>
+                    <span className="text-sm md:text-base font-medium text-white group-hover:text-yellow-100">
+                      {option.label}
+                    </span>
+                    <motion.div 
+                      className="ml-auto"
+                      initial={{ opacity: 0 }}
+                      whileHover={{ opacity: 1 }}
+                    >
+                      <ArrowRight className="w-5 h-5 text-yellow-400" />
+                    </motion.div>
+                  </div>
+                </Card>
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>      </div>
     </div>
   );
 };
