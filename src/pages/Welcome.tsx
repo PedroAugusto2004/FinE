@@ -848,37 +848,97 @@ const Welcome = () => {
 
           {/* Get in Touch Section */}
           <motion.section
-            className="text-center py-20"
+            className="py-24"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 1 }}
           >
-            <div className="max-w-2xl mx-auto bg-white/10 backdrop-blur-xl border border-yellow-400/20 rounded-3xl shadow-2xl p-8 md:p-14 flex flex-col items-center">
-              <h3 className="text-4xl md:text-5xl font-bold text-white mb-2">{t('welcome.getInTouch')}</h3>
-              <p className="text-base md:text-lg text-neutral-200 mb-8 max-w-xl font-normal">{t('welcome.loveToHear')}</p>
-              <form className="w-full space-y-5 text-left">
-                <div className="flex flex-col md:flex-row gap-4">
-                  <Input type="text" placeholder={t('welcome.name')} required className="flex-1 h-12 bg-white/10 border border-yellow-400/20 rounded-xl text-white placeholder:text-neutral-400 focus:border-yellow-400/60 focus:bg-white/20 transition-all duration-200" />
-                  <Input type="email" placeholder={t('welcome.email')} required className="flex-1 h-12 bg-white/10 border border-yellow-400/20 rounded-xl text-white placeholder:text-neutral-400 focus:border-yellow-400/60 focus:bg-white/20 transition-all duration-200" />
+            <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-16 md:gap-24 px-2 md:px-0">
+              {/* Left: Form */}
+              <div className="flex-1 w-full">
+                <h3 className="text-4xl md:text-5xl font-light text-neutral-100 mb-3 text-left tracking-tight drop-shadow-lg">
+                  {t('welcome.getInTouch')}
+                </h3>
+                <p className="text-base md:text-lg text-neutral-200 mb-10 max-w-lg text-left font-medium">
+                  {t('welcome.loveToHear')}
+                </p>
+                <form className="flex flex-col gap-7 w-full">
+                  <div className="flex flex-col md:flex-row gap-4 w-full">
+                    <Input type="text" placeholder={t('welcome.name')} required className="flex-1 h-12 bg-neutral-800/80 border-none rounded-2xl text-white placeholder:text-neutral-400 px-5 shadow-md focus:ring-2 focus:ring-yellow-300 focus:bg-neutral-800/90 transition-all duration-200" />
+                    <Input type="email" placeholder={t('welcome.email')} required className="flex-1 h-12 bg-neutral-800/80 border-none rounded-2xl text-white placeholder:text-neutral-400 px-5 shadow-md focus:ring-2 focus:ring-yellow-300 focus:bg-neutral-800/90 transition-all duration-200" />
+                  </div>
+                  <Input type="text" placeholder={t('welcome.subject', { defaultValue: 'Subject' })} required className="h-12 bg-neutral-800/80 border-none rounded-2xl text-white placeholder:text-neutral-400 px-5 shadow-md focus:ring-2 focus:ring-yellow-300 focus:bg-neutral-800/90 transition-all duration-200" />
+                  <textarea
+                    rows={5}
+                    placeholder={t('welcome.message')}
+                    required
+                    className="w-full bg-neutral-800/80 border-none rounded-2xl text-white placeholder:text-neutral-400 px-5 pt-3 shadow-md focus:ring-2 focus:ring-yellow-300 focus:bg-neutral-800/90 transition-all duration-200 min-h-[120px] resize-none"
+                  />
+                  <div className="flex justify-start pt-2 w-full">
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="h-12 px-8 bg-yellow-300/60 hover:bg-yellow-300/90 text-black font-semibold rounded-2xl shadow-md transition-all duration-200 w-full md:w-auto text-lg tracking-wide backdrop-blur-sm border border-yellow-200/20"
+                    >
+                      <CheckCircle className="h-5 w-5 mr-2 text-black" />
+                      {t('welcome.send')}
+                    </Button>
+                  </div>
+                </form>
+              </div>
+              {/* Right: Minimal Illustration or Quote */}
+              <div className="hidden md:flex flex-1 flex-col items-center justify-center">
+                <div className="flex flex-col items-center gap-6">
+                  <div className="flex flex-row items-center gap-4 mb-2">
+                    <Star className="w-10 h-10 text-yellow-400/80" />
+                    <Users className="w-10 h-10 text-yellow-400/80" />
+                    <Award className="w-10 h-10 text-yellow-400/80" />
+                  </div>
+                  <blockquote className="text-lg text-neutral-300 italic max-w-xs text-center font-light">
+                    “{t('welcome.contactQuote', { defaultValue: 'Your feedback helps us build a better future for everyone.' })}”
+                  </blockquote>
+                  <div className="flex flex-col gap-2 mt-4 text-neutral-400 text-sm text-center">
+                    <div className="flex items-center gap-2 justify-center">
+                      <Shield className="w-5 h-5 text-yellow-400/70" />
+                      <span>{t('welcome.contactSafe', { defaultValue: 'Your privacy is always protected.' })}</span>
+                    </div>
+                    <div className="flex items-center gap-2 justify-center">
+                      <TrendingUp className="w-5 h-5 text-yellow-400/70" />
+                      <span>{t('welcome.contactGrowth', { defaultValue: 'Every message helps us improve.' })}</span>
+                    </div>
+                    <div className="flex items-center gap-2 justify-center">
+                      <PiggyBank className="w-5 h-5 text-yellow-400/70" />
+                      <span>{t('welcome.contactCommunity', { defaultValue: 'Join a growing community.' })}</span>
+                    </div>
+                  </div>
                 </div>
-                <textarea
-                  rows={4}
-                  placeholder={t('welcome.message')}
-                  required
-                  className="w-full h-28 bg-white/10 border border-yellow-400/20 rounded-xl text-white placeholder:text-neutral-400 p-4 focus:border-yellow-400/60 focus:bg-white/20 transition-all duration-200 resize-none"
-                />
-                <div className="flex justify-center pt-2">
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="h-12 px-8 bg-yellow-400/80 hover:bg-yellow-400 text-black font-semibold rounded-xl shadow-md transition-all duration-200"
-                  >
-                    <CheckCircle className="h-5 w-5 mr-2 text-black" />
-                    {t('welcome.send')}
-                  </Button>
+              </div>
+              {/* Mobile version of quote and icons */}
+              <div className="flex md:hidden flex-col items-center justify-center mt-10 gap-4">
+                <div className="flex flex-row items-center gap-3">
+                  <Star className="w-7 h-7 text-yellow-400/80" />
+                  <Users className="w-7 h-7 text-yellow-400/80" />
+                  <Award className="w-7 h-7 text-yellow-400/80" />
                 </div>
-              </form>
+                <blockquote className="text-base text-neutral-300 italic max-w-xs text-center font-light">
+                  “{t('welcome.contactQuote', { defaultValue: 'Your feedback helps us build a better future for everyone.' })}”
+                </blockquote>
+                <div className="flex flex-col gap-1 text-neutral-400 text-xs text-center">
+                  <div className="flex items-center gap-1 justify-center">
+                    <Shield className="w-4 h-4 text-yellow-400/70" />
+                    <span>{t('welcome.contactSafe', { defaultValue: 'Your privacy is always protected.' })}</span>
+                  </div>
+                  <div className="flex items-center gap-1 justify-center">
+                    <TrendingUp className="w-4 h-4 text-yellow-400/70" />
+                    <span>{t('welcome.contactGrowth', { defaultValue: 'Every message helps us improve.' })}</span>
+                  </div>
+                  <div className="flex items-center gap-1 justify-center">
+                    <PiggyBank className="w-4 h-4 text-yellow-400/70" />
+                    <span>{t('welcome.contactCommunity', { defaultValue: 'Join a growing community.' })}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </motion.section>
         </div>
