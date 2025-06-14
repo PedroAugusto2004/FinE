@@ -35,5 +35,134 @@
     "select": "Language",
     "en": "English",
     "pt": "Portuguese"
-  }
+  },
+  "features": {
+    "smartProgress": {
+      "title": "Smart Progress Tracking",
+      "description": "Monitor your financial learning journey with detailed analytics and personalized insights.",
+      "details": [
+        "Visualize your progress with beautiful charts.",
+        "Personalized learning recommendations.",
+        "Track completed lessons and XP earned."
+      ]
+    },
+    "goalOriented": {
+      "title": "Goal-Oriented Learning",
+      "description": "Set and achieve financial milestones with our structured curriculum and achievement system.",
+      "details": [
+        "Custom goal setting and reminders.",
+        "Unlock badges for every milestone.",
+        "Progressive difficulty for continuous growth."
+      ]
+    },
+    "interactiveLessons": {
+      "title": "Interactive Lessons",
+      "description": "Learn through engaging, bite-sized lessons designed for maximum retention and practical application.",
+      "details": [
+        "Quizzes and real-world scenarios.",
+        "Instant feedback and explanations.",
+        "Save favorite lessons for review."
+      ]
+    },
+    "gamified": {
+      "title": "Gamified Experience",
+      "description": "Earn XP, unlock achievements, and compete on leaderboards while mastering financial concepts.",
+      "details": [
+        "Daily streaks and bonus rewards.",
+        "Compete with friends and the community.",
+        "Seasonal events and challenges."
+      ]
+    },
+    "secure": {
+      "title": "Secure & Private",
+      "description": "Your financial education data is protected with enterprise-grade security and privacy measures.",
+      "details": [
+        "End-to-end encrypted data.",
+        "No ads, no data selling.",
+        "Full control over your privacy settings."
+      ]
+    },
+    "community": {
+      "title": "Community Support",
+      "description": "Connect with fellow learners, share experiences, and get support from our financial education community.",
+      "details": [
+        "Active forums and Q&A.",
+        "Mentorship from experts.",
+        "Live webinars and events."
+      ]
+    },
+    "savings": {
+      "title": "Savings Simulations",
+      "description": "Practice saving and investing in a risk-free environment.",
+      "details": [
+        "Simulate real-world financial decisions.",
+        "See the impact of your choices instantly.",
+        "Learn from mistakes without consequences."
+      ]
+    },
+    "expert": {
+      "title": "Expert Insights",
+      "description": "Access exclusive tips and strategies from financial professionals.",
+      "details": [
+        "Weekly expert articles and videos.",
+        "Ask questions and get answers.",
+        "Stay updated with the latest trends."
+      ]
+    }
+  },
+  "journey": [
+    {
+      "title": "Financial Basics",
+      "desc": "Budgeting, saving, and spending habits",
+      "details": [
+        "Understand income vs. expenses",
+        "Build your first budget",
+        "Set up emergency savings"
+      ]
+    },
+    {
+      "title": "Investment Fundamentals",
+      "desc": "Stocks, bonds, and portfolio building",
+      "details": [
+        "Learn about risk and reward",
+        "Diversify your investments",
+        "Start with index funds"
+      ]
+    },
+    {
+      "title": "Advanced Strategies",
+      "desc": "Tax optimization and wealth building",
+      "details": [
+        "Reduce your tax bill",
+        "Grow wealth with compounding",
+        "Plan for big life goals"
+      ]
+    },
+    {
+      "title": "Financial Freedom",
+      "desc": "Passive income and retirement planning",
+      "details": [
+        "Create passive income streams",
+        "Retire early or on your terms",
+        "Live your dream lifestyle"
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Sarah Chen",
+      "role": "Software Engineer",
+      "content": "FinE transformed my understanding of personal finance. The gamified approach made learning actually fun!"
+    },
+    {
+      "name": "Marcus Johnson",
+      "role": "Marketing Manager",
+      "content": "I went from financial anxiety to confidence in just 3 months. The lesson structure is incredible."
+    },
+    {
+      "name": "Emily Rodriguez",
+      "role": "Student",
+      "content": "Finally, a platform that makes finance accessible. The progress tracking keeps me motivated daily."
+    }
+  ]
 }

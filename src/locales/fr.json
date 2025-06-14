@@ -38,5 +38,134 @@
     "es": "Espagnol",
     "fr": "Français",
     "de": "Allemand"
-  }
+  },
+  "features": {
+    "smartProgress": {
+      "title": "Suivi Intelligent du Progrès",
+      "description": "Suivez votre parcours financier avec des analyses détaillées et des informations personnalisées.",
+      "details": [
+        "Visualisez vos progrès avec de beaux graphiques.",
+        "Recommandations d'apprentissage personnalisées.",
+        "Suivez les leçons terminées et l'XP gagné."
+      ]
+    },
+    "goalOriented": {
+      "title": "Apprentissage Axé sur les Objectifs",
+      "description": "Fixez et atteignez des jalons financiers avec notre programme structuré et notre système de récompenses.",
+      "details": [
+        "Définition d'objectifs et rappels personnalisés.",
+        "Débloquez des badges à chaque étape.",
+        "Difficulté progressive pour une croissance continue."
+      ]
+    },
+    "interactiveLessons": {
+      "title": "Leçons Interactives",
+      "description": "Apprenez grâce à des leçons engageantes et courtes conçues pour une rétention maximale et une application pratique.",
+      "details": [
+        "Quiz et scénarios réels.",
+        "Retour instantané et explications.",
+        "Enregistrez vos leçons préférées pour révision."
+      ]
+    },
+    "gamified": {
+      "title": "Expérience Ludique",
+      "description": "Gagnez de l'XP, débloquez des succès et rivalisez dans les classements tout en maîtrisant les concepts financiers.",
+      "details": [
+        "Séries quotidiennes et récompenses bonus.",
+        "Compétition avec des amis et la communauté.",
+        "Événements et défis saisonniers."
+      ]
+    },
+    "secure": {
+      "title": "Sécurisé & Privé",
+      "description": "Vos données d'éducation financière sont protégées avec une sécurité de niveau entreprise.",
+      "details": [
+        "Données chiffrées de bout en bout.",
+        "Pas de publicité, pas de vente de données.",
+        "Contrôle total sur vos paramètres de confidentialité."
+      ]
+    },
+    "community": {
+      "title": "Soutien Communautaire",
+      "description": "Connectez-vous avec d'autres apprenants, partagez des expériences et obtenez du soutien de notre communauté.",
+      "details": [
+        "Forums actifs et questions-réponses.",
+        "Mentorat par des experts.",
+        "Webinaires et événements en direct."
+      ]
+    },
+    "savings": {
+      "title": "Simulations d'Épargne",
+      "description": "Entraînez-vous à épargner et à investir dans un environnement sans risque.",
+      "details": [
+        "Simulez des décisions financières réelles.",
+        "Voyez l'impact de vos choix instantanément.",
+        "Apprenez de vos erreurs sans conséquences."
+      ]
+    },
+    "expert": {
+      "title": "Conseils d'Experts",
+      "description": "Accédez à des conseils et stratégies exclusifs de professionnels de la finance.",
+      "details": [
+        "Articles et vidéos hebdomadaires d'experts.",
+        "Posez des questions et obtenez des réponses.",
+        "Restez à jour avec les dernières tendances."
+      ]
+    }
+  },
+  "journey": [
+    {
+      "title": "Bases Financières",
+      "desc": "Budgétisation, épargne et habitudes de dépense",
+      "details": [
+        "Comprendre les revenus et les dépenses",
+        "Établir votre premier budget",
+        "Constituer une épargne d'urgence"
+      ]
+    },
+    {
+      "title": "Fondamentaux de l'Investissement",
+      "desc": "Actions, obligations et constitution de portefeuille",
+      "details": [
+        "Comprendre le risque et la récompense",
+        "Diversifier vos investissements",
+        "Commencer avec des fonds indiciels"
+      ]
+    },
+    {
+      "title": "Stratégies Avancées",
+      "desc": "Optimisation fiscale et création de richesse",
+      "details": [
+        "Réduire votre facture fiscale",
+        "Faire croître votre patrimoine avec les intérêts composés",
+        "Planifier de grands objectifs de vie"
+      ]
+    },
+    {
+      "title": "Liberté Financière",
+      "desc": "Revenus passifs et préparation à la retraite",
+      "details": [
+        "Créer des sources de revenus passifs",
+        "Prendre sa retraite tôt ou à ses conditions",
+        "Vivre le style de vie de vos rêves"
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Sarah Chen",
+      "role": "Ingénieure Logiciel",
+      "content": "FinE a transformé ma compréhension des finances personnelles. L'approche ludique a rendu l'apprentissage vraiment amusant !"
+    },
+    {
+      "name": "Marcus Johnson",
+      "role": "Responsable Marketing",
+      "content": "Je suis passé de l'anxiété financière à la confiance en seulement 3 mois. La structure des leçons est incroyable."
+    },
+    {
+      "name": "Emily Rodriguez",
+      "role": "Étudiante",
+      "content": "Enfin, une plateforme qui rend la finance accessible. Le suivi des progrès me motive chaque jour."
+    }
+  ]
 }

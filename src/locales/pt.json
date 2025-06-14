@@ -35,5 +35,134 @@
     "select": "Idioma",
     "en": "Inglês",
     "pt": "Português"
-  }
+  },
+  "features": {
+    "smartProgress": {
+      "title": "Acompanhamento Inteligente de Progresso",
+      "description": "Monitore sua jornada financeira com análises detalhadas e insights personalizados.",
+      "details": [
+        "Visualize seu progresso com gráficos bonitos.",
+        "Recomendações de aprendizado personalizadas.",
+        "Acompanhe lições concluídas e XP ganho."
+      ]
+    },
+    "goalOriented": {
+      "title": "Aprendizado Orientado a Metas",
+      "description": "Defina e alcance marcos financeiros com nosso currículo estruturado e sistema de conquistas.",
+      "details": [
+        "Definição de metas e lembretes personalizados.",
+        "Desbloqueie medalhas a cada conquista.",
+        "Dificuldade progressiva para crescimento contínuo."
+      ]
+    },
+    "interactiveLessons": {
+      "title": "Lições Interativas",
+      "description": "Aprenda com lições envolventes e rápidas, projetadas para máxima retenção e aplicação prática.",
+      "details": [
+        "Quizzes e cenários do mundo real.",
+        "Feedback instantâneo e explicações.",
+        "Salve lições favoritas para revisão."
+      ]
+    },
+    "gamified": {
+      "title": "Experiência Gamificada",
+      "description": "Ganhe XP, desbloqueie conquistas e dispute nos rankings enquanto domina conceitos financeiros.",
+      "details": [
+        "Sequências diárias e recompensas bônus.",
+        "Compita com amigos e a comunidade.",
+        "Eventos e desafios sazonais."
+      ]
+    },
+    "secure": {
+      "title": "Seguro & Privado",
+      "description": "Seus dados de educação financeira são protegidos com segurança de nível empresarial.",
+      "details": [
+        "Dados criptografados de ponta a ponta.",
+        "Sem anúncios, sem venda de dados.",
+        "Controle total das configurações de privacidade."
+      ]
+    },
+    "community": {
+      "title": "Apoio da Comunidade",
+      "description": "Conecte-se com outros aprendizes, compartilhe experiências e receba suporte da nossa comunidade.",
+      "details": [
+        "Fóruns ativos e perguntas & respostas.",
+        "Mentoria de especialistas.",
+        "Webinars e eventos ao vivo."
+      ]
+    },
+    "savings": {
+      "title": "Simulações de Poupança",
+      "description": "Pratique poupar e investir em um ambiente sem riscos.",
+      "details": [
+        "Simule decisões financeiras reais.",
+        "Veja o impacto de suas escolhas instantaneamente.",
+        "Aprenda com erros sem consequências."
+      ]
+    },
+    "expert": {
+      "title": "Dicas de Especialistas",
+      "description": "Acesse dicas e estratégias exclusivas de profissionais financeiros.",
+      "details": [
+        "Artigos e vídeos semanais de especialistas.",
+        "Faça perguntas e obtenha respostas.",
+        "Fique por dentro das últimas tendências."
+      ]
+    }
+  },
+  "journey": [
+    {
+      "title": "Noções Básicas de Finanças",
+      "desc": "Orçamento, poupança e hábitos de consumo",
+      "details": [
+        "Entenda renda vs. despesas",
+        "Monte seu primeiro orçamento",
+        "Monte uma reserva de emergência"
+      ]
+    },
+    {
+      "title": "Fundamentos de Investimento",
+      "desc": "Ações, títulos e construção de portfólio",
+      "details": [
+        "Aprenda sobre risco e retorno",
+        "Diversifique seus investimentos",
+        "Comece com fundos de índice"
+      ]
+    },
+    {
+      "title": "Estratégias Avançadas",
+      "desc": "Otimização tributária e construção de riqueza",
+      "details": [
+        "Reduza sua carga tributária",
+        "Cresça patrimônio com juros compostos",
+        "Planeje grandes objetivos de vida"
+      ]
+    },
+    {
+      "title": "Liberdade Financeira",
+      "desc": "Renda passiva e planejamento de aposentadoria",
+      "details": [
+        "Crie fontes de renda passiva",
+        "Aposente-se cedo ou nos seus termos",
+        "Viva o estilo de vida dos seus sonhos"
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Sarah Chen",
+      "role": "Engenheira de Software",
+      "content": "O FinE transformou meu entendimento sobre finanças pessoais. A abordagem gamificada tornou o aprendizado realmente divertido!"
+    },
+    {
+      "name": "Marcus Johnson",
+      "role": "Gerente de Marketing",
+      "content": "Passei da ansiedade financeira para a confiança em apenas 3 meses. A estrutura das lições é incrível."
+    },
+    {
+      "name": "Emily Rodriguez",
+      "role": "Estudante",
+      "content": "Finalmente, uma plataforma que torna as finanças acessíveis. O acompanhamento de progresso me motiva todos os dias."
+    }
+  ]
 }

@@ -137,107 +137,156 @@ const Welcome = () => {
     }
   };
 
+  // Features (now using translation keys)
   const features = [
     {
       icon: TrendingUp,
-      title: "Smart Progress Tracking",
-      description: "Monitor your financial learning journey with detailed analytics and personalized insights.",
+      title: t('features.smartProgress.title'),
+      description: t('features.smartProgress.description'),
       details: [
-        "Visualize your progress with beautiful charts.",
-        "Personalized learning recommendations.",
-        "Track completed lessons and XP earned."
+        t('features.smartProgress.details.0'),
+        t('features.smartProgress.details.1'),
+        t('features.smartProgress.details.2'),
       ]
     },
     {
       icon: Target,
-      title: "Goal-Oriented Learning",
-      description: "Set and achieve financial milestones with our structured curriculum and achievement system.",
+      title: t('features.goalOriented.title'),
+      description: t('features.goalOriented.description'),
       details: [
-        "Custom goal setting and reminders.",
-        "Unlock badges for every milestone.",
-        "Progressive difficulty for continuous growth."
+        t('features.goalOriented.details.0'),
+        t('features.goalOriented.details.1'),
+        t('features.goalOriented.details.2'),
       ]
     },
     {
       icon: BookOpen,
-      title: "Interactive Lessons",
-      description: "Learn through engaging, bite-sized lessons designed for maximum retention and practical application.",
+      title: t('features.interactiveLessons.title'),
+      description: t('features.interactiveLessons.description'),
       details: [
-        "Quizzes and real-world scenarios.",
-        "Instant feedback and explanations.",
-        "Save favorite lessons for review."
+        t('features.interactiveLessons.details.0'),
+        t('features.interactiveLessons.details.1'),
+        t('features.interactiveLessons.details.2'),
       ]
     },
     {
       icon: Award,
-      title: "Gamified Experience",
-      description: "Earn XP, unlock achievements, and compete on leaderboards while mastering financial concepts.",
+      title: t('features.gamified.title'),
+      description: t('features.gamified.description'),
       details: [
-        "Daily streaks and bonus rewards.",
-        "Compete with friends and the community.",
-        "Seasonal events and challenges."
+        t('features.gamified.details.0'),
+        t('features.gamified.details.1'),
+        t('features.gamified.details.2'),
       ]
     },
     {
       icon: Shield,
-      title: "Secure & Private",
-      description: "Your financial education data is protected with enterprise-grade security and privacy measures.",
+      title: t('features.secure.title'),
+      description: t('features.secure.description'),
       details: [
-        "End-to-end encrypted data.",
-        "No ads, no data selling.",
-        "Full control over your privacy settings."
+        t('features.secure.details.0'),
+        t('features.secure.details.1'),
+        t('features.secure.details.2'),
       ]
     },
     {
       icon: Users,
-      title: "Community Support",
-      description: "Connect with fellow learners, share experiences, and get support from our financial education community.",
+      title: t('features.community.title'),
+      description: t('features.community.description'),
       details: [
-        "Active forums and Q&A.",
-        "Mentorship from experts.",
-        "Live webinars and events."
+        t('features.community.details.0'),
+        t('features.community.details.1'),
+        t('features.community.details.2'),
       ]
     },
-    // Extra features for more content
     {
       icon: PiggyBank,
-      title: "Savings Simulations",
-      description: "Practice saving and investing in a risk-free environment.",
+      title: t('features.savings.title'),
+      description: t('features.savings.description'),
       details: [
-        "Simulate real-world financial decisions.",
-        "See the impact of your choices instantly.",
-        "Learn from mistakes without consequences."
+        t('features.savings.details.0'),
+        t('features.savings.details.1'),
+        t('features.savings.details.2'),
       ]
     },
     {
       icon: DollarSign,
-      title: "Expert Insights",
-      description: "Access exclusive tips and strategies from financial professionals.",
+      title: t('features.expert.title'),
+      description: t('features.expert.description'),
       details: [
-        "Weekly expert articles and videos.",
-        "Ask questions and get answers.",
-        "Stay updated with the latest trends."
+        t('features.expert.details.0'),
+        t('features.expert.details.1'),
+        t('features.expert.details.2'),
       ]
     }
   ];
 
+  // Learning Journey (now using translation keys)
+  const learningJourney = [
+    {
+      icon: DollarSign,
+      step: 1,
+      title: t('journey.0.title'),
+      desc: t('journey.0.desc'),
+      details: [
+        t('journey.0.details.0'),
+        t('journey.0.details.1'),
+        t('journey.0.details.2'),
+      ]
+    },
+    {
+      icon: PiggyBank,
+      step: 2,
+      title: t('journey.1.title'),
+      desc: t('journey.1.desc'),
+      details: [
+        t('journey.1.details.0'),
+        t('journey.1.details.1'),
+        t('journey.1.details.2'),
+      ]
+    },
+    {
+      icon: TrendingUp,
+      step: 3,
+      title: t('journey.2.title'),
+      desc: t('journey.2.desc'),
+      details: [
+        t('journey.2.details.0'),
+        t('journey.2.details.1'),
+        t('journey.2.details.2'),
+      ]
+    },
+    {
+      icon: Star,
+      step: 4,
+      title: t('journey.3.title'),
+      desc: t('journey.3.desc'),
+      details: [
+        t('journey.3.details.0'),
+        t('journey.3.details.1'),
+        t('journey.3.details.2'),
+      ]
+    }
+  ];
+
+  // Testimonials (now using translation keys)
   const testimonials = [
     {
-      name: "Sarah Chen",
-      role: "Software Engineer",
-      content: "FinE transformed my understanding of personal finance. The gamified approach made learning actually fun!",
+      name: t('testimonials.0.name'),
+      role: t('testimonials.0.role'),
+      content: t('testimonials.0.content'),
       rating: 5
     },
     {
-      name: "Marcus Johnson",
-      role: "Marketing Manager",
-      content: "I went from financial anxiety to confidence in just 3 months. The lesson structure is incredible.",
+      name: t('testimonials.1.name'),
+      role: t('testimonials.1.role'),
+      content: t('testimonials.1.content'),
       rating: 5
     },
     {
-      name: "Emily Rodriguez",
-      role: "Student",
-      content: "Finally, a platform that makes finance accessible. The progress tracking keeps me motivated daily.",
+      name: t('testimonials.2.name'),
+      role: t('testimonials.2.role'),
+      content: t('testimonials.2.content'),
       rating: 5
     }
   ];

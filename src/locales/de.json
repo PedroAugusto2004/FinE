@@ -38,5 +38,134 @@
     "es": "Spanisch",
     "fr": "Französisch",
     "de": "Deutsch"
-  }
+  },
+  "features": {
+    "smartProgress": {
+      "title": "Intelligente Fortschrittsverfolgung",
+      "description": "Verfolge deinen Finanzlernweg mit detaillierten Analysen und persönlichen Einblicken.",
+      "details": [
+        "Visualisiere deinen Fortschritt mit schönen Diagrammen.",
+        "Personalisierte Lernempfehlungen.",
+        "Verfolge abgeschlossene Lektionen und verdiente XP."
+      ]
+    },
+    "goalOriented": {
+      "title": "Zielorientiertes Lernen",
+      "description": "Setze und erreiche finanzielle Meilensteine mit unserem strukturierten Lehrplan und Belohnungssystem.",
+      "details": [
+        "Individuelle Zielsetzung und Erinnerungen.",
+        "Schalte Abzeichen für jedes Ziel frei.",
+        "Steigende Schwierigkeit für kontinuierliches Wachstum."
+      ]
+    },
+    "interactiveLessons": {
+      "title": "Interaktive Lektionen",
+      "description": "Lerne mit ansprechenden, kurzen Lektionen für maximale Behaltensleistung und praktische Anwendung.",
+      "details": [
+        "Quizze und reale Szenarien.",
+        "Sofortiges Feedback und Erklärungen.",
+        "Speichere Lieblingslektionen zum Wiederholen."
+      ]
+    },
+    "gamified": {
+      "title": "Gamifizierte Erfahrung",
+      "description": "Verdiene XP, schalte Erfolge frei und konkurriere in Bestenlisten, während du Finanzkonzepte meisterst.",
+      "details": [
+        "Tägliche Streaks und Bonusbelohnungen.",
+        "Wettbewerb mit Freunden und der Community.",
+        "Saisonale Events und Herausforderungen."
+      ]
+    },
+    "secure": {
+      "title": "Sicher & Privat",
+      "description": "Deine Finanzbildungsdaten sind mit Unternehmenssicherheit geschützt.",
+      "details": [
+        "Ende-zu-Ende-verschlüsselte Daten.",
+        "Keine Werbung, kein Datenverkauf.",
+        "Volle Kontrolle über deine Privatsphäre."
+      ]
+    },
+    "community": {
+      "title": "Community-Support",
+      "description": "Vernetze dich mit anderen Lernenden, teile Erfahrungen und erhalte Unterstützung von unserer Community.",
+      "details": [
+        "Aktive Foren und Q&A.",
+        "Mentoring von Experten.",
+        "Live-Webinare und Events."
+      ]
+    },
+    "savings": {
+      "title": "Sparsimulationen",
+      "description": "Übe das Sparen und Investieren in einer risikofreien Umgebung.",
+      "details": [
+        "Simuliere reale Finanzentscheidungen.",
+        "Sieh sofort die Auswirkungen deiner Entscheidungen.",
+        "Lerne aus Fehlern ohne Konsequenzen."
+      ]
+    },
+    "expert": {
+      "title": "Experten-Tipps",
+      "description": "Erhalte exklusive Tipps und Strategien von Finanzprofis.",
+      "details": [
+        "Wöchentliche Expertenartikel und Videos.",
+        "Stelle Fragen und erhalte Antworten.",
+        "Bleibe auf dem neuesten Stand der Trends."
+      ]
+    }
+  },
+  "journey": [
+    {
+      "title": "Finanzielle Grundlagen",
+      "desc": "Budgetierung, Sparen und Ausgabengewohnheiten",
+      "details": [
+        "Verstehe Einnahmen vs. Ausgaben",
+        "Erstelle dein erstes Budget",
+        "Lege einen Notgroschen an"
+      ]
+    },
+    {
+      "title": "Investment-Grundlagen",
+      "desc": "Aktien, Anleihen und Portfoliobildung",
+      "details": [
+        "Lerne über Risiko und Rendite",
+        "Diversifiziere deine Anlagen",
+        "Starte mit Indexfonds"
+      ]
+    },
+    {
+      "title": "Fortgeschrittene Strategien",
+      "desc": "Steueroptimierung und Vermögensaufbau",
+      "details": [
+        "Reduziere deine Steuerlast",
+        "Vermögensaufbau durch Zinseszins",
+        "Plane große Lebensziele"
+      ]
+    },
+    {
+      "title": "Finanzielle Freiheit",
+      "desc": "Passives Einkommen und Ruhestandsplanung",
+      "details": [
+        "Schaffe passive Einkommensquellen",
+        "Gehe früh oder nach deinen Vorstellungen in Rente",
+        "Lebe deinen Traumlebensstil"
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Sarah Chen",
+      "role": "Softwareingenieurin",
+      "content": "FinE hat mein Verständnis für persönliche Finanzen verändert. Der spielerische Ansatz hat das Lernen wirklich spaßig gemacht!"
+    },
+    {
+      "name": "Marcus Johnson",
+      "role": "Marketing Manager",
+      "content": "Ich bin in nur 3 Monaten von finanzieller Angst zu Selbstvertrauen gewechselt. Die Struktur der Lektionen ist unglaublich."
+    },
+    {
+      "name": "Emily Rodriguez",
+      "role": "Studentin",
+      "content": "Endlich eine Plattform, die Finanzen zugänglich macht. Das Fortschrittstracking motiviert mich täglich."
+    }
+  ]
 }
