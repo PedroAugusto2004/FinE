@@ -5,7 +5,22 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { financialCourse } from "@/data/financialCourse";
-import { Clock, Award, CheckCircle, Lock, Play, DollarSign, Coins, Banknote, PiggyBank, TrendingUp } from "lucide-react";
+import { 
+  Clock, 
+  Award, 
+  CheckCircle, 
+  Lock, 
+  Play, 
+  DollarSign, 
+  Coins, 
+  Banknote, 
+  PiggyBank, 
+  TrendingUp,
+  Trophy,
+  Target,
+  Flame,
+  GraduationCap
+} from "lucide-react";
 import { useUserProgress, useUserStats } from "@/hooks/useUserProgress";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { motion, Variants } from "framer-motion";
@@ -55,55 +70,90 @@ const LessonTrack = () => {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <motion.div 
-          className="text-center mb-6 md:mb-8"
+          className="text-center mb-8 md:mb-12"
           variants={itemVariants}
         >
-          <motion.h1 
-            className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent mb-2"
+          <motion.div 
+            className="inline-flex items-center justify-center mb-4"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            Your Financial Journey
-          </motion.h1>
-          <motion.p 
-            className="text-muted-foreground text-sm md:text-lg"
+            <GraduationCap className="w-8 h-8 md:w-10 md:h-10 text-green-600 mr-3" />
+            <h1 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-green-600 via-emerald-500 to-teal-600 bg-clip-text text-transparent">
+              Your Financial Journey
+            </h1>
+          </motion.div>
+          <motion.div
+            className="flex items-center justify-center gap-2 text-muted-foreground"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
           >
-            Follow the money trail to financial mastery
-          </motion.p>
+            <Target className="w-4 h-4" />
+            <p className="text-sm md:text-lg font-medium">
+              Master your finances, secure your future
+            </p>
+          </motion.div>
         </motion.div>
 
         {/* Progress Overview */}
         <motion.div variants={itemVariants}>
-          <Card className="mb-6 md:mb-8 bg-card border-border hover:shadow-lg transition-shadow duration-300">
-            <CardContent className="p-4 md:p-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          <Card className="mb-8 md:mb-12 bg-card border-border hover:shadow-lg transition-shadow duration-300">
+            <CardContent className="p-6 md:p-8">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                 <motion.div 
-                  className="text-center"
-                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center space-x-4 p-4 rounded-lg bg-green-50 dark:bg-green-950/30"
+                  whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2, type: "tween" }}
                 >
-                  <div className="text-2xl md:text-3xl font-bold text-green-600">{userStats?.total_xp || 0}</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">Total XP</div>
+                  <div className="rounded-full p-3 bg-green-100 dark:bg-green-900">
+                    <Trophy className="w-6 h-6 text-green-600 dark:text-green-400" />
+                  </div>
+                  <div>
+                    <div className="text-2xl md:text-3xl font-bold text-green-600 dark:text-green-400">
+                      {userStats?.total_xp || 0}
+                    </div>
+                    <div className="text-xs md:text-sm font-medium text-green-800 dark:text-green-300">
+                      Total XP
+                    </div>
+                  </div>
                 </motion.div>
+
                 <motion.div 
-                  className="text-center"
-                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center space-x-4 p-4 rounded-lg bg-blue-50 dark:bg-blue-950/30"
+                  whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2, type: "tween" }}
                 >
-                  <div className="text-2xl md:text-3xl font-bold text-blue-600">{userStats?.current_streak || 0}</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">Day Streak 🔥</div>
+                  <div className="rounded-full p-3 bg-blue-100 dark:bg-blue-900">
+                    <Flame className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div>
+                    <div className="text-2xl md:text-3xl font-bold text-blue-600 dark:text-blue-400">
+                      {userStats?.current_streak || 0}
+                    </div>
+                    <div className="text-xs md:text-sm font-medium text-blue-800 dark:text-blue-300">
+                      Day Streak
+                    </div>
+                  </div>
                 </motion.div>
+
                 <motion.div 
-                  className="text-center"
-                  whileHover={{ scale: 1.05 }}
+                  className="flex items-center space-x-4 p-4 rounded-lg bg-purple-50 dark:bg-purple-950/30"
+                  whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.2, type: "tween" }}
                 >
-                  <div className="text-2xl md:text-3xl font-bold text-purple-600">{userStats?.lessons_completed || 0}</div>
-                  <div className="text-xs md:text-sm text-muted-foreground">Lessons Completed</div>
+                  <div className="rounded-full p-3 bg-purple-100 dark:bg-purple-900">
+                    <CheckCircle className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <div>
+                    <div className="text-2xl md:text-3xl font-bold text-purple-600 dark:text-purple-400">
+                      {userStats?.lessons_completed || 0}
+                    </div>
+                    <div className="text-xs md:text-sm font-medium text-purple-800 dark:text-purple-300">
+                      Lessons Completed
+                    </div>
+                  </div>
                 </motion.div>
               </div>
             </CardContent>
