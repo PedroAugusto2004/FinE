@@ -63,6 +63,15 @@ const fadeInUp = {
   },
 };
 
+const CIRCLES = [
+  { baseX: 400, r: 120, color: '#fde04722', speed: 18, xMul: 40, delay: 0 },
+  { baseX: 1500, r: 90, color: '#fbbf2422', speed: 22, xMul: 60, delay: 1.5 },
+  { baseX: 1000, r: 60, color: '#fffde422', speed: 25, xMul: 20, delay: 2.5 },
+  { baseX: 800, r: 70, color: '#fde04718', speed: 20, xMul: 30, delay: 0.7 },
+  { baseX: 1700, r: 50, color: '#fbbf2420', speed: 28, xMul: 50, delay: 2.2 },
+  { baseX: 300, r: 40, color: '#fffde418', speed: 30, xMul: 25, delay: 1.1 },
+];
+
 const Welcome = () => {
   const { t, i18n } = useTranslation();
   const [email, setEmail] = useState('');
@@ -70,6 +79,10 @@ const Welcome = () => {
   const [fullName, setFullName] = useState('');
   const [loading, setLoading] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [bgCoords, setBgCoords] = useState({ x: 0, y: 0 });
+  const [idleCoords, setIdleCoords] = useState({ x: 0, y: 0 });
+  const [isIdle, setIsIdle] = useState(true);
+  const idleTimeout = useRef<NodeJS.Timeout | null>(null);
   const langRef = useRef<HTMLDivElement>(null);
   const selectedLang = LANGUAGES.find(l => l.code === i18n.language);
 
@@ -302,8 +315,101 @@ const Welcome = () => {
     return () => document.removeEventListener('mousedown', handleClick);
   }, [langOpen]);
 
+  // Animate idle floating
+  useEffect(() => {
+    let frame: number;
+    function animate() {
+      const t = Date.now() / 2000;
+      setIdleCoords({
+        x: Math.sin(t) * 0.7 + Math.cos(t * 0.7) * 0.5,
+        y: Math.cos(t * 0.9) * 0.7 + Math.sin(t * 0.5) * 0.5,
+      });
+      frame = requestAnimationFrame(animate);
+    }
+    animate();
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
+  // Handle mouse movement and idle state
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const x = (e.clientX / window.innerWidth - 0.5) * 2;
+    const y = (e.clientY / window.innerHeight - 0.5) * 2;
+    setBgCoords({ x, y });
+    setIsIdle(false);
+    if (idleTimeout.current) clearTimeout(idleTimeout.current);
+    idleTimeout.current = setTimeout(() => setIsIdle(true), 2200);
+  };
+
+  const [bubbleStates, setBubbleStates] = useState(
+    CIRCLES.map((circle, idx) => ({
+      y: 1080 + Math.random() * 400, // start below the viewport
+      xOffset: Math.random() * 100 - 50, // slight horizontal offset
+      t: Math.random() * 1000, // randomize start
+    }))
+  );
+
+  // Animate bubbles rising
+  useEffect(() => {
+    let running = true;
+    function animate() {
+      setBubbleStates(prev => prev.map((bubble, idx) => {
+        const speed = CIRCLES[idx].speed;
+        let newY = bubble.y - (0.7 + speed * 0.03);
+        // If above the top, reset to below
+        if (newY < -CIRCLES[idx].r * 2) {
+          newY = 1080 + CIRCLES[idx].r + Math.random() * 200;
+        }
+        // Gentle horizontal sway
+        const t = bubble.t + 0.01;
+        const sway = Math.sin(t + idx) * 30;
+        return {
+          y: newY,
+          xOffset: sway,
+          t,
+        };
+      }));
+      if (running) requestAnimationFrame(animate);
+    }
+    animate();
+    return () => { running = false; };
+  }, []);
+
   return (
-    <div className="min-h-screen bg-neutral-900 text-white">
+    <div
+      className="min-h-screen bg-neutral-900 text-white relative overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
+      {/* Minimalistic Interactive Background Animation */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0"
+        style={{ filter: 'blur(0.5px)' }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <svg width="100%" height="100%" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full absolute">
+          {CIRCLES.map((circle, idx) => {
+            // Blend idle/interactive for x
+            const x = circle.baseX + ((isIdle ? idleCoords.x : bgCoords.x) * circle.xMul) + bubbleStates[idx].xOffset;
+            const y = bubbleStates[idx].y + ((isIdle ? idleCoords.y : bgCoords.y) * 10);
+            return (
+              <motion.circle
+                key={idx}
+                cx={x}
+                cy={y}
+                r={circle.r}
+                fill={circle.color}
+                animate={{
+                  opacity: [0.12, 0.22, 0.12],
+                  scale: [1, 1.08, 1],
+                }}
+                transition={{ repeat: Infinity, duration: 6 + idx, ease: 'easeInOut', delay: circle.delay }}
+              />
+            );
+          })}
+        </svg>
+      </motion.div>
       {/* Fixed Header Container */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-neutral-900/80 backdrop-blur-sm">
         <motion.header 
@@ -402,7 +508,7 @@ const Welcome = () => {
             variants={sectionVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.15 }}
           >
             {/* Left Side - Hero Content */}
             <motion.div className="space-y-8" variants={staggerContainer}>
@@ -543,7 +649,7 @@ const Welcome = () => {
             variants={sectionVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.15 }}
           >
             <motion.div className="text-center mb-16" variants={fadeInUp}>
               <h3 className="text-4xl font-bold text-white mb-6">{t('welcome.why')}</h3>
@@ -617,7 +723,7 @@ const Welcome = () => {
             variants={sectionVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.15 }}
           >
             <motion.div className="text-center mb-16 px-2" variants={fadeInUp}>
               <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">{t('welcome.yourJourney')}</h3>
@@ -684,7 +790,7 @@ const Welcome = () => {
             variants={sectionVariants}
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.15 }}
+            viewport={{ once: true, amount: 0.15 }}
           >
             <motion.div className="text-center mb-16" variants={fadeInUp}>
               <h3 className="text-4xl font-bold text-white mb-6">{t('welcome.success')}</h3>
