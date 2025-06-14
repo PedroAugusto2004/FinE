@@ -244,14 +244,14 @@ const OnboardingForm = () => {
   }
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center p-4 overflow-hidden">
+    <div className="min-h-screen relative flex items-center justify-center p-2 sm:p-4 overflow-hidden">
       {/* Animated background */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute w-[120vw] h-[120vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-radial from-gray-900 via-gray-800 to-black animate-bgPulse" />
-        <div className="absolute w-96 h-96 left-[-10%] top-[-10%] bg-yellow-500/10 rounded-full blur-3xl animate-float1" />
-        <div className="absolute w-80 h-80 right-[-8%] bottom-[-8%] bg-yellow-400/10 rounded-full blur-2xl animate-float2" />
+        <div className="absolute w-[200vw] h-[200vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-radial animate-bgPulse" />
+        <div className="absolute w-72 h-72 left-[-20vw] top-[-20vw] bg-yellow-500/10 rounded-full blur-3xl animate-float1" />
+        <div className="absolute w-60 h-60 right-[-16vw] bottom-[-16vw] bg-yellow-400/10 rounded-full blur-2xl animate-float2" />
       </div>
-      <div className="relative z-10 w-full max-w-2xl">
+      <div className="relative z-10 w-full max-w-lg sm:max-w-2xl mx-auto bg-transparent shadow-none border-none">
         {/* Progress bar */}
         <div className="mb-8">
           <div className="w-full h-1.5 bg-gray-800/60 rounded-full overflow-hidden relative">
