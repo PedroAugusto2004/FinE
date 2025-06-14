@@ -279,7 +279,7 @@ const OnboardingForm = () => {
 
         {/* Question */}
         <div className="text-center mb-8 px-2 sm:px-0 flex items-end min-h-[3.5rem]">
-          <h1 className="question-animate text-2xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent break-words whitespace-pre-line leading-tight pb-1">
+          <h1 className="question-animate text-2xl md:text-4xl font-light mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent break-words whitespace-pre-line leading-tight pb-1">
             {currentQuestion.title}
           </h1>
         </div>
