@@ -1,0 +1,42 @@
+{
+  "welcome": {
+    "platform": "Plateforme #1 d'Éducation Financière",
+    "master": "Maîtrisez votre",
+    "future": "Avenir Financier",
+    "desc": "Transformez votre relation à l'argent grâce à notre plateforme d'apprentissage gamifiée révolutionnaire. Construisez votre richesse, sécurisez votre avenir et atteignez la liberté financière avec des leçons personnalisées conçues par des experts.",
+    "start": "Commencez à Apprendre Gratuitement",
+    "demo": "Voir la Démo",
+    "learners": "Apprenants Actifs",
+    "lessons": "Leçons d'Experts",
+    "rating": "Note des Utilisateurs",
+    "join": "Rejoignez FinE Aujourd'hui",
+    "journey": "Commencez votre parcours vers la maîtrise financière",
+    "signin": "Connexion",
+    "signup": "Inscription",
+    "signing": "Connexion...",
+    "create": "Créer un Compte",
+    "creating": "Création du Compte...",
+    "fullname": "Nom Complet",
+    "email": "E-mail",
+    "password": "Mot de Passe",
+    "why": "Pourquoi choisir FinE ?",
+    "whyDesc": "Découvrez la plateforme d'éducation financière la plus complète et engageante, conçue pour l'apprenant moderne.",
+    "yourJourney": "Votre Parcours d'Apprentissage",
+    "yourJourneyDesc": "Un parcours étape par étape des bases financières à la création de richesse avancée, avec des jalons interactifs et de belles animations de progression.",
+    "success": "Histoires de Réussite",
+    "successDesc": "Rejoignez des milliers d'apprenants qui ont transformé leur vie financière avec FinE.",
+    "getInTouch": "Contactez-nous",
+    "loveToHear": "Nous serions ravis de vous entendre.",
+    "name": "Nom",
+    "message": "Votre message",
+    "send": "Envoyer"
+  },
+  "language": {
+    "select": "Langue",
+    "en": "Anglais",
+    "pt": "Portugais",
+    "es": "Espagnol",
+    "fr": "Français",
+    "de": "Allemand"
+  }
+}

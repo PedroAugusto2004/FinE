@@ -1,0 +1,42 @@
+{
+  "welcome": {
+    "platform": "Plataforma #1 de Educación Financiera",
+    "master": "Domina tu",
+    "future": "Futuro Financiero",
+    "desc": "Transforma tu relación con el dinero a través de nuestra plataforma gamificada revolucionaria. Construye riqueza, asegura tu futuro y alcanza la libertad financiera con lecciones personalizadas diseñadas por expertos.",
+    "start": "Comienza a Aprender Gratis",
+    "demo": "Ver Demo",
+    "learners": "Estudiantes Activos",
+    "lessons": "Lecciones de Expertos",
+    "rating": "Valoración de Usuarios",
+    "join": "Únete a FinE Hoy",
+    "journey": "Comienza tu camino hacia el dominio financiero",
+    "signin": "Iniciar Sesión",
+    "signup": "Registrarse",
+    "signing": "Iniciando...",
+    "create": "Crear Cuenta",
+    "creating": "Creando Cuenta...",
+    "fullname": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "password": "Contraseña",
+    "why": "¿Por qué elegir FinE?",
+    "whyDesc": "Experimenta la plataforma de educación financiera más completa y atractiva, diseñada para el aprendiz moderno.",
+    "yourJourney": "Tu Camino de Aprendizaje",
+    "yourJourneyDesc": "Un camino paso a paso desde lo básico hasta la creación avanzada de riqueza, con hitos interactivos y hermosas animaciones de progreso.",
+    "success": "Historias de Éxito",
+    "successDesc": "Únete a miles de estudiantes que han transformado sus vidas financieras con FinE.",
+    "getInTouch": "Contáctanos",
+    "loveToHear": "Nos encantaría saber de ti.",
+    "name": "Nombre",
+    "message": "Tu mensaje",
+    "send": "Enviar"
+  },
+  "language": {
+    "select": "Idioma",
+    "en": "Inglés",
+    "pt": "Portugués",
+    "es": "Español",
+    "fr": "Francés",
+    "de": "Alemán"
+  }
+}

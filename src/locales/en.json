@@ -1,0 +1,39 @@
+{
+  "welcome": {
+    "platform": "#1 Financial Education Platform",
+    "master": "Master Your",
+    "future": "Financial Future",
+    "desc": "Transform your relationship with money through our revolutionary gamified learning platform. Build wealth, secure your future, and achieve financial freedom with personalized lessons designed by financial experts.",
+    "start": "Start Learning Free",
+    "demo": "Watch Demo",
+    "learners": "Active Learners",
+    "lessons": "Expert Lessons",
+    "rating": "User Rating",
+    "join": "Join FinE Today",
+    "journey": "Start your journey to financial mastery",
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "signing": "Signing In...",
+    "create": "Create Account",
+    "creating": "Creating Account...",
+    "fullname": "Full Name",
+    "email": "Email",
+    "password": "Password",
+    "why": "Why Choose FinE?",
+    "whyDesc": "Experience the most comprehensive and engaging financial education platform designed for the modern learner.",
+    "yourJourney": "Your Learning Journey",
+    "yourJourneyDesc": "A step-by-step path from financial basics to advanced wealth-building, with interactive milestones and beautiful progress animations.",
+    "success": "Success Stories",
+    "successDesc": "Join thousands of learners who have transformed their financial lives with FinE.",
+    "getInTouch": "Get in Touch",
+    "loveToHear": "We'd love to hear from you.",
+    "name": "Name",
+    "message": "Your message",
+    "send": "Send"
+  },
+  "language": {
+    "select": "Language",
+    "en": "English",
+    "pt": "Portuguese"
+  }
+}
