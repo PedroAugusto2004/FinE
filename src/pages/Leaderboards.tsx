@@ -1,7 +1,19 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Trophy, Medal, Award, TrendingUp, Flame } from "lucide-react";
+import { 
+  Trophy, 
+  Medal, 
+  Award, 
+  TrendingUp, 
+  Flame,
+  Target,
+  Zap,
+  Brain,
+  Diamond,
+  CheckCircle2,
+  GraduationCap
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 const containerVariants = {
@@ -32,6 +44,37 @@ const Leaderboards = () => {
     { rank: 4, name: "Emma Thompson", xp: 2150, streak: 8, avatar: "ET", badge: null },
     { rank: 5, name: "David Kim", xp: 2100, streak: 22, avatar: "DK", badge: null },
     { rank: 6, name: "You", xp: 150, streak: 1, avatar: "YU", badge: null, isCurrentUser: true },
+  ];
+
+  const achievements = [
+    { 
+      name: "First Steps", 
+      description: "Complete first lesson", 
+      icon: Target,
+      earned: true,
+      color: "text-blue-500"
+    },
+    { 
+      name: "Week Warrior", 
+      description: "7 day streak", 
+      icon: Flame,
+      earned: false,
+      color: "text-orange-500"
+    },
+    { 
+      name: "Quiz Master", 
+      description: "100% on 5 quizzes", 
+      icon: GraduationCap,
+      earned: false,
+      color: "text-purple-500"
+    },
+    { 
+      name: "Dedicated", 
+      description: "30 day streak", 
+      icon: Diamond,
+      earned: false,
+      color: "text-emerald-500"
+    }
   ];
 
   return (
@@ -151,37 +194,36 @@ const Leaderboards = () => {
         </Card>
       </motion.div>
 
-      {/* Achievement Badges */}
+      {/* Achievements section */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Medal className="h-5 w-5" />
-            Achievement Badges
+            <Trophy className="h-5 w-5" />
+            Achievements
           </CardTitle>
-          <CardDescription>
-            Earn badges by reaching milestones
-          </CardDescription>
+          <CardDescription>Track your learning milestones</CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { name: "First Steps", description: "Complete first lesson", icon: "🎯", earned: true },
-              { name: "Week Warrior", description: "7 day streak", icon: "⚡", earned: false },
-              { name: "Quiz Master", description: "100% on 5 quizzes", icon: "🧠", earned: false },
-              { name: "Dedicated", description: "30 day streak", icon: "💎", earned: false },
-            ].map((badge) => (
-              <div
-                key={badge.name}
-                className={`p-4 rounded-lg border text-center space-y-2 ${
-                  badge.earned 
+            {achievements.map((achievement) => (
+              <div 
+                key={achievement.name}
+                className={`p-4 rounded-lg border ${
+                  achievement.earned 
                     ? 'bg-primary/5 border-primary/20' 
-                    : 'bg-muted/50 border-muted opacity-60'
+                    : 'bg-muted/50 border-border'
                 }`}
               >
-                <div className="text-3xl">{badge.icon}</div>
-                <div>
-                  <p className="font-semibold text-sm">{badge.name}</p>
-                  <p className="text-xs text-muted-foreground">{badge.description}</p>
+                <div className="flex flex-col items-center text-center gap-2">
+                  <div className={`h-12 w-12 rounded-full bg-background flex items-center justify-center ${
+                    achievement.earned ? achievement.color : 'text-muted-foreground'
+                  }`}>
+                    <achievement.icon className="h-6 w-6" />
+                  </div>
+                  <div>
+                    <p className="font-medium">{achievement.name}</p>
+                    <p className="text-sm text-muted-foreground">{achievement.description}</p>
+                  </div>
                 </div>
               </div>
             ))}
