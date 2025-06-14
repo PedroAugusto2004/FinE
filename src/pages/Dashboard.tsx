@@ -7,6 +7,43 @@ import { useNavigate } from "react-router-dom";
 import { financialCourse, getUserProgress, Lesson } from "@/data/financialCourse";
 import { Clock, Target, TrendingUp, BookOpen, Award, Flame } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 }
+  }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5 }
+  },
+  hover: {
+    scale: 1.02,
+    transition: { duration: 0.2 }
+  },
+  tap: {
+    scale: 0.98
+  }
+};
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -41,108 +78,126 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-3 sm:p-4 md:p-6 space-y-6 md:space-y-8">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="min-h-screen bg-background text-foreground p-3 sm:p-4 md:p-6 space-y-6 md:space-y-8"
+    >
       {/* Hero Section */}
-      <div className="text-center space-y-4 px-2 sm:px-4">
+      <motion.div variants={itemVariants} className="text-center space-y-4 px-2 sm:px-4">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground">
           Master Your <span className="text-primary">Financial Future</span>
         </h1>
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto px-2 sm:px-4">
           Learn essential financial skills through interactive lessons and build lasting money management habits.
         </p>
-      </div>
+      </motion.div>
 
       {/* Stats Overview */}
-      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-        <Card className="relative overflow-hidden bg-card border-border">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs md:text-sm font-medium">Total XP</CardTitle>
-            <Award className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-xl md:text-2xl font-bold text-primary">{progress.totalXP}</div>
-            <p className="text-xs text-muted-foreground">
-              Level {Math.floor(progress.totalXP / 100) + 1}
-            </p>
-          </CardContent>
-        </Card>
+      <motion.div 
+        variants={itemVariants}
+        className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
+      >
+        <motion.div variants={cardVariants} whileHover="hover" whileTap="tap">
+          <Card className="relative overflow-hidden bg-card border-border">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-xs md:text-sm font-medium">Total XP</CardTitle>
+              <Award className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl md:text-2xl font-bold text-primary">{progress.totalXP}</div>
+              <p className="text-xs text-muted-foreground">
+                Level {Math.floor(progress.totalXP / 100) + 1}
+              </p>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-        <Card className="bg-card border-border">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs md:text-sm font-medium">Current Streak</CardTitle>
-            <TrendingUp className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-xl md:text-2xl font-bold text-orange-500">{progress.currentStreak}</div>
-            <p className="text-xs text-muted-foreground">
-              <Flame className="inline-block h-4 w-4 mr-1" /> Keep it going!
-            </p>
-          </CardContent>
-        </Card>
+        <motion.div variants={cardVariants} whileHover="hover" whileTap="tap">
+          <Card className="bg-card border-border">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-xs md:text-sm font-medium">Current Streak</CardTitle>
+              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl md:text-2xl font-bold text-orange-500">{progress.currentStreak}</div>
+              <p className="text-xs text-muted-foreground">
+                <Flame className="inline-block h-4 w-4 mr-1" /> Keep it going!
+              </p>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-        <Card className="bg-card border-border">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs md:text-sm font-medium">Lessons Completed</CardTitle>
-            <BookOpen className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-xl md:text-2xl font-bold text-green-500">{progress.completedLessons.length}</div>
-            <p className="text-xs text-muted-foreground">
-              of {getTotalLessons()} total lessons
-            </p>
-          </CardContent>
-        </Card>
+        <motion.div variants={cardVariants} whileHover="hover" whileTap="tap">
+          <Card className="bg-card border-border">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-xs md:text-sm font-medium">Lessons Completed</CardTitle>
+              <BookOpen className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl md:text-2xl font-bold text-green-500">{progress.completedLessons.length}</div>
+              <p className="text-xs text-muted-foreground">
+                of {getTotalLessons()} total lessons
+              </p>
+            </CardContent>
+          </Card>
+        </motion.div>
 
-        <Card className="bg-card border-border">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-xs md:text-sm font-medium">Progress</CardTitle>
-            <Target className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-xl md:text-2xl font-bold text-blue-500">{getCompletionPercentage()}%</div>
-            <Progress value={getCompletionPercentage()} className="mt-2" />
-          </CardContent>
-        </Card>
-      </div>
+        <motion.div variants={cardVariants} whileHover="hover" whileTap="tap">
+          <Card className="bg-card border-border">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-xs md:text-sm font-medium">Progress</CardTitle>
+              <Target className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-xl md:text-2xl font-bold text-blue-500">{getCompletionPercentage()}%</div>
+              <Progress value={getCompletionPercentage()} className="mt-2" />
+            </CardContent>
+          </Card>
+        </motion.div>
+      </motion.div>
 
       {/* Continue Learning */}
       {nextLesson && (
-        <Card className="border-primary/20 bg-card">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="text-lg md:text-xl">Continue Learning</CardTitle>
-                <CardDescription>Pick up where you left off</CardDescription>
-              </div>
-              <Badge variant="secondary" className="bg-primary/10 text-primary">
-                Next Lesson
-              </Badge>
-            </div>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <h3 className="font-semibold text-base md:text-lg">{nextLesson.title}</h3>
-              <p className="text-muted-foreground text-sm md:text-base">{nextLesson.description}</p>
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-1">
-                  <Clock className="h-4 w-4" />
-                  {nextLesson.estimatedTime} min
+        <motion.div variants={itemVariants}>
+          <Card className="border-2 border-primary/20">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="text-lg md:text-xl">Continue Learning</CardTitle>
+                  <CardDescription>Pick up where you left off</CardDescription>
                 </div>
-                <div className="flex items-center gap-1">
-                  <Award className="h-4 w-4" />
-                  +{nextLesson.xpReward} XP
+                <Badge variant="secondary" className="bg-primary/10 text-primary">
+                  Next Lesson
+                </Badge>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <h3 className="font-semibold text-base md:text-lg">{nextLesson.title}</h3>
+                <p className="text-muted-foreground text-sm md:text-base">{nextLesson.description}</p>
+                <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    {nextLesson.estimatedTime} min
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <Award className="h-4 w-4" />
+                    +{nextLesson.xpReward} XP
+                  </div>
                 </div>
               </div>
-            </div>
-            <Button 
-              onClick={() => navigate(`/lesson/${nextLesson.id}`)}
-              className="w-full md:w-auto bg-primary hover:bg-primary/90"
-              size={isMobile ? "default" : "lg"}
-            >
-              Start Lesson {nextLesson.icon}
-            </Button>
-          </CardContent>
-        </Card>
+              <Button 
+                onClick={() => navigate(`/lesson/${nextLesson.id}`)}
+                className="w-full md:w-auto bg-primary hover:bg-primary/90"
+                size={isMobile ? "default" : "lg"}
+              >
+                Start Lesson {nextLesson.icon}
+              </Button>
+            </CardContent>
+          </Card>
+        </motion.div>
       )}
 
       {/* Course Units */}
@@ -157,38 +212,40 @@ const Dashboard = () => {
             const unitProgress = (completedLessons / totalLessons) * 100;
 
             return (
-              <Card key={unit.id} className="group hover:shadow-lg transition-all duration-300 cursor-pointer bg-card border-border">
-                <CardHeader>
-                  <div className="flex items-center justify-between">
-                    <div className={`w-10 h-10 md:w-12 md:h-12 rounded-lg ${unit.color} flex items-center justify-center text-white font-bold text-base md:text-lg`}>
-                      {index + 1}
+              <motion.div key={unit.id} variants={itemVariants}>
+                <Card className="group hover:shadow-lg transition-all duration-300 cursor-pointer bg-card border-border">
+                  <CardHeader>
+                    <div className="flex items-center justify-between">
+                      <div className={`w-10 h-10 md:w-12 md:h-12 rounded-lg ${unit.color} flex items-center justify-center text-white font-bold text-base md:text-lg`}>
+                        {index + 1}
+                      </div>
+                      <Badge variant="outline">
+                        {completedLessons}/{totalLessons}
+                      </Badge>
                     </div>
-                    <Badge variant="outline">
-                      {completedLessons}/{totalLessons}
-                    </Badge>
-                  </div>
-                  <CardTitle className="group-hover:text-primary transition-colors text-base md:text-lg">
-                    {unit.title}
-                  </CardTitle>
-                  <CardDescription className="text-sm">{unit.description}</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="space-y-2">
-                    <div className="flex justify-between text-sm">
-                      <span>Progress</span>
-                      <span>{Math.round(unitProgress)}%</span>
+                    <CardTitle className="group-hover:text-primary transition-colors text-base md:text-lg">
+                      {unit.title}
+                    </CardTitle>
+                    <CardDescription className="text-sm">{unit.description}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span>Progress</span>
+                        <span>{Math.round(unitProgress)}%</span>
+                      </div>
+                      <Progress value={unitProgress} />
                     </div>
-                    <Progress value={unitProgress} />
-                  </div>
-                  <Button 
-                    variant="outline" 
-                    className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
-                    onClick={() => navigate('/lessons')}
-                  >
-                    View Lessons
-                  </Button>
-                </CardContent>
-              </Card>
+                    <Button 
+                      variant="outline" 
+                      className="w-full group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                      onClick={() => navigate('/lessons')}
+                    >
+                      View Lessons
+                    </Button>
+                  </CardContent>
+                </Card>
+              </motion.div>
             );
           })}
         </div>
@@ -232,7 +289,7 @@ const Dashboard = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </motion.div>
   );
 };
 
