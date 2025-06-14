@@ -164,5 +164,85 @@
       "role": "Estudante",
       "content": "Finalmente, uma plataforma que torna as finanças acessíveis. O acompanhamento de progresso me motiva todos os dias."
     }
-  ]
+  ],
+  "onboarding": {
+    "loading": "Completando sua configuração...",
+    "welcome": "Bem-vindo ao FinE!",
+    "startLearning": "Vamos começar sua jornada de aprendizado financeiro.",
+    "error": "Não foi possível completar o processo. Por favor, tente novamente.",
+    "back": "Voltar",
+    "questions": {
+      "howDidYouHear": "Como você conheceu o FinE?",
+      "learningGoal": "Qual é seu objetivo diário de aprendizado?",
+      "motivation": "O que te motiva a melhorar suas finanças?",
+      "preferredFormat": "Como você prefere aprender?",
+      "knowledgeLevel": "Qual é seu nível atual de conhecimento financeiro?",
+      "goals": "O que você mais quer aprender?",
+      "priorities": "Qual é sua principal prioridade financeira?",
+      "reminders": "Gostaria de receber lembretes para criar um hábito?"
+    },
+    "options": {
+      "howDidYouHear": {
+        "tiktok": "TikTok",
+        "google": "Busca Google",
+        "friends": "Amigos ou família",
+        "news": "Notícias, artigos ou blogs",
+        "social": "Facebook ou Instagram",
+        "youtube": "YouTube"
+      },
+      "learningGoal": {
+        "5min": "5 minutos",
+        "10min": "10 minutos",
+        "15min": "15 minutos",
+        "20min": "20+ minutos"
+      },
+      "motivation": {
+        "family": "Família",
+        "freedom": "Liberdade financeira",
+        "security": "Segurança",
+        "growth": "Crescimento pessoal"
+      },
+      "preferredFormat": {
+        "reading": "Leitura",
+        "videos": "Vídeos",
+        "interactive": "Lições interativas",
+        "audio": "Áudio"
+      },
+      "knowledgeLevel": {
+        "beginner": "Iniciante completo",
+        "basic": "Conheço o básico",
+        "intermediate": "Tenho alguma experiência",
+        "advanced": "Tenho bom conhecimento"
+      },
+      "goals": {
+        "budgeting": "Orçamento e economia",
+        "investing": "Investimento e crescimento patrimonial",
+        "debt": "Gestão e pagamento de dívidas",
+        "retirement": "Planejamento de aposentadoria"
+      },
+      "priorities": {
+        "emergency": "Criar um fundo de emergência",
+        "income": "Aumentar minha renda",
+        "expenses": "Reduzir meus gastos",
+        "future": "Planejar o futuro"
+      },
+      "reminders": {
+        "yes": "Sim, envie-me lembretes",
+        "no": "Não, obrigado",
+        "notifications": "Mostrar notificações na tela"
+      }
+    },
+    "showcase": {
+      "title": "Bem-vindo ao FinE!",
+      "subtitle": "Com o FinE, você pode:",
+      "features": {
+        "master": "Dominar orçamentos, economia e investimentos",
+        "habits": "Desenvolver hábitos financeiros saudáveis",
+        "security": "Alcançar segurança e liberdade financeira",
+        "goals": "Estabelecer e alcançar suas metas pessoais",
+        "community": "Juntar-se a uma comunidade de aprendizado"
+      },
+      "cta": "Começar a Aprender"
+    }
+  }
 }
