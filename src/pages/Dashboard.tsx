@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { useNavigate } from "react-router-dom";
 import { financialCourse, getUserProgress, Lesson } from "@/data/financialCourse";
-import { Clock, Target, TrendingUp, BookOpen, Award } from "lucide-react";
+import { Clock, Target, TrendingUp, BookOpen, Award, Flame } from "lucide-react";
 import { useIsMobile } from "@/hooks/use-mobile";
 
 const Dashboard = () => {
@@ -75,7 +75,7 @@ const Dashboard = () => {
           <CardContent>
             <div className="text-xl md:text-2xl font-bold text-orange-500">{progress.currentStreak}</div>
             <p className="text-xs text-muted-foreground">
-              🔥 Keep it going!
+              <Flame className="inline-block h-4 w-4 mr-1" /> Keep it going!
             </p>
           </CardContent>
         </Card>

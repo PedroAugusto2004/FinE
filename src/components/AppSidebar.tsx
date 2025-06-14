@@ -1,4 +1,4 @@
-import { Home, BookOpen, Trophy, ShoppingBag, User, Settings as SettingsIcon, LogOut, DollarSign } from "lucide-react";
+import { Home, BookOpen, Trophy, ShoppingBag, User, Settings as SettingsIcon, LogOut, DollarSign, Flame } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -121,7 +121,7 @@ export function AppSidebar() {
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <span className="text-sm text-muted-foreground">Streak</span>
-                <span className="text-sm font-medium">🔥 {userStats?.current_streak || 0}</span>
+                <span className="text-sm font-medium"><Flame className="inline-block h-4 w-4 mr-1" /> {userStats?.current_streak || 0}</span>
               </div>
             </div>
 

@@ -2,6 +2,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Trophy, Medal, Award, TrendingUp, Flame } from "lucide-react";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 }
+  }
+};
 
 const Leaderboards = () => {
   const leaderboardData = [
@@ -14,16 +35,21 @@ const Leaderboards = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-3 sm:p-6 space-y-8 max-w-3xl mx-auto w-full">
-      <div className="text-center space-y-4">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="min-h-screen bg-background text-foreground p-3 sm:p-6 space-y-8 max-w-3xl mx-auto w-full"
+    >
+      <motion.div variants={itemVariants} className="text-center space-y-4">
         <h1 className="text-4xl font-bold">Leaderboards</h1>
         <p className="text-xl text-muted-foreground">
           See how you stack up against other learners
         </p>
-      </div>
+      </motion.div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
+      <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Your Rank</CardTitle>
@@ -62,64 +88,68 @@ const Leaderboards = () => {
             </p>
           </CardContent>
         </Card>
-      </div>
+      </motion.div>
 
       {/* Leaderboard */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Trophy className="h-5 w-5" />
-            This Week's Top Learners
-          </CardTitle>
-          <CardDescription>
-            Rankings based on XP earned this week
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {leaderboardData.map((user) => (
-              <div
-                key={user.rank}
-                className={`flex items-center justify-between p-4 rounded-lg border transition-colors ${
-                  user.isCurrentUser 
-                    ? 'bg-primary/5 border-primary/20' 
-                    : 'hover:bg-accent/50'
-                }`}
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-3">
-                    <span className="text-2xl font-bold text-muted-foreground w-8">
-                      {user.rank <= 3 ? (
-                        user.badge && <user.badge className="h-6 w-6" />
-                      ) : (
-                        `#${user.rank}`
-                      )}
-                    </span>
-                    <Avatar className="h-10 w-10">
-                      <AvatarFallback className={user.isCurrentUser ? 'bg-primary text-primary-foreground' : ''}>
-                        {user.avatar}
-                      </AvatarFallback>
-                    </Avatar>
+      <motion.div variants={itemVariants}>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Trophy className="h-5 w-5" />
+              This Week's Top Learners
+            </CardTitle>
+            <CardDescription>
+              Rankings based on XP earned this week
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <motion.div className="space-y-4">
+              {leaderboardData.map((user, index) => (
+                <motion.div
+                  key={user.rank}
+                  variants={itemVariants}
+                  whileHover={{ scale: 1.02 }}
+                  className={`flex items-center justify-between p-4 rounded-lg border transition-colors ${
+                    user.isCurrentUser 
+                      ? 'bg-primary/5 border-primary/20' 
+                      : 'hover:bg-accent/50'
+                  }`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-3">
+                      <span className="text-2xl font-bold text-muted-foreground w-8">
+                        {user.rank <= 3 ? (
+                          user.badge && <user.badge className="h-6 w-6" />
+                        ) : (
+                          `#${user.rank}`
+                        )}
+                      </span>
+                      <Avatar className="h-10 w-10">
+                        <AvatarFallback className={user.isCurrentUser ? 'bg-primary text-primary-foreground' : ''}>
+                          {user.avatar}
+                        </AvatarFallback>
+                      </Avatar>
+                    </div>
+                    <div>
+                      <p className={`font-semibold ${user.isCurrentUser ? 'text-primary' : ''}`}>
+                        {user.name}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        {user.streak} day streak <Flame className="inline-block h-4 w-4 ml-1" />
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className={`font-semibold ${user.isCurrentUser ? 'text-primary' : ''}`}>
-                      {user.name}
-                    </p>
-                    <p className="text-sm text-muted-foreground">
-                      {user.streak} day streak 🔥
-                    </p>
+                  <div className="text-right">
+                    <Badge variant={user.isCurrentUser ? 'default' : 'secondary'}>
+                      {user.xp} XP
+                    </Badge>
                   </div>
-                </div>
-                <div className="text-right">
-                  <Badge variant={user.isCurrentUser ? 'default' : 'secondary'}>
-                    {user.xp} XP
-                  </Badge>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          </CardContent>
+        </Card>
+      </motion.div>
 
       {/* Achievement Badges */}
       <Card>
@@ -158,7 +188,7 @@ const Leaderboards = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </motion.div>
   );
 };
 

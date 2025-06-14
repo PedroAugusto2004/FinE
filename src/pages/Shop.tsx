@@ -2,6 +2,27 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ShoppingBag, Gem, Zap, Snowflake, Lightbulb, Crown, Moon, TreePine } from "lucide-react";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 }
+  }
+};
 
 const Shop = () => {
   const shopItems = [
@@ -58,36 +79,43 @@ const Shop = () => {
   const categories = ["All", "Power-ups", "Themes"];
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-3 sm:p-6 space-y-8 max-w-3xl mx-auto w-full">
-      <div className="text-center space-y-4">
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="min-h-screen bg-background text-foreground p-3 sm:p-6 space-y-8 max-w-3xl mx-auto w-full"
+    >
+      <motion.div variants={itemVariants} className="text-center space-y-4">
         <h1 className="text-4xl font-bold">Shop</h1>
         <p className="text-xl text-muted-foreground">
           Spend your XP on power-ups and customizations
         </p>
-      </div>
+      </motion.div>
 
       {/* XP Balance */}
-      <Card className="bg-gradient-to-r from-primary/10 to-primary/5">
-        <CardContent className="pt-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                <Gem className="h-6 w-6 text-primary" />
+      <motion.div variants={itemVariants}>
+        <Card className="bg-gradient-to-r from-primary/10 to-primary/5">
+          <CardContent className="pt-6">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
+                  <Gem className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Your Balance</p>
+                  <p className="text-2xl font-bold text-primary">150 XP</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Your Balance</p>
-                <p className="text-2xl font-bold text-primary">150 XP</p>
-              </div>
+              <Button variant="outline">
+                Earn More XP
+              </Button>
             </div>
-            <Button variant="outline">
-              Earn More XP
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </motion.div>
 
       {/* Categories */}
-      <div className="flex gap-2 flex-wrap">
+      <motion.div variants={itemVariants} className="flex gap-2 flex-wrap">
         {categories.map((category) => (
           <Button
             key={category}
@@ -97,42 +125,49 @@ const Shop = () => {
             {category}
           </Button>
         ))}
-      </div>
+      </motion.div>
 
-      {/* Shop Items */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {/* Shop Grid */}
+      <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {shopItems.map((item) => (
-          <Card key={item.id} className="group hover:shadow-lg transition-all duration-300">
-            <CardHeader>
-              <div className="flex items-center justify-between">
-                <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center text-2xl">
-                  <item.icon className="h-6 w-6" />
+          <motion.div
+            key={item.id}
+            variants={itemVariants}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <Card className="cursor-pointer hover:border-primary/50 transition-colors">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div className="w-12 h-12 rounded-lg bg-accent flex items-center justify-center text-2xl">
+                    <item.icon className="h-6 w-6" />
+                  </div>
+                  <Badge variant="secondary">{item.category}</Badge>
                 </div>
-                <Badge variant="secondary">{item.category}</Badge>
-              </div>
-              <CardTitle className="group-hover:text-primary transition-colors">
-                {item.name}
-              </CardTitle>
-              <CardDescription>{item.description}</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-primary" />
-                  <span className="font-semibold text-primary">{item.price} XP</span>
+                <CardTitle className="group-hover:text-primary transition-colors">
+                  {item.name}
+                </CardTitle>
+                <CardDescription>{item.description}</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Zap className="h-4 w-4 text-primary" />
+                    <span className="font-semibold text-primary">{item.price} XP</span>
+                  </div>
                 </div>
-              </div>
-              <Button 
-                className="w-full" 
-                variant={item.price <= 150 ? "default" : "secondary"}
-                disabled={item.price > 150}
-              >
-                {item.price <= 150 ? "Purchase" : "Not Enough XP"}
-              </Button>
-            </CardContent>
-          </Card>
+                <Button 
+                  className="w-full" 
+                  variant={item.price <= 150 ? "default" : "secondary"}
+                  disabled={item.price > 150}
+                >
+                  {item.price <= 150 ? "Purchase" : "Not Enough XP"}
+                </Button>
+              </CardContent>
+            </Card>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
 
       {/* Featured Deals */}
       <Card>
@@ -183,7 +218,7 @@ const Shop = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </motion.div>
   );
 };
 

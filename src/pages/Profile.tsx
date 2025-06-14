@@ -5,6 +5,27 @@ import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Calendar, Award, TrendingUp, BookOpen, Target, Clock, Zap, Flame, Brain, BookOpenCheck, Diamond } from "lucide-react";
 import { getUserProgress } from "@/data/financialCourse";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 }
+  }
+};
 
 const Profile = () => {
   const progress = getUserProgress();
@@ -32,9 +53,14 @@ const Profile = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-3 sm:p-6 space-y-8 max-w-3xl mx-auto w-full">
+    <motion.div 
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="min-h-screen bg-background text-foreground p-3 sm:p-6 space-y-8 max-w-3xl mx-auto w-full"
+    >
       {/* Header */}
-      <div className="text-center space-y-4">
+      <motion.div variants={itemVariants} className="text-center space-y-4">
         <Avatar className="h-24 w-24 mx-auto">
           <AvatarFallback className="bg-primary text-primary-foreground text-2xl">
             FS
@@ -44,33 +70,35 @@ const Profile = () => {
           <h1 className="text-3xl font-bold">Finance Student</h1>
           <p className="text-muted-foreground">Learning financial literacy one lesson at a time</p>
         </div>
-      </div>
+      </motion.div>
 
       {/* Level Progress */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Award className="h-5 w-5" />
-            Level Progress
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-2xl font-bold text-primary">Level {currentLevel}</p>
-              <p className="text-sm text-muted-foreground">{xpForNextLevel} XP to next level</p>
+      <motion.div variants={itemVariants}>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Award className="h-5 w-5" />
+              Level Progress
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-2xl font-bold text-primary">Level {currentLevel}</p>
+                <p className="text-sm text-muted-foreground">{xpForNextLevel} XP to next level</p>
+              </div>
+              <div className="text-right">
+                <p className="text-lg font-semibold">{progress.totalXP} XP</p>
+                <p className="text-sm text-muted-foreground">Total earned</p>
+              </div>
             </div>
-            <div className="text-right">
-              <p className="text-lg font-semibold">{progress.totalXP} XP</p>
-              <p className="text-sm text-muted-foreground">Total earned</p>
-            </div>
-          </div>
-          <Progress value={levelProgress} className="h-3" />
-        </CardContent>
-      </Card>
+            <Progress value={levelProgress} className="h-3" />
+          </CardContent>
+        </Card>
+      </motion.div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+      <motion.div variants={itemVariants} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Current Streak</CardTitle>
@@ -122,7 +150,7 @@ const Profile = () => {
             </p>
           </CardContent>
         </Card>
-      </div>
+      </motion.div>
 
       {/* Weekly Activity */}
       <Card>
@@ -209,7 +237,7 @@ const Profile = () => {
           </div>
         </CardContent>
       </Card>
-    </div>
+    </motion.div>
   );
 };
 
