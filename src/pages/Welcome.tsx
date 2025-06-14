@@ -72,6 +72,32 @@ const CIRCLES = [
   { baseX: 300, r: 40, color: '#fffde418', speed: 30, xMul: 25, delay: 1.1 },
 ];
 
+// AnimatedNumber component for counting up
+import React from 'react';
+const AnimatedNumber = ({ value, duration = 1200, format = (v: number) => v }: { value: number, duration?: number, format?: (v: number) => string | number }) => {
+  const [display, setDisplay] = useState(0);
+  const frame = useRef<number | null>(null);
+  useEffect(() => {
+    let start = 0;
+    let startTime: number | null = null;
+    function step(timestamp: number) {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setDisplay(Math.floor(progress * (value - start) + start));
+      if (progress < 1) {
+        frame.current = requestAnimationFrame(step);
+      } else {
+        setDisplay(value);
+      }
+    }
+    frame.current = requestAnimationFrame(step);
+    return () => {
+      if (frame.current) cancelAnimationFrame(frame.current);
+    };
+  }, [value, duration]);
+  return <span>{format(display)}</span>;
+};
+
 const Welcome = () => {
   const { t, i18n } = useTranslation();
   const [email, setEmail] = useState('');
@@ -524,14 +550,29 @@ const Welcome = () => {
                   {t('welcome.desc')}
                 </p>
               </motion.div>
-              {/* CTA Buttons */}
-              <motion.div className="flex flex-col sm:flex-row gap-4" variants={fadeInUp}>
-                <Button 
-                  className="h-12 sm:h-14 px-6 sm:px-8 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold text-base sm:text-lg shadow-lg shadow-yellow-500/25 transition-all duration-300 hover:scale-105"
-                >
-                  <Play className="h-5 w-5 mr-2 text-black" />
-                  {t('welcome.start')}
-                </Button>
+              {/* Quick Stats - moved up */}
+              <motion.div className="flex items-center gap-6 sm:gap-8 pt-2 sm:pt-4" variants={fadeInUp}>
+                <div className="text-center">
+                  <div className="text-2xl sm:text-4xl font-bold text-white">
+                    <AnimatedNumber value={50000} duration={1200} format={v => v >= 50000 ? '50K+' : `${Math.floor(v / 1000)}K+`} />
+                  </div>
+                  <div className="text-xs sm:text-sm text-neutral-400">{t('welcome.learners')}</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl sm:text-4xl font-bold text-white">
+                    <AnimatedNumber value={200} duration={1200} format={v => v >= 200 ? '200+' : `${v}+`} />
+                  </div>
+                  <div className="text-xs sm:text-sm text-neutral-400">{t('welcome.lessons')}</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl sm:text-4xl font-bold text-white">
+                    <AnimatedNumber value={49} duration={1200} format={v => (v / 10).toFixed(1) + '★'} />
+                  </div>
+                  <div className="text-xs sm:text-sm text-neutral-400">{t('welcome.rating')}</div>
+                </div>
+              </motion.div>
+              {/* CTA Buttons - only Watch Demo button remains */}
+              <motion.div className="flex flex-col sm:flex-row gap-4 pt-2" variants={fadeInUp}>
                 <Button 
                   variant="outline" 
                   className="h-12 sm:h-14 px-6 sm:px-8 border-neutral-700 bg-neutral-900 text-neutral-200 hover:bg-neutral-800 text-base sm:text-lg transition-all duration-300"
@@ -540,21 +581,6 @@ const Welcome = () => {
                   {t('welcome.demo')}
                   <ArrowRight className="h-5 w-5 ml-2 text-yellow-400" />
                 </Button>
-              </motion.div>
-              {/* Quick Stats */}
-              <motion.div className="flex items-center gap-6 sm:gap-8 pt-6 sm:pt-8" variants={fadeInUp}>
-                <div className="text-center">
-                  <div className="text-2xl sm:text-4xl font-bold text-white">50K+</div>
-                  <div className="text-xs sm:text-sm text-neutral-400">{t('welcome.learners')}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl sm:text-4xl font-bold text-white">200+</div>
-                  <div className="text-xs sm:text-sm text-neutral-400">{t('welcome.lessons')}</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl sm:text-4xl font-bold text-white">4.9★</div>
-                  <div className="text-xs sm:text-sm text-neutral-400">{t('welcome.rating')}</div>
-                </div>
               </motion.div>
             </motion.div>
             {/* Right Side - Auth Form */}
