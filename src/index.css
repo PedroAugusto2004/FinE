@@ -204,18 +204,39 @@
 }
 
 @keyframes bgPulse {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.08); }
+  0%, 100% { filter: brightness(1) blur(0px); }
+  25% { filter: brightness(1.08) blur(2px); }
+  50% { filter: brightness(1.15) blur(4px); }
+  75% { filter: brightness(1.08) blur(2px); }
 }
 
 @keyframes float1 {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-12px) scale(1.04); }
+  0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+  25% { transform: translateY(-18px) scale(1.07) rotate(2deg); }
+  50% { transform: translateY(-36px) scale(1.12) rotate(-2deg); }
+  75% { transform: translateY(-18px) scale(1.07) rotate(1deg); }
 }
 
 @keyframes float2 {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(12px) scale(1.06); }
+  0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+  25% { transform: translateY(18px) scale(1.09) rotate(-2deg); }
+  50% { transform: translateY(36px) scale(1.14) rotate(2deg); }
+  75% { transform: translateY(18px) scale(1.09) rotate(-1deg); }
+}
+
+@keyframes float3 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  20% { transform: translate(-10px, 12px) scale(1.04) rotate(3deg); }
+  40% { transform: translate(18px, -8px) scale(1.08) rotate(-2deg); }
+  60% { transform: translate(-14px, 16px) scale(1.12) rotate(2deg); }
+  80% { transform: translate(10px, -10px) scale(1.06) rotate(-1deg); }
+}
+
+@keyframes float4 {
+  0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+  25% { transform: translate(12px, 10px) scale(1.05) rotate(-2deg); }
+  50% { transform: translate(-16px, 18px) scale(1.09) rotate(2deg); }
+  75% { transform: translate(8px, -14px) scale(1.07) rotate(-3deg); }
 }
 
 .animate-float {
@@ -254,6 +275,14 @@
   animation: float2 9s ease-in-out infinite;
 }
 
+.animate-float3 {
+  animation: float3 19s ease-in-out infinite;
+}
+
+.animate-float4 {
+  animation: float4 23s ease-in-out infinite;
+}
+
 /* Delay classes for staggered animations */
 .delay-300 {
   animation-delay: 300ms;
@@ -266,6 +295,10 @@
 .delay-2000 {
   animation-delay: 2000ms;
 }
+
+.delay-2s { animation-delay: 2s; }
+.delay-3s { animation-delay: 3s; }
+.delay-4s { animation-delay: 4s; }
 
 /* Animation delay utility classes for Welcome page */
 .animate-delay-0 {
@@ -342,19 +375,67 @@
 }
 
 .bg-gradient-radial {
-  background: radial-gradient(circle at 50% 50%, #111 0%, #181818 60%, #000 100%);
+  background: radial-gradient(circle at 50% 60%, #000 0%, #101010 70%, #000 100%);
+  /* Remove animation from here, apply to a wrapper instead */
+}
+.animate-bgPulse {
+  animation: bgPulse 12s ease-in-out infinite;
+}
+.animate-float1 {
+  animation: float1 14s ease-in-out infinite;
+}
+.animate-float2 {
+  animation: float2 17s ease-in-out infinite;
+}
+.animate-float3 {
+  animation: float3 19s ease-in-out infinite;
+}
+.animate-float4 {
+  animation: float4 23s ease-in-out infinite;
 }
 
 @media (max-width: 640px) {
   .bg-gradient-radial {
-    background: radial-gradient(circle at 50% 60%, #111 0%, #181818 70%, #000 100%);
+    background: linear-gradient(180deg, #000 0%, #181818 60%, #000 100%);
   }
-  .animate-float1, .animate-float2 {
-    width: 60vw !important;
-    height: 60vw !important;
-    left: 10vw !important;
-    right: 10vw !important;
-    top: 10vw !important;
-    bottom: 10vw !important;
+  .animate-float1, .animate-float2, .animate-float3, .animate-float4 {
+    width: 32vw !important;
+    height: 32vw !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+    opacity: 0.5;
+  }
+}
+
+/* Glassy button styles */
+.btn-glass {
+  background: rgba(30, 30, 30, 0.35);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.18), 0 1.5px 8px 0 rgba(255,255,255,0.08) inset;
+  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  color: #fff;
+  transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.btn-glass:hover, .btn-glass:focus {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1.5px solid rgba(255,255,255,0.22);
+  box-shadow: 0 6px 32px 0 rgba(255,255,255,0.10), 0 2px 12px 0 rgba(255,255,255,0.12) inset;
+  color: #fff;
+}
+
+.question-animate {
+  animation: questionFadeIn 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+@keyframes questionFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
   }
 }

@@ -250,6 +250,9 @@ const OnboardingForm = () => {
         <div className="absolute w-[200vw] h-[200vw] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-gradient-radial animate-bgPulse" />
         <div className="absolute w-72 h-72 left-[-20vw] top-[-20vw] bg-yellow-500/10 rounded-full blur-3xl animate-float1" />
         <div className="absolute w-60 h-60 right-[-16vw] bottom-[-16vw] bg-yellow-400/10 rounded-full blur-2xl animate-float2" />
+        <div className="absolute w-40 h-40 left-[10vw] bottom-[10vw] bg-yellow-300/10 rounded-full blur-2xl animate-float3 delay-2s" />
+        <div className="absolute w-32 h-32 right-[12vw] top-[12vw] bg-yellow-200/10 rounded-full blur-2xl animate-float4 delay-3s" />
+        <div className="absolute w-24 h-24 left-[30vw] top-[20vw] bg-yellow-100/10 rounded-full blur-2xl animate-float3 delay-4s" />
       </div>
       <div className="relative z-10 w-full max-w-lg sm:max-w-2xl mx-auto bg-transparent shadow-none border-none">
         {/* Progress bar */}
@@ -266,7 +269,7 @@ const OnboardingForm = () => {
               variant="ghost"
               onClick={goBack}
               disabled={currentStep === 0}
-              className="text-gray-400 hover:text-white hover:bg-white/5 backdrop-blur-sm border border-white/10 disabled:opacity-30 px-3 py-1 text-sm"
+              className="btn-glass text-gray-200 hover:text-white disabled:opacity-30 px-3 py-1 text-sm border-none shadow-none"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
@@ -275,8 +278,8 @@ const OnboardingForm = () => {
         </div>
 
         {/* Question */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+        <div className="text-center mb-8 px-2 sm:px-0 flex items-end min-h-[3.5rem]">
+          <h1 className="question-animate text-2xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent break-words whitespace-pre-line leading-tight pb-1">
             {currentQuestion.title}
           </h1>
         </div>
@@ -286,7 +289,7 @@ const OnboardingForm = () => {
           {currentQuestion.options.map((option, index) => (
             <Card
               key={option.value}
-              className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-yellow-500/10 animate-fade-in bg-gray-800/30 backdrop-blur-xl border border-gray-700/50 hover:border-yellow-400/50 px-2 py-2 md:px-4 md:py-3"
+              className="btn-glass group cursor-pointer transition-all duration-300 hover:scale-105 animate-fade-in border-none shadow-none px-2 py-2 md:px-4 md:py-3"
               style={{ animationDelay: `${index * 100}ms` }}
               onClick={() => handleAnswer(option.value)}
             >
@@ -302,7 +305,7 @@ const OnboardingForm = () => {
                   {option.label}
                 </span>
                 <div className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <ArrowRight className="w-4 h-4 text-yellow-400" />
+                  <ArrowRight className="w-5 h-5 text-yellow-400" />
                 </div>
               </div>
             </Card>
