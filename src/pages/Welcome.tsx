@@ -1001,52 +1001,64 @@ const Welcome = () => {
 export default Welcome;
 
 const FeatureCard = ({ feature, Icon }: { feature: any, Icon: any }) => {
-  const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [hovered, setHovered] = useState(false);
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    setCoords({ x, y });
-    setHovered(true);
-  };
-  const handleMouseLeave = () => {
-    setCoords({ x: 0, y: 0 });
-    setHovered(false);
-  };
   return (
     <motion.div
-      className="group p-8 bg-neutral-800 border-neutral-700 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500 cursor-pointer relative overflow-hidden"
-      variants={fadeInUp}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
+      className={`group p-7 bg-neutral-850 border border-neutral-800 rounded-xl transition-all duration-300 cursor-pointer relative overflow-hidden shadow-none hover:shadow-xl hover:scale-[1.025]`}
+      variants={{
+        hidden: { opacity: 0, y: 40, scale: 0.96 },
+        visible: {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          transition: {
+            duration: 0.6,
+            ease: [0.42, 0, 0.58, 1],
+          },
+        },
+      }}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.18 }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       style={{
-        transform: hovered
-          ? `perspective(800px) rotateY(${coords.x / 18}deg) rotateX(${-coords.y / 18}deg) scale(1.04)`
-          : 'perspective(800px) scale(1)',
-        transition: 'transform 0.25s cubic-bezier(0.42,0,0.58,1)',
+        boxShadow: hovered ? '0 4px 32px 0 rgba(253, 224, 71, 0.08)' : 'none',
+        borderColor: hovered ? '#fde047' : '#262626',
+        touchAction: 'manipulation',
       }}
     >
-      <div className="w-16 h-16 bg-neutral-900 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-        <Icon className="h-8 w-8 text-yellow-400" />
+      <div className="flex flex-col items-center gap-4">
+        <motion.div
+          className="w-12 h-12 flex items-center justify-center rounded-full bg-yellow-400/10 mb-2"
+          initial={{ scale: 0.7, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
+        >
+          <Icon className="h-7 w-7 text-yellow-400" />
+        </motion.div>
+        <h4 className="text-lg font-semibold text-white text-center mb-1 tracking-tight leading-snug">
+          {feature.title}
+        </h4>
+        <p className="text-neutral-300 text-sm text-center mb-3 leading-relaxed min-h-[44px]">
+          {feature.description}
+        </p>
+        <ul className="text-neutral-400 text-xs space-y-1 text-left w-full max-w-xs mx-auto pl-2">
+          {feature.details && feature.details.map((detail: string, i: number) => (
+            <motion.li
+              key={i}
+              className="flex items-start gap-2"
+              initial={{ opacity: 0, x: -10 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: 0.18 + i * 0.07 }}
+              viewport={{ once: true }}
+            >
+              <span className="text-yellow-400 text-base leading-none mt-0.5">•</span> {detail}
+            </motion.li>
+          ))}
+        </ul>
       </div>
-      <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
-      <p className="text-neutral-300 leading-relaxed mb-4">{feature.description}</p>
-      <ul className="text-neutral-400 text-sm space-y-1 text-left mx-auto max-w-xs">
-        {feature.details && feature.details.map((detail: string, i: number) => (
-          <li key={i} className="flex items-start gap-2">
-            <span className="text-yellow-400">•</span> {detail}
-          </li>
-        ))}
-      </ul>
-      {/* Animated background highlight on hover */}
-      <motion.div
-        className="absolute inset-0 pointer-events-none rounded-2xl"
-        initial={{ opacity: 0 }}
-        animate={hovered ? { opacity: 0.12 } : { opacity: 0 }}
-        transition={{ duration: 0.3 }}
-        style={{ background: 'radial-gradient(circle at 60% 40%, #fde047 0%, transparent 80%)' }}
-      />
     </motion.div>
   );
 };
