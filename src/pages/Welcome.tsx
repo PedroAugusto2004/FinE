@@ -64,12 +64,21 @@ const fadeInUp = {
 };
 
 const CIRCLES = [
-  { baseX: 400, r: 120, color: '#fde04722', speed: 18, xMul: 40, delay: 0 },
-  { baseX: 1500, r: 90, color: '#fbbf2422', speed: 22, xMul: 60, delay: 1.5 },
-  { baseX: 1000, r: 60, color: '#fffde422', speed: 25, xMul: 20, delay: 2.5 },
-  { baseX: 800, r: 70, color: '#fde04718', speed: 20, xMul: 30, delay: 0.7 },
-  { baseX: 1700, r: 50, color: '#fbbf2420', speed: 28, xMul: 50, delay: 2.2 },
-  { baseX: 300, r: 40, color: '#fffde418', speed: 30, xMul: 25, delay: 1.1 },
+  { baseX: 400, r: 120, color: '#fde04735', speed: 25, xMul: 40, delay: 0 },
+  { baseX: 1500, r: 90, color: '#fbbf2438', speed: 30, xMul: 60, delay: 1.5 },
+  { baseX: 1000, r: 60, color: '#fffde435', speed: 35, xMul: 20, delay: 2.5 },
+  { baseX: 800, r: 70, color: '#fde04730', speed: 28, xMul: 30, delay: 0.7 },
+  { baseX: 1700, r: 50, color: '#fbbf2432', speed: 38, xMul: 50, delay: 2.2 },
+  { baseX: 300, r: 40, color: '#fffde430', speed: 40, xMul: 25, delay: 1.1 },
+  { baseX: 600, r: 85, color: '#fde04733', speed: 32, xMul: 35, delay: 1.8 },
+  { baseX: 1200, r: 65, color: '#fbbf2435', speed: 36, xMul: 45, delay: 0.5 },
+  { baseX: 200, r: 55, color: '#fffde438', speed: 42, xMul: 28, delay: 2.8 },
+  { baseX: 1400, r: 45, color: '#fde04732', speed: 34, xMul: 55, delay: 1.3 },
+  { baseX: 900, r: 95, color: '#fbbf2436', speed: 33, xMul: 42, delay: 2.0 },
+  { baseX: 500, r: 75, color: '#fffde434', speed: 37, xMul: 38, delay: 0.9 },
+  { baseX: 1600, r: 80, color: '#fde04737', speed: 31, xMul: 48, delay: 1.7 },
+  { baseX: 100, r: 60, color: '#fbbf2433', speed: 39, xMul: 32, delay: 2.4 },
+  { baseX: 1300, r: 70, color: '#fffde436', speed: 35, xMul: 52, delay: 1.2 }
 ];
 
 // AnimatedNumber component for counting up
