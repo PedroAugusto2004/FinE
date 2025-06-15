@@ -552,9 +552,22 @@ const Welcome = () => {
                   <Star className="h-4 w-4 text-yellow-400" />
                   {t('welcome.platform')}
                 </div>
-                <h2 className="text-4xl sm:text-6xl md:text-7xl font-bold leading-tight">
-                  {t('welcome.master')} <span className="text-yellow-400">{t('welcome.future')}</span>
-                </h2>
+                <motion.h2 
+                  className="text-4xl sm:text-6xl md:text-7xl font-bold leading-tight"
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 1, ease: easeOut }}
+                >
+                  {t('welcome.master')} {" "}
+                  <motion.span
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 1.2, delay: 0.3, ease: easeOut }}
+                    className="text-yellow-400 inline-block"
+                  >
+                    {t('welcome.future')}
+                  </motion.span>
+                </motion.h2>
                 <p className="text-base sm:text-xl text-neutral-300 leading-relaxed">
                   {t('welcome.desc')}
                 </p>
