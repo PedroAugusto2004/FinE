@@ -121,6 +121,10 @@ const Welcome = () => {
   const langRef = useRef<HTMLDivElement>(null);
   const selectedLang = LANGUAGES.find(l => l.code === i18n.language);
 
+  // State for mouse position relative to features section
+  const [featuresMouse, setFeaturesMouse] = useState<{x: number, y: number} | null>(null);
+  const featuresSectionRef = useRef<HTMLDivElement>(null);
+
   const { toast } = useToast();
 
   const handleSignIn = async (e: React.FormEvent) => {
@@ -375,11 +379,15 @@ const Welcome = () => {
     idleTimeout.current = setTimeout(() => setIsIdle(true), 2200);
   };
 
+  // Detect mobile for background optimization
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  const CIRCLES_OPTIMIZED = isMobile ? CIRCLES.slice(0, 6).map(c => ({ ...c, r: c.r * 0.7 })) : CIRCLES;
+
   const [bubbleStates, setBubbleStates] = useState(
-    CIRCLES.map((circle, idx) => ({
-      y: 1080 + Math.random() * 400, // start below the viewport
-      xOffset: Math.random() * 100 - 50, // slight horizontal offset
-      t: Math.random() * 1000, // randomize start
+    (isMobile ? CIRCLES_OPTIMIZED : CIRCLES).map((circle, idx) => ({
+      y: 1080 + Math.random() * 400,
+      xOffset: Math.random() * 100 - 50,
+      t: Math.random() * 1000,
     }))
   );
 
@@ -388,11 +396,11 @@ const Welcome = () => {
     let running = true;
     function animate() {
       setBubbleStates(prev => prev.map((bubble, idx) => {
-        const speed = CIRCLES[idx].speed;
-        let newY = bubble.y - (0.7 + speed * 0.03);
+        const speed = (isMobile ? CIRCLES_OPTIMIZED : CIRCLES)[idx].speed;
+        let newY = bubble.y - (0.7 + speed * 0.09); // Increased speed multiplier for even faster movement
         // If above the top, reset to below
-        if (newY < -CIRCLES[idx].r * 2) {
-          newY = 1080 + CIRCLES[idx].r + Math.random() * 200;
+        if (newY < -((isMobile ? CIRCLES_OPTIMIZED : CIRCLES)[idx].r * 2)) {
+          newY = 1080 + (isMobile ? CIRCLES_OPTIMIZED : CIRCLES)[idx].r + Math.random() * 200;
         }
         // Gentle horizontal sway
         const t = bubble.t + 0.01;
@@ -407,7 +415,7 @@ const Welcome = () => {
     }
     animate();
     return () => { running = false; };
-  }, []);
+  }, [isMobile]);
 
   return (
     <div
@@ -424,7 +432,7 @@ const Welcome = () => {
         transition={{ duration: 1 }}
       >
         <svg width="100%" height="100%" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full absolute">
-          {CIRCLES.map((circle, idx) => {
+          {(isMobile ? CIRCLES_OPTIMIZED : CIRCLES).map((circle, idx) => {
             // Blend idle/interactive for x
             const x = circle.baseX + ((isIdle ? idleCoords.x : bgCoords.x) * circle.xMul) + bubbleStates[idx].xOffset;
             const y = bubbleStates[idx].y + ((isIdle ? idleCoords.y : bgCoords.y) * 10);
@@ -698,6 +706,16 @@ const Welcome = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.15 }}
+            ref={featuresSectionRef}
+            onMouseMove={e => {
+              if (!featuresSectionRef.current) return;
+              const rect = featuresSectionRef.current.getBoundingClientRect();
+              setFeaturesMouse({
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+              });
+            }}
+            onMouseLeave={() => setFeaturesMouse(null)}
           >
             <motion.div className="text-center mb-16" variants={fadeInUp}>
               <h3 className="text-4xl font-bold text-white mb-6">{t('welcome.why')}</h3>
@@ -708,59 +726,7 @@ const Welcome = () => {
             <motion.div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8" variants={staggerContainer}>
               {features.map((feature, index) => {
                 const Icon = feature.icon;
-                // Mouse movement state for 3D hover effect
-                const [hovered, setHovered] = useState(false);
-                const [coords, setCoords] = useState({ x: 0, y: 0 });
-                // Handler for mouse movement
-                const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-                  const rect = e.currentTarget.getBoundingClientRect();
-                  const x = e.clientX - rect.left - rect.width / 2;
-                  const y = e.clientY - rect.top - rect.height / 2;
-                  setCoords({ x, y });
-                };
-                // Handler for mouse leave
-                const handleMouseLeave = () => {
-                  setCoords({ x: 0, y: 0 });
-                  setHovered(false);
-                };
-                return (
-                  <motion.div
-                    key={index}
-                    className="group p-8 bg-neutral-800 border-neutral-700 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500 cursor-pointer relative overflow-hidden"
-                    variants={fadeInUp}
-                    whileHover={{ scale: 1.06, boxShadow: '0 8px 32px 0 rgba(255, 214, 10, 0.15)' }}
-                    onMouseMove={handleMouseMove}
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={handleMouseLeave}
-                    style={{
-                      transform: hovered
-                        ? `perspective(800px) rotateY(${coords.x / 20}deg) rotateX(${-coords.y / 20}deg) scale(1.06)`
-                        : undefined,
-                      transition: 'transform 0.3s cubic-bezier(0.42,0,0.58,1)',
-                    }}
-                  >
-                    <div className="w-16 h-16 bg-neutral-900 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <Icon className="h-8 w-8 text-yellow-400" />
-                    </div>
-                    <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
-                    <p className="text-neutral-300 leading-relaxed mb-4">{feature.description}</p>
-                    <ul className="text-neutral-400 text-sm space-y-1 text-left mx-auto max-w-xs">
-                      {feature.details && feature.details.map((detail: string, i: number) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-yellow-400">•</span> {detail}
-                        </li>
-                      ))}
-                    </ul>
-                    {/* Animated background highlight on hover */}
-                    <motion.div
-                      className="absolute inset-0 pointer-events-none rounded-2xl"
-                      initial={{ opacity: 0 }}
-                      animate={hovered ? { opacity: 0.12 } : { opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                      style={{ background: 'radial-gradient(circle at 60% 40%, #fde047 0%, transparent 80%)' }}
-                    />
-                  </motion.div>
-                );
+                return <FeatureCard key={index} feature={feature} Icon={Icon} />;
               })}
             </motion.div>
           </motion.section>
@@ -1033,3 +999,54 @@ const Welcome = () => {
 };
 
 export default Welcome;
+
+const FeatureCard = ({ feature, Icon }: { feature: any, Icon: any }) => {
+  const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const [hovered, setHovered] = useState(false);
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    setCoords({ x, y });
+    setHovered(true);
+  };
+  const handleMouseLeave = () => {
+    setCoords({ x: 0, y: 0 });
+    setHovered(false);
+  };
+  return (
+    <motion.div
+      className="group p-8 bg-neutral-800 border-neutral-700 hover:border-yellow-400/50 backdrop-blur-sm rounded-2xl transition-all duration-500 cursor-pointer relative overflow-hidden"
+      variants={fadeInUp}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        transform: hovered
+          ? `perspective(800px) rotateY(${coords.x / 18}deg) rotateX(${-coords.y / 18}deg) scale(1.04)`
+          : 'perspective(800px) scale(1)',
+        transition: 'transform 0.25s cubic-bezier(0.42,0,0.58,1)',
+      }}
+    >
+      <div className="w-16 h-16 bg-neutral-900 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+        <Icon className="h-8 w-8 text-yellow-400" />
+      </div>
+      <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
+      <p className="text-neutral-300 leading-relaxed mb-4">{feature.description}</p>
+      <ul className="text-neutral-400 text-sm space-y-1 text-left mx-auto max-w-xs">
+        {feature.details && feature.details.map((detail: string, i: number) => (
+          <li key={i} className="flex items-start gap-2">
+            <span className="text-yellow-400">•</span> {detail}
+          </li>
+        ))}
+      </ul>
+      {/* Animated background highlight on hover */}
+      <motion.div
+        className="absolute inset-0 pointer-events-none rounded-2xl"
+        initial={{ opacity: 0 }}
+        animate={hovered ? { opacity: 0.12 } : { opacity: 0 }}
+        transition={{ duration: 0.3 }}
+        style={{ background: 'radial-gradient(circle at 60% 40%, #fde047 0%, transparent 80%)' }}
+      />
+    </motion.div>
+  );
+};
