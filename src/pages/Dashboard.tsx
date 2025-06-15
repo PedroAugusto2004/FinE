@@ -113,9 +113,9 @@ const Dashboard = () => {
         className="container mx-auto px-4 py-6 space-y-8"
       >
         {/* Welcome Section */}
-        <motion.div variants={itemVariants} className="space-y-4">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div className="space-y-1">              <h2 className="text-3xl font-medium tracking-tight leading-relaxed text-foreground/90">
+        <motion.div variants={itemVariants} className="space-y-4">          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="space-y-1 pl-14 sm:pl-0">
+              <h2 className="text-3xl font-medium tracking-tight leading-relaxed text-foreground/90">
                 Good {timeOfDay}{firstName ? `, ${firstName}` : ''}
               </h2>
               <p className="text-base text-muted-foreground/80 font-normal leading-relaxed">
