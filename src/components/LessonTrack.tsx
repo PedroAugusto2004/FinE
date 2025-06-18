@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { useNavigate } from "react-router-dom";
 import { financialCourse } from "@/data/financialCourse";
-import { Lock, ArrowRight } from "lucide-react";
+import { Lock, ArrowRight, BookOpen, Circle, CheckCircle2, PiggyBank, BarChart2, CreditCard } from "lucide-react";
 import { useUserProgress, useUserStats } from "@/hooks/useUserProgress";
 import { useProgressCalculations } from "@/hooks/useProgressCalculations";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -32,6 +32,13 @@ const itemVariants = {
     }
   }
 };
+
+// Map each unit to a Lucide icon related to its subject
+const unitIcons = [
+  BookOpen,    // Financial Basics
+  PiggyBank,   // Saving & Investing
+  CreditCard   // Credit & Debt
+];
 
 const LessonTrack = () => {
   const navigate = useNavigate();
@@ -81,6 +88,7 @@ const LessonTrack = () => {
       <div className="space-y-16">
         {financialCourse.map((unit, unitIndex) => {
           const unitStats = progress.unitProgress[unit.id];
+          const UnitIcon = unitIcons[unitIndex] || BookOpen;
           
           return (
             <motion.div 
@@ -91,6 +99,7 @@ const LessonTrack = () => {
               {/* Unit Header */}
               <div className="space-y-4">
                 <div className="flex items-baseline gap-3">
+                  <UnitIcon className="w-4 h-4 text-primary" aria-label="Module" />
                   <span className="text-lg font-medium text-primary">
                     {unitIndex + 1}
                   </span>
@@ -131,12 +140,19 @@ const LessonTrack = () => {
                     >
                       <div className="space-y-1">
                         <div className="flex items-center justify-between">
-                          <h3 className={cn(
-                            "text-base font-medium group-hover:text-primary transition-colors",
-                            isLocked && "text-muted-foreground"
-                          )}>
-                            {lesson.title}
-                          </h3>
+                          <div className="flex items-center gap-2">
+                            {isCompleted ? (
+                              <CheckCircle2 className="w-3.5 h-3.5 text-primary" aria-label="Completed" />
+                            ) : (
+                              <Circle className="w-3.5 h-3.5 text-muted-foreground" aria-label="Not started" />
+                            )}
+                            <h3 className={cn(
+                              "text-base font-medium group-hover:text-primary transition-colors",
+                              isLocked && "text-muted-foreground"
+                            )}>
+                              {lesson.title}
+                            </h3>
+                          </div>
                           {!isLocked ? (
                             <ArrowRight className={cn(
                               "w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity",
