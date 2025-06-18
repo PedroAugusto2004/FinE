@@ -38,12 +38,16 @@ const LessonTrack = () => {
   const { data: userProgress } = useUserProgress();
   const { data: userStats } = useUserStats();
   const progress = useProgressCalculations();
+  const isMobile = useIsMobile();
 
   const completedLessons = new Set(userProgress?.map(p => p.lesson_id) || []);
 
   return (
     <motion.div 
-      className="min-h-screen bg-background p-4 md:p-8 max-w-3xl mx-auto"
+      className={cn(
+        "min-h-screen bg-background p-4 md:p-8 max-w-3xl mx-auto",
+        isMobile && "pt-16"
+      )}
       initial="hidden"
       animate="visible"
       variants={containerVariants}
