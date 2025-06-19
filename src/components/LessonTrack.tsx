@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -88,6 +88,23 @@ const LessonTrack = () => {
     return '#22c55e';
   };
 
+  const unitRef = useRef<HTMLDivElement>(null);
+  const lessonRef = useRef<HTMLDivElement>(null);
+  const [lineEnd, setLineEnd] = useState(112); // default fallback
+
+  useEffect(() => {
+    if (unitRef.current && lessonRef.current && isMobile) {
+      const unitRect = unitRef.current.getBoundingClientRect();
+      const lessonRect = lessonRef.current.getBoundingClientRect();
+      // Calculate the distance from the bottom of the unit to the top of the lesson
+      const offset = lessonRect.top - unitRect.bottom;
+      // The SVG starts at 0, so add the height of the unit card
+      setLineEnd(unitRect.height + offset);
+    } else if (!isMobile) {
+      setLineEnd(112); // fallback for desktop
+    }
+  }, [isMobile]);
+
   return (
     <div className={cn(
       "min-h-screen bg-background p-4 md:p-8 max-w-3xl mx-auto flex flex-col items-center relative",
@@ -124,9 +141,9 @@ const LessonTrack = () => {
         width="32" height={nodes.length * 96}
         style={{ top: 180 + 96, height: nodes.length * 96, pointerEvents: 'none', zIndex: 0 }}
       >
-        {/* Green line from unit to just before the lesson card (try a larger value to fill the gap) */}
+        {/* Green line from unit to just before the lesson card, responsive for mobile/desktop */}
         <path
-          d={`M16 0 V112`}
+          d={`M16 0 V${lineEnd}`}
           stroke="#22c55e"
           strokeWidth="6"
           strokeLinecap="round"
@@ -135,7 +152,7 @@ const LessonTrack = () => {
         />
         {/* Dark line from after the lesson card to next node */}
         <path
-          d={`M16 128 V192`}
+          d={`M16 ${lineEnd + 16} V192`}
           stroke={getLineColor(1)}
           strokeWidth="6"
           strokeLinecap="round"
@@ -166,14 +183,15 @@ const LessonTrack = () => {
         {nodes.map((node, idx) => {
           if (node.type === 'unit') {
             const UnitIcon = unitIcons[node.unitIdx] || BookOpen;
+            // Attach ref only to the first unit
             return (
               <motion.div
                 key={node.unit.id}
                 variants={itemVariants}
                 className="flex flex-col items-center relative"
                 style={{ minHeight: 80 }}
+                ref={idx === 0 ? unitRef : undefined}
               >
-                {/* Mask the line only inside the card area */}
                 <div className="bg-background border-4 border-green-500 rounded-2xl shadow-lg flex flex-col items-center px-6 py-3 min-w-[120px] relative z-30">
                   <UnitIcon className="w-6 h-6 text-green-500 mb-1" />
                   <span className="text-lg font-bold text-green-600">{node.unit.title}</span>
@@ -184,14 +202,15 @@ const LessonTrack = () => {
           } else if (node.type === 'lesson') {
             const isCompleted = completedLessons.has(node.lesson.id);
             const isLocked = !node.lesson.isUnlocked;
+            // Attach ref only to the first lesson
             return (
               <motion.div
                 key={node.lesson.id}
                 variants={itemVariants}
                 className="flex flex-col items-center relative"
                 style={{ minHeight: 80 }}
+                ref={idx === 1 ? lessonRef : undefined}
               >
-                {/* Mask the line only inside the card area */}
                 <div
                   className={cn(
                     "rounded-2xl border-2 flex items-center px-6 py-2 min-w-[120px] transition-colors cursor-pointer relative z-30",
