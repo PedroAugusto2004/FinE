@@ -108,13 +108,16 @@ const LessonTrack = () => {
 
   // Handler for lesson click
   const handleLessonClick = (node) => {
-    if (!node.lesson.isUnlocked) return;
+    if (!node.lesson.isUnlocked) {
+      setSelectedLesson({ ...node.lesson, isLocked: true });
+      return;
+    }
     setSelectedLesson(node.lesson);
   };
 
   // Handler for starting lesson from popup
   const handleStartLesson = () => {
-    if (selectedLesson) {
+    if (selectedLesson && !selectedLesson.isLocked) {
       navigate(`/lesson/${selectedLesson.id}`);
       setSelectedLesson(null);
     }
@@ -270,16 +273,28 @@ const LessonTrack = () => {
                 {selectedLesson.title}
               </h2>
               <p className="text-sm text-muted-foreground text-center mb-4 px-2">
-                {selectedLesson.description}
+                {selectedLesson.isLocked
+                  ? 'Complete other levels to unlock this!'
+                  : selectedLesson.description}
               </p>
-              <motion.button
-                className="w-full rounded-lg shadow-none text-base font-medium bg-green-700 hover:bg-green-800 text-white py-2 transition-colors focus:outline-none active:scale-95"
-                whileTap={{ scale: 0.93, y: 2 }}
-                onClick={handleStartLesson}
-                style={{ outline: 'none', border: 'none' }}
-              >
-                START
-              </motion.button>
+              {selectedLesson.isLocked ? (
+                <motion.button
+                  className="w-full rounded-lg shadow-none text-base font-medium bg-gray-400 text-white py-2 cursor-not-allowed opacity-80"
+                  style={{ outline: 'none', border: 'none' }}
+                  disabled
+                >
+                  LOCKED
+                </motion.button>
+              ) : (
+                <motion.button
+                  className="w-full rounded-lg shadow-none text-base font-medium bg-green-700 hover:bg-green-800 text-white py-2 transition-colors focus:outline-none active:scale-95"
+                  whileTap={{ scale: 0.93, y: 2 }}
+                  onClick={handleStartLesson}
+                  style={{ outline: 'none', border: 'none' }}
+                >
+                  START
+                </motion.button>
+              )}
             </div>
           </motion.div>
         </div>
