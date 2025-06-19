@@ -244,7 +244,7 @@ const LessonTrack = () => {
                   className={cn(
                     "rounded-2xl border-2 flex items-center px-6 py-2 min-w-[120px] transition-colors cursor-pointer relative z-30",
                     isCompleted ? "border-green-500 bg-green-50" : "border-border bg-background",
-                    isLocked && "opacity-60 cursor-not-allowed"
+                    isLocked && "bg-background"
                   )}
                   onClick={() => handleLessonClick(node)}
                 >
