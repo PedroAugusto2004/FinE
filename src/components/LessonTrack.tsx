@@ -91,6 +91,7 @@ const LessonTrack = () => {
   const unitRef = useRef<HTMLDivElement>(null);
   const lessonRef = useRef<HTMLDivElement>(null);
   const [lineEnd, setLineEnd] = useState(112); // default fallback
+  const [selectedLesson, setSelectedLesson] = useState(null); // Track selected lesson for popup
 
   useEffect(() => {
     if (unitRef.current && lessonRef.current && isMobile) {
@@ -104,6 +105,35 @@ const LessonTrack = () => {
       setLineEnd(112); // fallback for desktop
     }
   }, [isMobile]);
+
+  // Handler for lesson click
+  const handleLessonClick = (node) => {
+    if (!node.lesson.isUnlocked) return;
+    setSelectedLesson(node.lesson);
+  };
+
+  // Handler for starting lesson from popup
+  const handleStartLesson = () => {
+    if (selectedLesson) {
+      navigate(`/lesson/${selectedLesson.id}`);
+      setSelectedLesson(null);
+    }
+  };
+
+  // Handler for closing popup
+  const handleClosePopup = () => setSelectedLesson(null);
+
+  // Close popup on outside click
+  useEffect(() => {
+    if (!selectedLesson) return;
+    const handleClick = (e) => {
+      if (e.target.classList.contains('lesson-popup-overlay')) {
+        setSelectedLesson(null);
+      }
+    };
+    window.addEventListener('mousedown', handleClick);
+    return () => window.removeEventListener('mousedown', handleClick);
+  }, [selectedLesson]);
 
   return (
     <div className={cn(
@@ -202,7 +232,6 @@ const LessonTrack = () => {
           } else if (node.type === 'lesson') {
             const isCompleted = completedLessons.has(node.lesson.id);
             const isLocked = !node.lesson.isUnlocked;
-            // Attach ref only to the first lesson
             return (
               <motion.div
                 key={node.lesson.id}
@@ -217,7 +246,7 @@ const LessonTrack = () => {
                     isCompleted ? "border-green-500 bg-green-50" : "border-border bg-background",
                     isLocked && "opacity-60 cursor-not-allowed"
                   )}
-                  onClick={() => !isLocked && navigate(`/lesson/${node.lesson.id}`)}
+                  onClick={() => handleLessonClick(node)}
                 >
                   {isCompleted ? (
                     <CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />
@@ -233,6 +262,45 @@ const LessonTrack = () => {
           return null;
         })}
       </div>
+
+      {/* Lesson Description Popup */}
+      {selectedLesson && (
+        <div className="lesson-popup-overlay fixed inset-0 flex items-center justify-center z-50 backdrop-blur-sm bg-black/30 transition-all duration-300 animate-fadeIn">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 40 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 40 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className="bg-white/70 dark:bg-neutral-900/70 rounded-xl shadow-xl p-6 max-w-sm w-full relative border border-border backdrop-blur-md"
+            style={{ boxShadow: '0 8px 32px 0 rgba(0,0,0,0.18)' }}
+          >
+            <button
+              className="absolute top-3 right-3 text-muted-foreground hover:text-foreground text-2xl font-light focus:outline-none"
+              onClick={handleClosePopup}
+              aria-label="Close"
+              style={{ background: 'none', border: 'none' }}
+            >
+              ×
+            </button>
+            <div className="flex flex-col items-center gap-3">
+              <h2 className="text-lg font-semibold text-center mb-1 text-foreground tracking-tight">
+                {selectedLesson.title}
+              </h2>
+              <p className="text-sm text-muted-foreground text-center mb-4 px-2">
+                {selectedLesson.description}
+              </p>
+              <motion.button
+                className="w-full rounded-lg shadow-none text-base font-medium bg-green-700 hover:bg-green-800 text-white py-2 transition-colors focus:outline-none active:scale-95"
+                whileTap={{ scale: 0.93, y: 2 }}
+                onClick={handleStartLesson}
+                style={{ outline: 'none', border: 'none' }}
+              >
+                START
+              </motion.button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };
