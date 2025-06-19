@@ -40,6 +40,18 @@ const unitIcons = [
   CreditCard   // Credit & Debt
 ];
 
+// Helper: flatten units and lessons into a single array for rendering the path
+const getTrackNodes = (course) => {
+  const nodes = [];
+  course.forEach((unit, unitIdx) => {
+    nodes.push({ type: 'unit', unit, unitIdx });
+    unit.lessons.forEach((lesson, lessonIdx) => {
+      nodes.push({ type: 'lesson', lesson, lessonIdx, unit, unitIdx });
+    });
+  });
+  return nodes;
+};
+
 const LessonTrack = () => {
   const navigate = useNavigate();
   const { data: userProgress } = useUserProgress();
@@ -48,17 +60,13 @@ const LessonTrack = () => {
   const isMobile = useIsMobile();
 
   const completedLessons = new Set(userProgress?.map(p => p.lesson_id) || []);
+  const nodes = getTrackNodes(financialCourse);
 
   return (
-    <motion.div 
-      className={cn(
-        "min-h-screen bg-background p-4 md:p-8 max-w-3xl mx-auto",
-        isMobile && "pt-16"
-      )}
-      initial="hidden"
-      animate="visible"
-      variants={containerVariants}
-    >
+    <div className={cn(
+      "min-h-screen bg-background p-4 md:p-8 max-w-3xl mx-auto flex flex-col items-center relative",
+      isMobile && "pt-16"
+    )}>
       {/* Header */}
       <motion.div variants={itemVariants} className="mb-12 space-y-2">
         <h1 className="text-2xl md:text-3xl font-medium tracking-tight">
@@ -84,100 +92,86 @@ const LessonTrack = () => {
         </div>
       </motion.div>
 
-      {/* Lesson Track */}
-      <div className="space-y-16">
-        {financialCourse.map((unit, unitIndex) => {
-          const unitStats = progress.unitProgress[unit.id];
-          const UnitIcon = unitIcons[unitIndex] || BookOpen;
-          
-          return (
-            <motion.div 
-              key={unit.id} 
-              variants={itemVariants}
-              className="space-y-6"
-            >
-              {/* Unit Header */}
-              <div className="space-y-4">
-                <div className="flex items-baseline gap-3">
-                  <UnitIcon className="w-4 h-4 text-primary" aria-label="Module" />
-                  <span className="text-lg font-medium text-primary">
-                    {unitIndex + 1}
-                  </span>
-                  <h2 className="text-xl font-medium">
-                    {unit.title}
-                  </h2>
-                </div>
-                <p className="text-sm text-muted-foreground pl-8">
-                  {unit.description}
-                </p>
-                <div className="pl-8 space-y-2">
-                  <Progress 
-                    value={unitStats?.percentageComplete || 0}
-                    className="h-1 w-48"
-                  />
-                  <div className="text-xs text-muted-foreground">
-                    {unitStats?.completedLessons || 0}/{unitStats?.totalLessons || 0} lessons · {unitStats?.earnedXP || 0} XP
-                  </div>
-                </div>
-              </div>
+      {/* SVG Path connecting all nodes */}
+      <svg
+        className="absolute left-1/2 -translate-x-1/2 z-0"
+        width="32" height={nodes.length * 96}
+        style={{ top: 180 + 96, height: nodes.length * 96, pointerEvents: 'none' }} // shift down by 1 node
+      >
+        <path
+          d={`M16 0 V${(nodes.length - 1) * 96}`}
+          stroke="#22c55e"
+          strokeWidth="6"
+          strokeLinecap="round"
+          opacity="0.7"
+          fill="none"
+        />
+      </svg>
 
-              {/* Lessons */}
-              <div className="space-y-4 pl-8">
-                {unit.lessons.map((lesson) => {
-                  const isCompleted = completedLessons.has(lesson.id);
-                  const isLocked = !lesson.isUnlocked;
-                  
-                  return (
-                    <motion.div 
-                      key={lesson.id}
-                      variants={itemVariants}
-                      className={cn(
-                        "group relative border-l-2 pl-6 py-3 transition-colors",
-                        isCompleted ? "border-primary" : "border-border",
-                        !isLocked && "hover:border-primary cursor-pointer"
-                      )}
-                      onClick={() => !isLocked && navigate(`/lesson/${lesson.id}`)}
-                    >
-                      <div className="space-y-1">
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            {isCompleted ? (
-                              <CheckCircle2 className="w-3.5 h-3.5 text-primary" aria-label="Completed" />
-                            ) : (
-                              <Circle className="w-3.5 h-3.5 text-muted-foreground" aria-label="Not started" />
-                            )}
-                            <h3 className={cn(
-                              "text-base font-medium group-hover:text-primary transition-colors",
-                              isLocked && "text-muted-foreground"
-                            )}>
-                              {lesson.title}
-                            </h3>
-                          </div>
-                          {!isLocked ? (
-                            <ArrowRight className={cn(
-                              "w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity",
-                              isCompleted && "text-primary"
-                            )} />
-                          ) : (
-                            <Lock className="w-4 h-4 text-muted-foreground" />
-                          )}
-                        </div>
-                        <p className={cn(
-                          "text-sm text-muted-foreground",
-                          isLocked && "text-muted-foreground/60"
-                        )}>
-                          {lesson.description}
-                        </p>
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-            </motion.div>
-          );
+      {/* Render nodes (modules and lessons) */}
+      <div className="flex flex-col items-center gap-12 relative z-10 w-full">
+        {nodes.map((node, idx) => {
+          if (node.type === 'unit') {
+            const UnitIcon = unitIcons[node.unitIdx] || BookOpen;
+            return (
+              <motion.div
+                key={node.unit.id}
+                variants={itemVariants}
+                className="flex flex-col items-center relative"
+                style={{ minHeight: 80 }}
+              >
+                {/* Mask the line only inside the card area */}
+                <div className="absolute left-1/2 -translate-x-1/2 z-20"
+                  style={{ width: 140, height: 64, top: 0 }}
+                >
+                  <div className="w-full h-full bg-background rounded-2xl" />
+                </div>
+                <div className="bg-background border-4 border-green-500 rounded-2xl shadow-lg flex flex-col items-center px-6 py-3 min-w-[120px] relative z-30">
+                  <UnitIcon className="w-6 h-6 text-green-500 mb-1" />
+                  <span className="text-lg font-bold text-green-600">{node.unit.title}</span>
+                  <span className="text-xs text-muted-foreground text-center">{node.unit.description}</span>
+                </div>
+              </motion.div>
+            );
+          } else if (node.type === 'lesson') {
+            const isCompleted = completedLessons.has(node.lesson.id);
+            const isLocked = !node.lesson.isUnlocked;
+            return (
+              <motion.div
+                key={node.lesson.id}
+                variants={itemVariants}
+                className="flex flex-col items-center relative"
+                style={{ minHeight: 80 }}
+              >
+                {/* Mask the line only inside the card area */}
+                <div className="absolute left-1/2 -translate-x-1/2 z-20"
+                  style={{ width: 140, height: 40, top: 0 }}
+                >
+                  <div className="w-full h-full bg-background rounded-2xl" />
+                </div>
+                <div
+                  className={cn(
+                    "rounded-2xl border-2 flex items-center px-6 py-2 min-w-[120px] transition-colors cursor-pointer relative z-30",
+                    isCompleted ? "border-green-500 bg-green-50" : "border-border bg-background",
+                    isLocked && "opacity-60 cursor-not-allowed"
+                  )}
+                  onClick={() => !isLocked && navigate(`/lesson/${node.lesson.id}`)}
+                >
+                  {isCompleted ? (
+                    <CheckCircle2 className="w-5 h-5 text-green-500 mr-2" />
+                  ) : (
+                    <Circle className="w-5 h-5 text-muted-foreground mr-2" />
+                  )}
+                  <span className={cn("font-medium", isLocked && "text-muted-foreground")}>{node.lesson.title}</span>
+                  {isLocked && <Lock className="w-4 h-4 ml-2 text-muted-foreground" />}
+                </div>
+              </motion.div>
+            );
+          }
+          return null;
         })}
       </div>
-    </motion.div>
+    </div>
   );
 };
 
