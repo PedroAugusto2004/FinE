@@ -180,32 +180,15 @@ const LessonTrack = () => {
           opacity="1"
           fill="none"
         />
-        {/* Dark line from after the lesson card to next node */}
+        {/* Solid gray line from after the lesson card to the end, no overlap or opacity blending */}
         <path
-          d={`M16 ${lineEnd + 16} V192`}
-          stroke={getLineColor(1)}
+          d={`M16 ${lineEnd} V${nodes.length * 96}`}
+          stroke="#6b7280" // Tailwind gray-600
           strokeWidth="6"
           strokeLinecap="round"
-          opacity={getLineColor(1) === '#22c55e' ? 1 : 0.7}
+          opacity="1"
           fill="none"
         />
-        {/* The rest of the segments, starting after the second lesson */}
-        {nodes.slice(2, nodes.length - 1).map((_, idx) => {
-          const segIdx = idx + 2;
-          const color = getLineColor(segIdx);
-          const opacity = color === '#22c55e' ? 1 : 0.7;
-          return (
-            <path
-              key={segIdx}
-              d={`M16 ${(segIdx) * 96} V${(segIdx + 1) * 96}`}
-              stroke={color}
-              strokeWidth="6"
-              strokeLinecap="round"
-              opacity={opacity}
-              fill="none"
-            />
-          );
-        })}
       </svg>
 
       {/* Render nodes (modules and lessons) */}
