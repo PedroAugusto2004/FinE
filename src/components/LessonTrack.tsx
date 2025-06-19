@@ -62,6 +62,32 @@ const LessonTrack = () => {
   const completedLessons = new Set(userProgress?.map(p => p.lesson_id) || []);
   const nodes = getTrackNodes(financialCourse);
 
+  // Find the index of the "What is Money?" lesson
+  const whatIsMoneyIdx = nodes.findIndex(
+    (node) => node.type === 'lesson' && node.lesson.title === 'What is Money?'
+  );
+
+  // Find the last completed lesson index
+  const lastCompletedIdx = nodes.reduce((acc, node, idx) => {
+    if (node.type === 'lesson' && completedLessons.has(node.lesson.id)) {
+      return idx;
+    }
+    return acc;
+  }, -1);
+
+  // Helper to determine color for each segment
+  const getLineColor = (idx) => {
+    // The segment connects nodes[idx] to nodes[idx+1]
+    // If the node at idx is a lesson and is completed, color green
+    const node = nodes[idx];
+    if (node.type === 'lesson' && completedLessons.has(node.lesson.id)) {
+      return '#22c55e';
+    }
+    // Otherwise, dark grey after 'What is Money?'
+    if (idx >= whatIsMoneyIdx) return '#262626';
+    return '#22c55e';
+  };
+
   return (
     <div className={cn(
       "min-h-screen bg-background p-4 md:p-8 max-w-3xl mx-auto flex flex-col items-center relative",
@@ -96,16 +122,43 @@ const LessonTrack = () => {
       <svg
         className="absolute left-1/2 -translate-x-1/2 z-0"
         width="32" height={nodes.length * 96}
-        style={{ top: 180 + 96, height: nodes.length * 96, pointerEvents: 'none' }} // shift down by 1 node
+        style={{ top: 180 + 96, height: nodes.length * 96, pointerEvents: 'none', zIndex: 0 }}
       >
+        {/* Green line from unit to just before the lesson card (try a larger value to fill the gap) */}
         <path
-          d={`M16 0 V${(nodes.length - 1) * 96}`}
+          d={`M16 0 V112`}
           stroke="#22c55e"
           strokeWidth="6"
           strokeLinecap="round"
-          opacity="0.7"
+          opacity="1"
           fill="none"
         />
+        {/* Dark line from after the lesson card to next node */}
+        <path
+          d={`M16 128 V192`}
+          stroke={getLineColor(1)}
+          strokeWidth="6"
+          strokeLinecap="round"
+          opacity={getLineColor(1) === '#22c55e' ? 1 : 0.7}
+          fill="none"
+        />
+        {/* The rest of the segments, starting after the second lesson */}
+        {nodes.slice(2, nodes.length - 1).map((_, idx) => {
+          const segIdx = idx + 2;
+          const color = getLineColor(segIdx);
+          const opacity = color === '#22c55e' ? 1 : 0.7;
+          return (
+            <path
+              key={segIdx}
+              d={`M16 ${(segIdx) * 96} V${(segIdx + 1) * 96}`}
+              stroke={color}
+              strokeWidth="6"
+              strokeLinecap="round"
+              opacity={opacity}
+              fill="none"
+            />
+          );
+        })}
       </svg>
 
       {/* Render nodes (modules and lessons) */}
@@ -121,11 +174,6 @@ const LessonTrack = () => {
                 style={{ minHeight: 80 }}
               >
                 {/* Mask the line only inside the card area */}
-                <div className="absolute left-1/2 -translate-x-1/2 z-20"
-                  style={{ width: 140, height: 64, top: 0 }}
-                >
-                  <div className="w-full h-full bg-background rounded-2xl" />
-                </div>
                 <div className="bg-background border-4 border-green-500 rounded-2xl shadow-lg flex flex-col items-center px-6 py-3 min-w-[120px] relative z-30">
                   <UnitIcon className="w-6 h-6 text-green-500 mb-1" />
                   <span className="text-lg font-bold text-green-600">{node.unit.title}</span>
@@ -144,11 +192,6 @@ const LessonTrack = () => {
                 style={{ minHeight: 80 }}
               >
                 {/* Mask the line only inside the card area */}
-                <div className="absolute left-1/2 -translate-x-1/2 z-20"
-                  style={{ width: 140, height: 40, top: 0 }}
-                >
-                  <div className="w-full h-full bg-background rounded-2xl" />
-                </div>
                 <div
                   className={cn(
                     "rounded-2xl border-2 flex items-center px-6 py-2 min-w-[120px] transition-colors cursor-pointer relative z-30",
