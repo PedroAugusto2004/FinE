@@ -144,7 +144,6 @@ const LessonTrack = () => {
 
   return (
     <>
-      <MetricsBar xp={progress.totalProgress.earnedXP} streak={progress.streak.current} lessons={`${progress.totalProgress.completedLessons}/${progress.totalProgress.totalLessons}`} />
       <div className={cn(
         "min-h-screen bg-background p-4 md:p-8 max-w-3xl mx-auto flex flex-col items-center relative",
         isMobile && "pt-16"
@@ -160,7 +159,7 @@ const LessonTrack = () => {
         </motion.div>
 
         {/* Progress Overview */}
-        <motion.div variants={itemVariants} className="mb-12">
+        {/* <motion.div variants={itemVariants} className="mb-12">
           <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground pb-4">
             <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-yellow-400" />
@@ -178,26 +177,26 @@ const LessonTrack = () => {
               <span className="sr-only">Lessons</span>
             </div>
           </div>
-        </motion.div>
+        </motion.div> */}
 
         {/* SVG Path connecting all nodes */}
         <svg
           className="absolute left-1/2 -translate-x-1/2 z-0"
           width="32" height={nodes.length * 96}
-          style={{ top: 180 + 96, height: nodes.length * 96, pointerEvents: 'none', zIndex: 0 }}
+          style={{ top: 180, height: nodes.length * 96, pointerEvents: 'none', zIndex: 0 }}
         >
-          {/* Green line from unit to just before the lesson card, responsive for mobile/desktop */}
+          {/* Green line from unit to just after the lesson card, responsive for mobile/desktop */}
           <path
-            d={`M16 0 V${lineEnd}`}
+            d={`M16 0 V${isMobile ? lineEnd + 12 : lineEnd + 32}`}
             stroke="#22c55e"
             strokeWidth="6"
             strokeLinecap="round"
             opacity="1"
             fill="none"
           />
-          {/* Solid gray line from after the lesson card to the end, no overlap or opacity blending */}
+          {/* Solid gray line from after the green line to the end, no overlap or opacity blending */}
           <path
-            d={`M16 ${lineEnd} V${nodes.length * 96}`}
+            d={`M16 ${isMobile ? lineEnd + 12 : lineEnd + 32} V${nodes.length * 96}`}
             stroke="#6b7280" // Tailwind gray-600
             strokeWidth="6"
             strokeLinecap="round"
@@ -347,6 +346,11 @@ const LessonTrack = () => {
             </motion.div>
           </div>
         )}
+
+        {/* MetricsBar in the top right corner */}
+        <div className="absolute right-4 top-4 z-50">
+          <MetricsBar xp={progress.totalProgress.earnedXP} streak={progress.streak.current} lessons={`${progress.totalProgress.completedLessons}/${progress.totalProgress.totalLessons}`} />
+        </div>
       </div>
     </>
   );
