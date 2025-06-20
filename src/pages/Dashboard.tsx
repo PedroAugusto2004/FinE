@@ -28,6 +28,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import MetricsBar from "@/components/MetricsBar";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -105,15 +106,17 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <ScrollArea className="h-screen">
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={containerVariants}
-        className="container mx-auto px-4 py-6 space-y-8"
-      >
-        {/* Welcome Section */}
-        <motion.div variants={itemVariants} className="space-y-4">          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+    <>
+      <MetricsBar xp={progress.totalXP} streak={progress.currentStreak} lessons={`${progress.completedLessons.length}/${getTotalLessons()}`} />
+      <ScrollArea className="h-screen">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={containerVariants}
+          className="container mx-auto px-4 py-6 space-y-8"
+        >
+          {/* Welcome Section */}
+          <motion.div variants={itemVariants} className="space-y-4">          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
             <div className="space-y-1 pl-14 sm:pl-0">
               <h2 className="text-3xl font-medium tracking-tight leading-relaxed text-foreground/90">
                 Good {timeOfDay}{firstName ? `, ${firstName}` : ''}
@@ -578,6 +581,7 @@ const Dashboard = () => {
         </Card>
       </motion.div>
     </ScrollArea>
+    </>
   );
 };
 
