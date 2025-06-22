@@ -175,6 +175,12 @@ const LessonTrack = () => {
           background-repeat: repeat;
           opacity: 0.7;
         }
+        .unit-card-gradient {
+          background: linear-gradient(145deg, #fff 60%, #f3f4f6 100%);
+        }
+        .dark .unit-card-gradient {
+          background: linear-gradient(145deg, #23272f 60%, #1a1d23 100%);
+        }
       `}</style>
       <div className={cn(
         "min-h-screen p-4 md:p-8 max-w-3xl mx-auto flex flex-col items-center relative",
@@ -185,7 +191,8 @@ const LessonTrack = () => {
           <button
             className={cn(
               "flex items-center gap-3 px-4 py-3 rounded-2xl",
-              "backdrop-blur-md bg-green-500/20 dark:bg-green-700/20",
+              // Dark green background, now with transparency
+              "backdrop-blur-md bg-[rgba(13,45,26,0.85)] dark:bg-[rgba(13,45,26,0.85)]",
               "transition-all duration-200",
               isMobile ? "text-base min-w-[90vw] max-w-[98vw]" : "text-lg min-w-[340px] max-w-[420px]"
             )}
@@ -193,15 +200,15 @@ const LessonTrack = () => {
             onClick={() => setShowSectionModal(true)}
           >
             <div className="flex flex-col flex-1 min-w-0">
-              <span className="uppercase text-xs font-bold text-green-900/80 dark:text-green-200/80 tracking-wide mb-0.5 flex items-center" style={{letterSpacing: '0.04em'}}>
-                <ArrowRight className="w-4 h-4 mr-1 text-green-600 dark:text-green-300" style={{ transform: 'scaleX(-1)' }} />
+              <span className="uppercase text-xs font-bold text-[#e5e7eb] dark:text-[#e5e7eb] tracking-wide mb-0.5 flex items-center" style={{letterSpacing: '0.04em'}}>
+                <ArrowRight className="w-4 h-4 mr-1 text-green-300 dark:text-green-200" style={{ transform: 'scaleX(-1)' }} />
                 SECTION {activeUnitIdx + 1}, UNIT {activeUnitIdx + 1}
               </span>
-              <span className="font-semibold text-green-900 dark:text-green-200 truncate text-left">
+              <span className="font-semibold text-white dark:text-white truncate text-left">
                 {activeUnit.title}
               </span>
             </div>
-            <span className="flex items-center gap-1 px-3 py-1.5 rounded-lg font-bold text-xs ml-2 backdrop-blur-md bg-white/30 dark:bg-neutral-900/30" style={{ WebkitBackdropFilter: 'blur(8px)', backdropFilter: 'blur(8px)' }}>
+            <span className="flex items-center gap-1 px-3 py-1.5 rounded-lg font-bold text-xs ml-2 backdrop-blur-md bg-white/30 dark:bg-neutral-900/30 border border-[#09331a] text-white dark:text-white" style={{ WebkitBackdropFilter: 'blur(8px)', backdropFilter: 'blur(8px)', borderWidth: 1, borderColor: '#09331a' }}>
               <NotebookPen className="w-4 h-4 mr-1" />
               GUIDEBOOK
             </span>
@@ -342,14 +349,14 @@ const LessonTrack = () => {
                   <div
                     className={cn(
                       "bg-background border-4 rounded-2xl flex flex-col items-center px-6 py-3 min-w-[120px] relative",
-                      isActive ? "border-green-500 scale-105" : "border-green-500 shadow-md"
+                      isActive ? "border-green-500 scale-105" : "border-green-500 shadow-md",
+                      "unit-card-gradient"
                     )}
                     style={{
                       ...(isActive ? { transform: 'scale(1.07)' } : {}),
                       fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
-                      boxShadow: '0 2px 8px 0 rgba(0,0,0,0.18), 0 1.5px 0 0 #22c55e inset', // 3D effect: soft shadow, inner border, no green glow
+                      boxShadow: '0 2px 8px 0 rgba(0,0,0,0.18), 0 1.5px 0 0 #22c55e inset',
                       border: '2.5px solid #22c55e',
-                      background: 'linear-gradient(145deg, #23272f 60%, #1a1d23 100%)', // subtle dark gradient for depth
                       transition: 'box-shadow 0.2s cubic-bezier(.4,2,.6,1), background 0.2s cubic-bezier(.4,2,.6,1)',
                     }}
                   >
