@@ -1,4 +1,4 @@
-import { Home, BookOpen, Trophy, ShoppingBag, User, Settings as SettingsIcon, LogOut, DollarSign, Flame } from "lucide-react";
+import { GraduationCap, NotebookPen, BarChart2, CreditCard, User, Settings as SettingsIcon, LogOut, DollarSign } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -6,50 +6,41 @@ import {
   SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarHeader,
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Progress } from "@/components/ui/progress";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
-import { useUserStats } from "@/hooks/useUserProgress";
 import { useSidebar } from "@/components/ui/sidebar";
 
 const menuItems = [
   {
     title: "Learn",
     url: "/",
-    icon: Home,
-    color: "text-blue-500"
+    icon: GraduationCap
   },
   {
     title: "Lessons",
     url: "/lessons",
-    icon: BookOpen,
-    color: "text-green-500"
+    icon: NotebookPen
   },
   {
     title: "Leaderboards",
     url: "/leaderboards", 
-    icon: Trophy,
-    color: "text-yellow-500"
+    icon: BarChart2
   },
   {
     title: "Shop",
     url: "/shop",
-    icon: ShoppingBag,
-    color: "text-purple-500"
+    icon: CreditCard
   },
   {
     title: "Profile",
     url: "/profile",
-    icon: User,
-    color: "text-pink-500"
+    icon: User
   }
 ];
 
@@ -57,7 +48,6 @@ export function AppSidebar() {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, signOut } = useAuth();
-  const { data: userStats } = useUserStats();
   const { isMobile, setOpenMobile } = useSidebar();
 
   // Helper to close sidebar on mobile after navigation
@@ -82,55 +72,34 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="flex-1 flex flex-col justify-center">
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
-              {menuItems.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton
-                    asChild
-                    isActive={location.pathname === item.url}
-                    className="w-full justify-start py-3 px-4 hover:bg-accent/50 transition-colors"
-                  >
-                    <button
-                      onClick={() => handleNavigate(item.url)}
-                      className="flex items-center gap-3"
+            <SidebarMenu className="flex flex-col gap-4">
+              {menuItems.map((item) => {
+                const isActive = location.pathname === item.url;
+                return (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton
+                      asChild
+                      isActive={isActive}
+                      className={`w-full flex items-center gap-3 px-6 py-4 text-base font-medium rounded-lg transition-colors ${isActive ? 'bg-accent/60' : 'hover:bg-accent/40'}`}
                     >
-                      <item.icon className={`h-5 w-5 ${item.color}`} />
-                      <span className="font-medium">{item.title}</span>
-                    </button>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+                      <button
+                        onClick={() => handleNavigate(item.url)}
+                        className="flex items-center gap-3 w-full"
+                      >
+                        <item.icon
+                          className={`h-6 w-6 transition-colors ${isActive ? 'text-blue-600' : 'text-gray-400 dark:text-gray-500'}`}
+                          strokeWidth={2}
+                        />
+                        <span className="flex-1 text-left">{item.title}</span>
+                      </button>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
             </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-
-        <SidebarGroup>
-          <SidebarGroupLabel>Progress</SidebarGroupLabel>
-          <SidebarGroupContent className="px-4 space-y-4">
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Total XP</span>
-                <Badge variant="secondary">{userStats?.total_xp || 0}</Badge>
-              </div>
-              <Progress value={((userStats?.total_xp || 0) % 100)} className="h-2" />
-            </div>
-            
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Streak</span>
-                <span className="text-sm font-medium"><Flame className="inline-block h-4 w-4 mr-1" /> {userStats?.current_streak || 0}</span>
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex justify-between items-center">
-                <span className="text-sm text-muted-foreground">Completed</span>
-                <span className="text-sm font-medium">{userStats?.lessons_completed || 0} lessons</span>
-              </div>
-            </div>
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
@@ -172,7 +141,6 @@ export function AppSidebar() {
           </Avatar>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-medium truncate">{user?.email}</p>
-            <p className="text-xs text-muted-foreground truncate">Level {Math.floor((userStats?.total_xp || 0) / 100) + 1}</p>
           </div>
         </div>
       </SidebarFooter>
