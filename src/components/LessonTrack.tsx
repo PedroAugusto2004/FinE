@@ -153,8 +153,31 @@ const LessonTrack = () => {
 
   return (
     <>
+      {/* Decorative dotted backgrounds for both light and dark mode */}
+      {/* Dark mode dots */}
+      <div
+        className="fixed inset-0 w-full h-full z-0 pointer-events-none hidden dark:block lesson-track-dots-bg-dark"
+        aria-hidden="true"
+      />
+      {/* Light mode dots */}
+      <div
+        className="fixed inset-0 w-full h-full z-0 pointer-events-none block dark:hidden lesson-track-dots-bg-light"
+        aria-hidden="true"
+      />
+      <style>{`
+        .lesson-track-dots-bg-dark {
+          background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="2" fill="%2333ff99" fill-opacity="0.13"/><circle cx="20" cy="20" r="2" fill="%2333ff99" fill-opacity="0.13"/><circle cx="36" cy="36" r="2" fill="%2333ff99" fill-opacity="0.13"/></svg>');
+          background-repeat: repeat;
+          opacity: 0.5;
+        }
+        .lesson-track-dots-bg-light {
+          background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="2" fill="%2300593a" fill-opacity="0.22"/><circle cx="20" cy="20" r="2" fill="%2300593a" fill-opacity="0.22"/><circle cx="36" cy="36" r="2" fill="%2300593a" fill-opacity="0.22"/></svg>');
+          background-repeat: repeat;
+          opacity: 0.7;
+        }
+      `}</style>
       <div className={cn(
-        "min-h-screen bg-background p-4 md:p-8 max-w-3xl mx-auto flex flex-col items-center relative",
+        "min-h-screen p-4 md:p-8 max-w-3xl mx-auto flex flex-col items-center relative",
         isMobile && "pt-16"
       )}>
         {/* Section Navigation Button */}
