@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { useNavigate } from "react-router-dom";
 import { financialCourse } from "@/data/financialCourse";
-import { Lock, ArrowRight, BookOpen, NotebookPen, Circle, CheckCircle2, PiggyBank, BarChart2, CreditCard, Star, Flame, Zap } from "lucide-react";
+import { Lock, ArrowRight, BookOpen, NotebookPen, Circle, CheckCircle2, PiggyBank, BarChart2, CreditCard, Star, Flame, Zap, Wallet } from "lucide-react";
 import { useUserProgress, useUserStats } from "@/hooks/useUserProgress";
 import { useProgressCalculations } from "@/hooks/useProgressCalculations";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -36,7 +36,7 @@ const itemVariants = {
 
 // Map each unit to a Lucide icon related to its subject
 const unitIcons = [
-  BookOpen,    // Financial Basics
+  Wallet,    // Financial Basics (changed from BarChart2 to Wallet for a more relevant icon)
   PiggyBank,   // Saving & Investing
   CreditCard   // Credit & Debt
 ];
@@ -321,11 +321,18 @@ const LessonTrack = () => {
                       "bg-background border-4 rounded-2xl flex flex-col items-center px-6 py-3 min-w-[120px] relative",
                       isActive ? "border-green-500 scale-105" : "border-green-500 shadow-md"
                     )}
-                    style={isActive ? { transform: 'scale(1.07)' } : {}}
+                    style={{
+                      ...(isActive ? { transform: 'scale(1.07)' } : {}),
+                      fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
+                      boxShadow: '0 2px 8px 0 rgba(0,0,0,0.18), 0 1.5px 0 0 #22c55e inset', // 3D effect: soft shadow, inner border, no green glow
+                      border: '2.5px solid #22c55e',
+                      background: 'linear-gradient(145deg, #23272f 60%, #1a1d23 100%)', // subtle dark gradient for depth
+                      transition: 'box-shadow 0.2s cubic-bezier(.4,2,.6,1), background 0.2s cubic-bezier(.4,2,.6,1)',
+                    }}
                   >
                     <UnitIcon className="w-7 h-7 text-green-500 mb-1" />
-                    <span className="text-lg font-bold text-green-600">{node.unit.title}</span>
-                    <span className="text-xs text-muted-foreground text-center">{node.unit.description}</span>
+                    <span className="text-lg font-bold text-green-600" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif', textShadow: '0 2px 8px rgba(34,197,94,0.10)' }}>{node.unit.title}</span>
+                    <span className="text-xs text-muted-foreground text-center" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif', textShadow: '0 1px 4px rgba(0,0,0,0.12)' }}>{node.unit.description}</span>
                   </div>
                 </motion.div>
               );
