@@ -5,7 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { Separator } from "@/components/ui/separator";
 import { useNavigate } from "react-router-dom";
 import { financialCourse } from "@/data/financialCourse";
-import { Lock, ArrowRight, BookOpen, Circle, CheckCircle2, PiggyBank, BarChart2, CreditCard, Star, Flame, Zap } from "lucide-react";
+import { Lock, ArrowRight, BookOpen, NotebookPen, Circle, CheckCircle2, PiggyBank, BarChart2, CreditCard, Star, Flame, Zap } from "lucide-react";
 import { useUserProgress, useUserStats } from "@/hooks/useUserProgress";
 import { useProgressCalculations } from "@/hooks/useProgressCalculations";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -62,6 +62,14 @@ const LessonTrack = () => {
 
   const completedLessons = new Set(userProgress?.map(p => p.lesson_id) || []);
   const nodes = getTrackNodes(financialCourse);
+
+  // Section navigation state
+  const [activeUnitIdx, setActiveUnitIdx] = useState(0);
+  const units = financialCourse;
+  const activeUnit = units[activeUnitIdx];
+
+  // Section modal state
+  const [showSectionModal, setShowSectionModal] = useState(false);
 
   // Find the index of the "What is Money?" lesson
   const whatIsMoneyIdx = nodes.findIndex(
@@ -139,8 +147,9 @@ const LessonTrack = () => {
     return () => window.removeEventListener('mousedown', handleClick);
   }, [selectedLesson]);
 
-  // Find the active unit (first unit for now, can be dynamic)
-  const activeUnitIdx = 0; // 'Financial Basics' is the first unit
+  // Helper: check if a unit is completed
+  const isUnitCompleted = (unit) =>
+    unit.lessons.every(lesson => completedLessons.has(lesson.id));
 
   return (
     <>
@@ -148,15 +157,99 @@ const LessonTrack = () => {
         "min-h-screen bg-background p-4 md:p-8 max-w-3xl mx-auto flex flex-col items-center relative",
         isMobile && "pt-16"
       )}>
-        {/* Header */}
-        <motion.div variants={itemVariants} className="mb-12 space-y-2">
-          <h1 className="text-2xl md:text-3xl font-medium tracking-tight">
-            Your Financial Journey
-          </h1>
-          <p className="text-sm text-muted-foreground">
-            Master the fundamentals of personal finance
-          </p>
-        </motion.div>
+        {/* Section Navigation Button */}
+        <div className="w-full flex justify-center mb-8 z-50">
+          <button
+            className={cn(
+              "flex items-center gap-3 px-4 py-3 rounded-2xl",
+              "backdrop-blur-md bg-green-500/20 dark:bg-green-700/20",
+              "transition-all duration-200",
+              isMobile ? "text-base min-w-[90vw] max-w-[98vw]" : "text-lg min-w-[340px] max-w-[420px]"
+            )}
+            aria-label="Show all sections"
+            onClick={() => setShowSectionModal(true)}
+          >
+            <div className="flex flex-col flex-1 min-w-0">
+              <span className="uppercase text-xs font-bold text-green-900/80 dark:text-green-200/80 tracking-wide mb-0.5 flex items-center" style={{letterSpacing: '0.04em'}}>
+                <ArrowRight className="w-4 h-4 mr-1 text-green-600 dark:text-green-300" style={{ transform: 'scaleX(-1)' }} />
+                SECTION {activeUnitIdx + 1}, UNIT {activeUnitIdx + 1}
+              </span>
+              <span className="font-semibold text-green-900 dark:text-green-200 truncate text-left">
+                {activeUnit.title}
+              </span>
+            </div>
+            <span className="flex items-center gap-1 px-3 py-1.5 rounded-lg font-bold text-xs ml-2 backdrop-blur-md bg-white/30 dark:bg-neutral-900/30" style={{ WebkitBackdropFilter: 'blur(8px)', backdropFilter: 'blur(8px)' }}>
+              <NotebookPen className="w-4 h-4 mr-1" />
+              GUIDEBOOK
+            </span>
+          </button>
+        </div>
+
+        {/* Section Modal Overlay */}
+        {showSectionModal && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            onMouseDown={e => {
+              if (e.target === e.currentTarget) setShowSectionModal(false);
+            }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 40 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 40 }}
+              transition={{ duration: 0.22, ease: 'easeOut' }}
+              className="bg-[#18232e] dark:bg-[#151c23] border border-[#233040] rounded-2xl shadow-2xl p-4 w-full max-w-md mx-auto relative animate-fadeIn"
+              onMouseDown={e => e.stopPropagation()}
+            >
+              {/* Remove the X button for closing */}
+              <div className="flex flex-col gap-4">
+                {units.map((unit, idx) => {
+                  const isLocked = idx === 1 || idx === 2; // Lock section 2 and 3 (0-based)
+                  return (
+                    <div
+                      key={unit.id}
+                      className={cn(
+                        "flex items-center justify-between border border-[#233040] rounded-xl px-5 py-4 mb-1 bg-[#1e293b] dark:bg-[#1a232e] relative overflow-hidden",
+                        idx === activeUnitIdx ? "ring-2 ring-green-500" : "",
+                        isLocked ? "opacity-60" : ""
+                      )}
+                    >
+                      <div className="flex items-center gap-2">
+                        <div className="text-lg font-bold text-white mb-1">Section {String(Number(idx) + 1)}</div>
+                        {isLocked && (
+                          <Lock className="w-5 h-5 text-muted-foreground ml-1" />
+                        )}
+                      </div>
+                      <div>
+                        {isUnitCompleted(unit) && !isLocked && (
+                          <div className="flex items-center gap-1 text-green-400 font-semibold text-sm mb-1">
+                            <svg width="16" height="16" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block"><polyline points="20 6 9 17 4 12" /></svg>
+                            COMPLETED!
+                          </div>
+                        )}
+                        <button
+                          className={cn(
+                            "border px-4 py-1.5 rounded-lg font-bold text-sm transition",
+                            isLocked ? "border-gray-400 text-gray-400 cursor-not-allowed bg-gray-700/30" : "border-blue-400 text-blue-400 hover:bg-blue-400/10"
+                          )}
+                          onClick={() => {
+                            if (!isLocked) {
+                              setActiveUnitIdx(idx);
+                              setShowSectionModal(false);
+                            }
+                          }}
+                          disabled={isLocked}
+                        >
+                          {isLocked ? 'LOCKED' : 'REVIEW'}
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </div>
+        )}
 
         {/* Progress Overview */}
         {/* <motion.div variants={itemVariants} className="mb-12">
@@ -185,7 +278,7 @@ const LessonTrack = () => {
           width="32" height={nodes.length * 96}
           style={{ top: 180, height: nodes.length * 96, pointerEvents: 'none', zIndex: 0 }}
         >
-          {/* Green line from unit to just after the lesson card, responsive for mobile/desktop */}
+          {/* Green line from unit to just after the lesson card, responsive for mobile */}
           <path
             d={`M16 0 V${isMobile ? lineEnd + 12 : lineEnd + 32}`}
             stroke="#22c55e"
