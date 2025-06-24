@@ -114,7 +114,7 @@ const Dashboard = () => {
     let touchStartY = 0;
     let touchEndX = 0;
     let isTracking = false;
-    const EDGE_THRESHOLD = 90; // px from left edge (adjusted for easier swipe)
+    const EDGE_THRESHOLD = 300; // px from left edge (adjusted for easier swipe)
     const SWIPE_THRESHOLD = 100; // px to trigger sidebar
     const handleTouchStart = (e: TouchEvent) => {
       const x = e.touches[0].clientX;
