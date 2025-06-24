@@ -410,7 +410,8 @@ const LessonTrack = () => {
                       "rounded-3xl border-2 flex items-center px-7 py-3 min-w-[140px] transition-all cursor-pointer relative z-30",
                       "bg-gradient-to-br from-green-50 via-white to-green-100 dark:from-[#1a232e] dark:via-[#151c23] dark:to-[#1a232e]",
                       isCompleted ? "border-green-500 shadow-lg" : "border-[rgba(38,38,38,0.7)] shadow-md",
-                      isLocked && !isCompleted && "bg-background border-[rgba(38,38,38,0.3)] opacity-70",
+                      // Remove opacity-70 for locked lessons
+                      isLocked && !isCompleted && "bg-background border-[rgba(38,38,38,0.3)]",
                       !isLocked && !isCompleted && "hover:scale-[1.045] hover:shadow-xl",
                       isCompleted && "hover:scale-[1.045] hover:shadow-green-200/60",
                       "duration-200 ease-out"
