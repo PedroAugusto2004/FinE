@@ -164,7 +164,7 @@ const LessonTrack = () => {
       touchEndX = e.touches[0].clientX;
     };
     const handleTouchEnd = () => {
-      if (touchStartX < 40 && touchEndX - touchStartX > 60) {
+      if (touchEndX - touchStartX > 60) {
         setOpenMobile(true);
       }
     };
