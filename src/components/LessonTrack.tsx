@@ -334,8 +334,8 @@ const LessonTrack = () => {
         {/* SVG Path connecting all nodes */}
         <svg
           className="absolute left-1/2 -translate-x-1/2 z-0"
-          width="32" height={nodes.length * 96 + (isMobile ? 64 : 0)}
-          style={{ top: 180, height: nodes.length * 96 + (isMobile ? 64 : 0), pointerEvents: 'none', zIndex: 0 }}
+          width="32" height={nodes.length * 96 + (isMobile ? 64 : 0) + 96}
+          style={{ top: 180, height: nodes.length * 96 + (isMobile ? 64 : 0) + 96, pointerEvents: 'none', zIndex: 0 }}
         >
           {/* Green line from unit to just after the lesson card, responsive for mobile */}
           <path
@@ -346,9 +346,9 @@ const LessonTrack = () => {
             opacity="1"
             fill="none"
           />
-          {/* Solid gray line from after the green line to the end, no overlap or opacity blending */}
+          {/* Solid gray line from after the green line to the end, extended by 96px to connect to the next module */}
           <path
-            d={`M16 ${isMobile ? lineEnd + 12 : lineEnd + 32} V${nodes.length * 96 + (isMobile ? 64 : 0)}`}
+            d={`M16 ${isMobile ? lineEnd + 12 : lineEnd + 32} V${nodes.length * 96 + (isMobile ? 64 : 0) + 96}`}
             stroke="#6b7280" // Tailwind gray-600
             strokeWidth="6"
             strokeLinecap="round"
@@ -369,7 +369,7 @@ const LessonTrack = () => {
                   key={node.unit.id}
                   variants={itemVariants}
                   className={cn(
-                    "flex flex-col items-center relative",
+                    "flex flex-col items-center relative group",
                     isActive && "z-40"
                   )}
                   style={{ minHeight: 80 }}
@@ -377,21 +377,26 @@ const LessonTrack = () => {
                 >
                   <div
                     className={cn(
-                      "bg-background border-4 rounded-2xl flex flex-col items-center px-6 py-3 min-w-[120px] relative",
-                      isActive ? "border-green-500 scale-105" : "border-green-500 shadow-md",
-                      "unit-card-gradient"
+                      // Enhanced style for main module card
+                      "relative bg-gradient-to-br from-green-100 via-white to-green-50 dark:from-[#1a232e] dark:via-[#151c23] dark:to-[#1a232e] border-4 rounded-2xl flex flex-col items-center px-8 py-5 min-w-[140px] shadow-lg transition-all duration-200",
+                      isActive ? "border-green-500 scale-105" : "border-green-400 shadow-md",
+                      // Remove hover:scale-105 and hover:shadow-2xl for non-active cards
+                      isActive ? "unit-card-gradient group-hover:scale-105 group-hover:shadow-2xl" : "unit-card-gradient"
                     )}
                     style={{
-                      ...(isActive ? { transform: 'scale(1.07)' } : {}),
+                      ...(isActive ? { transform: 'scale(1.09)' } : {}),
                       fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
-                      boxShadow: '0 2px 8px 0 rgba(0,0,0,0.18), 0 1.5px 0 0 #22c55e inset',
                       border: '2.5px solid #22c55e',
-                      transition: 'box-shadow 0.2s cubic-bezier(.4,2,.6,1), background 0.2s cubic-bezier(.4,2,.6,1)',
+                      transition: 'box-shadow 0.2s cubic-bezier(.4,2,.6,1), background 0.2s cubic-bezier(.4,2,.6,1), transform 0.18s cubic-bezier(.4,2,.6,1)',
                     }}
                   >
-                    <UnitIcon className="w-7 h-7 text-green-500 mb-1" />
-                    <span className="text-lg font-bold text-green-600" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif', textShadow: '0 2px 8px rgba(34,197,94,0.10)' }}>{node.unit.title}</span>
-                    <span className="text-xs text-muted-foreground text-center" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif', textShadow: '0 1px 4px rgba(0,0,0,0.12)' }}>{node.unit.description}</span>
+                    {/* Decorative icon background */}
+                    <span className="absolute top-3 left-1/2 -translate-x-1/2 w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/30 blur-[2px] opacity-60 z-0" />
+                    <span className="relative z-10 flex items-center justify-center mb-2">
+                      <UnitIcon className="w-9 h-9 text-green-500 drop-shadow-md" />
+                    </span>
+                    <span className="text-xl font-extrabold text-green-700 dark:text-green-400 mb-1 text-center" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif', textShadow: '0 2px 8px rgba(34,197,94,0.10)' }}>{node.unit.title}</span>
+                    <span className="text-sm text-muted-foreground text-center" style={{ fontFamily: 'Inter, Segoe UI, Arial, sans-serif', textShadow: '0 1px 4px rgba(0,0,0,0.10)' }}>{node.unit.description}</span>
                   </div>
                 </motion.div>
               );
