@@ -396,8 +396,6 @@ const LessonTrack = () => {
             } else if (node.type === 'lesson') {
               const isCompleted = completedLessons.has(node.lesson.id);
               const isLocked = !node.lesson.isUnlocked;
-              // Color-code: green border if completed, charcoal border if not, green icon (20% opacity if locked)
-              // Hover: enlarge, show tooltip
               return (
                 <motion.div
                   key={node.lesson.id}
@@ -408,20 +406,30 @@ const LessonTrack = () => {
                 >
                   <div
                     className={cn(
-                      "rounded-2xl border-2 flex items-center px-6 py-2 min-w-[120px] transition-all cursor-pointer relative z-30 bg-background",
-                      isCompleted ? "border-green-500 bg-green-50" : "border-[rgba(38,38,38,0.7)]",
-                      isLocked && !isCompleted && "bg-background border-[rgba(38,38,38,0.3)]"
+                      // Enhanced style for lesson card
+                      "rounded-3xl border-2 flex items-center px-7 py-3 min-w-[140px] transition-all cursor-pointer relative z-30",
+                      "bg-gradient-to-br from-green-50 via-white to-green-100 dark:from-[#1a232e] dark:via-[#151c23] dark:to-[#1a232e]",
+                      isCompleted ? "border-green-500 shadow-lg" : "border-[rgba(38,38,38,0.7)] shadow-md",
+                      isLocked && !isCompleted && "bg-background border-[rgba(38,38,38,0.3)] opacity-70",
+                      !isLocked && !isCompleted && "hover:scale-[1.045] hover:shadow-xl",
+                      isCompleted && "hover:scale-[1.045] hover:shadow-green-200/60",
+                      "duration-200 ease-out"
                     )}
                     style={{
-                      boxShadow: isCompleted ? '0 2px 8px 0 rgba(34,197,94,0.08)' : undefined,
-                      transition: 'transform 0.18s cubic-bezier(.4,2,.6,1)',
+                      boxShadow: isCompleted
+                        ? '0 4px 16px 0 rgba(34,197,94,0.10), 0 1.5px 0 0 #22c55e inset'
+                        : '0 2px 8px 0 rgba(0,0,0,0.08)',
+                      borderWidth: 2.5,
+                      borderColor: isCompleted ? '#22c55e' : undefined,
+                      fontFamily: 'Inter, Segoe UI, Arial, sans-serif',
+                      transition: 'transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s cubic-bezier(.4,2,.6,1)',
                     }}
                     onClick={() => handleLessonClick(node)}
                   >
                     <motion.span
-                      className="flex items-center justify-center mr-2"
+                      className="flex items-center justify-center mr-3"
                       initial={false}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.13 }}
                       animate={{ scale: 1 }}
                       style={{
                         display: 'inline-flex',
@@ -429,15 +437,20 @@ const LessonTrack = () => {
                       }}
                     >
                       {isCompleted ? (
-                        <CheckCircle2 className="w-5 h-5 text-green-500" />
+                        <CheckCircle2 className="w-6 h-6 text-green-500 drop-shadow-md" />
                       ) : (
                         <Circle className={cn(
-                          "w-5 h-5",
+                          "w-6 h-6",
                           isLocked ? "text-green-500/20" : "text-green-500"
                         )} />
                       )}
                     </motion.span>
-                    <span className={cn("font-medium", isLocked && "text-muted-foreground")}>{node.lesson.title}</span>
+                    <span className={cn(
+                      "font-semibold text-base text-foreground",
+                      isLocked && "text-muted-foreground font-normal"
+                    )} style={{letterSpacing: '0.01em'}}>
+                      {node.lesson.title}
+                    </span>
                     {isLocked && <Lock className="w-4 h-4 ml-2 text-muted-foreground" />}
                     {/* Tooltip on hover */}
                     <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200 z-50">
