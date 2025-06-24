@@ -305,8 +305,8 @@ const LessonTrack = () => {
         {/* SVG Path connecting all nodes */}
         <svg
           className="absolute left-1/2 -translate-x-1/2 z-0"
-          width="32" height={nodes.length * 96}
-          style={{ top: 180, height: nodes.length * 96, pointerEvents: 'none', zIndex: 0 }}
+          width="32" height={nodes.length * 96 + (isMobile ? 64 : 0)}
+          style={{ top: 180, height: nodes.length * 96 + (isMobile ? 64 : 0), pointerEvents: 'none', zIndex: 0 }}
         >
           {/* Green line from unit to just after the lesson card, responsive for mobile */}
           <path
@@ -319,7 +319,7 @@ const LessonTrack = () => {
           />
           {/* Solid gray line from after the green line to the end, no overlap or opacity blending */}
           <path
-            d={`M16 ${isMobile ? lineEnd + 12 : lineEnd + 32} V${nodes.length * 96}`}
+            d={`M16 ${isMobile ? lineEnd + 12 : lineEnd + 32} V${nodes.length * 96 + (isMobile ? 64 : 0)}`}
             stroke="#6b7280" // Tailwind gray-600
             strokeWidth="6"
             strokeLinecap="round"
