@@ -85,7 +85,7 @@ const Leaderboards = () => {
         initial="hidden"
         animate="visible"
         variants={containerVariants}
-        className="min-h-screen bg-background text-foreground p-3 sm:p-6 space-y-8 max-w-3xl mx-auto w-full"
+        className="min-h-screen w-full bg-white dark:bg-[#151c23] text-foreground p-3 sm:p-6 space-y-8"
       >
         <motion.div variants={itemVariants} className="text-center space-y-4">
           <h1 className="text-4xl font-bold">Leaderboards</h1>

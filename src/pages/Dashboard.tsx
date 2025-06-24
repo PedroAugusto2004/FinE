@@ -108,7 +108,7 @@ const Dashboard = () => {
   return (
     <>
       <MetricsBar xp={progress.totalXP} streak={progress.currentStreak} lessons={`${progress.completedLessons.length}/${getTotalLessons()}`} />
-      <ScrollArea className="h-screen">
+      <ScrollArea className="h-screen bg-white dark:bg-[#151c23]">
         <motion.div
           initial="hidden"
           animate="visible"

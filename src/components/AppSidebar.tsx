@@ -62,7 +62,7 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="border-r border-border">
+    <Sidebar className="border-r border-border bg-white dark:bg-[#151c23]">
       <SidebarHeader className="p-6">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-neutral-800 rounded-xl flex items-center justify-center shadow-lg">
