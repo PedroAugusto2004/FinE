@@ -12,6 +12,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import MetricsBar from "@/components/MetricsBar";
+import { useSidebar } from "@/components/ui/sidebar";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -59,6 +60,7 @@ const LessonTrack = () => {
   const { data: userStats } = useUserStats();
   const progress = useProgressCalculations();
   const isMobile = useIsMobile();
+  const { isMobile: sidebarMobile, setOpenMobile } = useSidebar();
 
   const completedLessons = new Set(userProgress?.map(p => p.lesson_id) || []);
   const nodes = getTrackNodes(financialCourse);
@@ -150,6 +152,31 @@ const LessonTrack = () => {
   // Helper: check if a unit is completed
   const isUnitCompleted = (unit) =>
     unit.lessons.every(lesson => completedLessons.has(lesson.id));
+
+  useEffect(() => {
+    if (!isMobile) return;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      touchEndX = e.touches[0].clientX;
+    };
+    const handleTouchEnd = () => {
+      if (touchStartX < 40 && touchEndX - touchStartX > 60) {
+        setOpenMobile(true);
+      }
+    };
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isMobile, setOpenMobile]);
 
   return (
     <>

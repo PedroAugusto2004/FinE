@@ -7,6 +7,8 @@ import { Calendar, Award, TrendingUp, BookOpen, Target, Clock, Zap, Flame, Brain
 import { getUserProgress } from "@/data/financialCourse";
 import { motion } from "framer-motion";
 import MetricsBar from "@/components/MetricsBar";
+import { useSidebar } from "@/components/ui/sidebar";
+import React from "react";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -52,6 +54,32 @@ const Profile = () => {
     { day: "Sat", completed: false },
     { day: "Sun", completed: false },
   ];
+
+  const { isMobile, setOpenMobile } = useSidebar();
+  React.useEffect(() => {
+    if (!isMobile) return;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      touchEndX = e.touches[0].clientX;
+    };
+    const handleTouchEnd = () => {
+      if (touchStartX < 40 && touchEndX - touchStartX > 60) {
+        setOpenMobile(true);
+      }
+    };
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isMobile, setOpenMobile]);
 
   return (
     <>

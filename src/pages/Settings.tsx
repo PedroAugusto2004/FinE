@@ -8,12 +8,15 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { Moon, Sun, Monitor, ArrowLeft, Bell, Globe, Shield, HelpCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useSidebar } from "@/components/ui/sidebar";
+import React from "react";
 
 const Settings = () => {
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const [notifications, setNotifications] = useState(true);
   const [soundEffects, setSoundEffects] = useState(true);
+  const { isMobile, setOpenMobile } = useSidebar();
 
   const themeOptions = [
     {
@@ -35,6 +38,31 @@ const Settings = () => {
       icon: Monitor
     }
   ];
+
+  React.useEffect(() => {
+    if (!isMobile) return;
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+    };
+    const handleTouchMove = (e: TouchEvent) => {
+      touchEndX = e.touches[0].clientX;
+    };
+    const handleTouchEnd = () => {
+      if (touchStartX < 40 && touchEndX - touchStartX > 60) {
+        setOpenMobile(true);
+      }
+    };
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove);
+    window.addEventListener('touchend', handleTouchEnd);
+    return () => {
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [isMobile, setOpenMobile]);
 
   return (
     <div className="min-h-screen bg-white dark:bg-[#151c23] text-foreground p-3 sm:p-6">
