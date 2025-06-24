@@ -42,17 +42,35 @@ const Settings = () => {
   React.useEffect(() => {
     if (!isMobile) return;
     let touchStartX = 0;
+    let touchStartY = 0;
     let touchEndX = 0;
+    let isTracking = false;
+    const EDGE_THRESHOLD = 90; // px from left edge (adjusted for easier swipe)
+    const SWIPE_THRESHOLD = 100; // px to trigger sidebar
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartX = e.touches[0].clientX;
+      const x = e.touches[0].clientX;
+      const y = e.touches[0].clientY;
+      if (x <= EDGE_THRESHOLD) {
+        isTracking = true;
+        touchStartX = x;
+        touchEndX = x; // Reset endX to startX on touch start
+        touchStartY = y;
+      } else {
+        isTracking = false;
+      }
     };
     const handleTouchMove = (e: TouchEvent) => {
+      if (!isTracking) return;
       touchEndX = e.touches[0].clientX;
     };
-    const handleTouchEnd = () => {
-      if (touchEndX - touchStartX > 60) {
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (!isTracking) return;
+      const deltaX = touchEndX - touchStartX;
+      // Only open if the user actually swiped horizontally enough (not just tapped)
+      if (deltaX > SWIPE_THRESHOLD) {
         setOpenMobile(true);
       }
+      isTracking = false;
     };
     window.addEventListener('touchstart', handleTouchStart);
     window.addEventListener('touchmove', handleTouchMove);
