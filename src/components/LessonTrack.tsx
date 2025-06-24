@@ -255,7 +255,7 @@ const LessonTrack = () => {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 40 }}
               transition={{ duration: 0.22, ease: 'easeOut' }}
-              className="bg-[#18232e] dark:bg-[#151c23] border border-[#233040] rounded-2xl shadow-2xl p-4 w-full max-w-md mx-auto relative animate-fadeIn"
+              className="border rounded-2xl shadow-2xl p-4 w-full max-w-md mx-auto relative animate-fadeIn bg-white dark:bg-[#151c23] border-[#e5e7eb] dark:border-[#233040]"
               onMouseDown={e => e.stopPropagation()}
             >
               {/* Remove the X button for closing */}
@@ -266,20 +266,22 @@ const LessonTrack = () => {
                     <div
                       key={unit.id}
                       className={cn(
-                        "flex items-center justify-between border border-[#233040] rounded-xl px-5 py-4 mb-1 bg-[#1e293b] dark:bg-[#1a232e] relative overflow-hidden",
+                        // Light mode: white card, dark mode: current color
+                        "flex items-center justify-between border rounded-xl px-5 py-4 mb-1 relative overflow-hidden",
+                        "bg-white border-[#e5e7eb] dark:bg-[#1e293b] dark:border-[#233040]",
                         idx === activeUnitIdx ? "ring-2 ring-green-500" : "",
                         isLocked ? "opacity-60" : ""
                       )}
                     >
                       <div className="flex items-center gap-2">
-                        <div className="text-lg font-bold text-white mb-1">Section {String(Number(idx) + 1)}</div>
+                        <div className="text-lg font-bold text-neutral-900 dark:text-white mb-1">Section {String(Number(idx) + 1)}</div>
                         {isLocked && (
                           <Lock className="w-5 h-5 text-muted-foreground ml-1" />
                         )}
                       </div>
                       <div>
                         {isUnitCompleted(unit) && !isLocked && (
-                          <div className="flex items-center gap-1 text-green-400 font-semibold text-sm mb-1">
+                          <div className="flex items-center gap-1 text-green-500 dark:text-green-400 font-semibold text-sm mb-1">
                             <svg width="16" height="16" fill="none" stroke="#22c55e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="inline-block"><polyline points="20 6 9 17 4 12" /></svg>
                             COMPLETED!
                           </div>
@@ -287,7 +289,7 @@ const LessonTrack = () => {
                         <button
                           className={cn(
                             "border px-4 py-1.5 rounded-lg font-bold text-sm transition",
-                            isLocked ? "border-gray-400 text-gray-400 cursor-not-allowed bg-gray-700/30" : "border-blue-400 text-blue-400 hover:bg-blue-400/10"
+                            isLocked ? "border-gray-400 text-gray-400 cursor-not-allowed bg-gray-200 dark:bg-gray-700/30" : "border-blue-400 text-blue-500 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-400/10"
                           )}
                           onClick={() => {
                             if (!isLocked) {
