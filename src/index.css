@@ -121,15 +121,17 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-secondary;
+    background: hsl(var(--secondary));
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-muted-foreground rounded-full;
+    background: hsl(var(--muted-foreground));
+    border-radius: 9999px;
   }
 
+  /* Remove yellow hover effect */
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-primary;
+    background: hsl(var(--muted-foreground));
   }
 }
 
