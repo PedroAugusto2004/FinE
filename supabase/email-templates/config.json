@@ -1,0 +1,12 @@
+{
+  "templates": {
+    "confirm": {
+      "subject": "Welcome to FinE - Verify Your Account 🎉",
+      "template": "confirm-signup.html"
+    }
+  },
+  "redirectUrls": {
+    "emailConfirm": "https://your-domain.com/verify-email",
+    "emailConfirmDev": "http://localhost:5173/verify-email"
+  }
+}

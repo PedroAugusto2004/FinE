@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { supabase } from '@/integrations/supabase/client';
+import { supabase, signUpWithCustomRedirect } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { 
   DollarSign, 
@@ -161,22 +161,24 @@ const Welcome = () => {
     setLoading(true);
     
     try {
-      const { data, error } = await supabase.auth.signUp({
+      const { data, error } = await signUpWithCustomRedirect(
         email,
         password,
-        options: {
-          data: {
-            full_name: fullName,
-          },
-          emailRedirectTo: `${window.location.origin}`,
-        },
-      });
+        `${window.location.origin}/verify-email`
+      );
       
       if (error) throw error;
       
+      // Update user metadata with full name
+      if (data.user) {
+        await supabase.auth.updateUser({
+          data: { full_name: fullName }
+        });
+      }
+      
       toast({
         title: "Success!",
-        description: "Check your email to confirm your account and complete the registration.",
+        description: "Check your email for a personalized verification link from FinE to complete your registration.",
       });
     } catch (error: any) {
       toast({

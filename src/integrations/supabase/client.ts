@@ -9,3 +9,16 @@ const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiO
 // import { supabase } from "@/integrations/supabase/client";
 
 export const supabase = createClient<Database>(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+
+// Helper function for sign up with custom redirect
+export const signUpWithCustomRedirect = async (email: string, password: string, redirectUrl?: string) => {
+  const finalRedirectUrl = redirectUrl || `${window.location.origin}/verify-email`;
+  
+  return await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: finalRedirectUrl
+    }
+  });
+};

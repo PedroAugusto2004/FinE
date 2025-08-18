@@ -8,6 +8,7 @@ import { AppSidebar } from "@/components/AppSidebar";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import PublicRoute from "@/components/PublicRoute";
 import Dashboard from "./pages/Dashboard";
 import Lessons from "./pages/Lessons";
 import Lesson from "./pages/Lesson";
@@ -16,6 +17,7 @@ import Shop from "./pages/Shop";
 import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import EmailVerification from "./pages/EmailVerification";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 
@@ -31,30 +33,39 @@ const App = () => {
             <Toaster />
             <Sonner />
             <BrowserRouter>
-              <ProtectedRoute>
-                <SidebarProvider>
-                  <div className="min-h-screen flex w-full">
-                    {isMobile && (
-                      <div className="fixed top-3 left-3 z-50 md:hidden">
-                        <SidebarTrigger />
+              <Routes>
+                <Route path="/verify-email" element={
+                  <PublicRoute>
+                    <EmailVerification />
+                  </PublicRoute>
+                } />
+                <Route path="/*" element={
+                  <ProtectedRoute>
+                    <SidebarProvider>
+                      <div className="min-h-screen flex w-full">
+                        {isMobile && (
+                          <div className="fixed top-3 left-3 z-50 md:hidden">
+                            <SidebarTrigger />
+                          </div>
+                        )}
+                        <AppSidebar />
+                        <main className="flex-1 overflow-hidden">
+                          <Routes>
+                            <Route path="/" element={<Dashboard />} />
+                            <Route path="/lessons" element={<Lessons />} />
+                            <Route path="/lesson/:lessonId" element={<Lesson />} />
+                            <Route path="/leaderboards" element={<Leaderboards />} />
+                            <Route path="/shop" element={<Shop />} />
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/settings" element={<Settings />} />
+                            <Route path="*" element={<NotFound />} />
+                          </Routes>
+                        </main>
                       </div>
-                    )}
-                    <AppSidebar />
-                    <main className="flex-1 overflow-hidden">
-                      <Routes>
-                        <Route path="/" element={<Dashboard />} />
-                        <Route path="/lessons" element={<Lessons />} />
-                        <Route path="/lesson/:lessonId" element={<Lesson />} />
-                        <Route path="/leaderboards" element={<Leaderboards />} />
-                        <Route path="/shop" element={<Shop />} />
-                        <Route path="/profile" element={<Profile />} />
-                        <Route path="/settings" element={<Settings />} />
-                        <Route path="*" element={<NotFound />} />
-                      </Routes>
-                    </main>
-                  </div>
-                </SidebarProvider>
-              </ProtectedRoute>
+                    </SidebarProvider>
+                  </ProtectedRoute>
+                } />
+              </Routes>
             </BrowserRouter>
           </TooltipProvider>
         </ThemeProvider>

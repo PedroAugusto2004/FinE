@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your FinE Account</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 0; padding: 0; background-color: #f8fafc; }
+        .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; }
+        .header { background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); padding: 40px 20px; text-align: center; }
+        .logo { height: 60px; margin-bottom: 20px; }
+        .header h1 { color: #ffffff; margin: 0; font-size: 28px; font-weight: 700; }
+        .content { padding: 40px 20px; }
+        .welcome { font-size: 24px; font-weight: 600; color: #1f2937; margin-bottom: 20px; text-align: center; }
+        .message { font-size: 16px; line-height: 1.6; color: #4b5563; margin-bottom: 30px; text-align: center; }
+        .button-container { text-align: center; margin: 40px 0; }
+        .verify-button { display: inline-block; background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%); color: #ffffff; text-decoration: none; padding: 16px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.39); }
+        .verify-button:hover { transform: translateY(-2px); }
+        .features { background-color: #f8fafc; padding: 30px 20px; margin: 30px 0; border-radius: 12px; }
+        .features h3 { color: #1f2937; font-size: 20px; margin-bottom: 20px; text-align: center; }
+        .feature-list { list-style: none; padding: 0; margin: 0; }
+        .feature-list li { padding: 8px 0; color: #4b5563; font-size: 14px; }
+        .feature-list li:before { content: "✓"; color: #10b981; font-weight: bold; margin-right: 10px; }
+        .footer { background-color: #1f2937; color: #9ca3af; padding: 30px 20px; text-align: center; font-size: 14px; }
+        .footer a { color: #60a5fa; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Welcome to FinE!</h1>
+            <p style="color: #e5e7eb; margin: 10px 0 0 0; font-size: 16px;">Your Financial Education Journey Starts Here</p>
+        </div>
+        
+        <div class="content">
+            <h2 class="welcome">Almost There! 🎉</h2>
+            
+            <p class="message">
+                Thank you for joining FinE, the premier platform for financial education. 
+                To complete your registration and unlock access to our comprehensive financial learning resources, 
+                please verify your email address by clicking the button below.
+            </p>
+            
+            <div class="button-container">
+                <a href="{{ .ConfirmationURL }}" class="verify-button">
+                    Verify My Email Address
+                </a>
+            </div>
+            
+            <div class="features">
+                <h3>What's waiting for you in FinE:</h3>
+                <ul class="feature-list">
+                    <li>Interactive financial lessons and courses</li>
+                    <li>Personalized learning tracks</li>
+                    <li>Progress tracking and achievements</li>
+                    <li>Community leaderboards</li>
+                    <li>Practical financial tools and calculators</li>
+                    <li>Expert insights and market analysis</li>
+                </ul>
+            </div>
+            
+            <p style="font-size: 14px; color: #6b7280; text-align: center; margin-top: 30px;">
+                If you didn't create an account with FinE, you can safely ignore this email.
+            </p>
+            
+            <p style="font-size: 12px; color: #9ca3af; text-align: center; margin-top: 20px;">
+                This verification link will expire in 24 hours for security purposes.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>© 2024 FinE - Financial Education Platform</p>
+            <p>
+                <a href="#">Privacy Policy</a> | 
+                <a href="#">Terms of Service</a> | 
+                <a href="#">Contact Support</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
